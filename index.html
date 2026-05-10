@@ -1,0 +1,3761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ARYON PRIVATE. A discreet lifestyle management firm. Private residences, yachting, mobility, and personal concierge services.">
+<title>ARYON PRIVATE: A Private Standard</title>
+
+<link rel="stylesheet" href="nav.css">
+
+<style>
+/* ===== GOOGLE FONTS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap');
+
+/* ===== CSS RESET ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: #0d0d0d;
+  color: #ffffff;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { background: none; border: none; cursor: none; font-family: inherit; }
+ul, ol { list-style: none; }
+input, textarea, select { font-family: inherit; }
+
+/* ===== DESIGN TOKENS ===== */
+:root {
+  --black:        #0a0a0a;
+  --bg:           #0d0d0d;
+  --bg-raised:    #111111;
+  --bg-card:      #141414;
+  --bg-card-2:    #181818;
+  --bg-hover:     #1c1c1c;
+
+  --gold:         #c9a96e;
+  --gold-light:   #dbbe8a;
+  --gold-pale:    #ecdbb0;
+  --gold-40:      rgba(201,169,110,0.40);
+  --gold-25:      rgba(201,169,110,0.25);
+  --gold-15:      rgba(201,169,110,0.15);
+  --gold-08:      rgba(201,169,110,0.08);
+
+  --white:        #ffffff;
+  --white-85:     rgba(255,255,255,0.85);
+  --white-65:     rgba(255,255,255,0.65);
+  --white-40:     rgba(255,255,255,0.40);
+  --white-20:     rgba(255,255,255,0.20);
+  --white-10:     rgba(255,255,255,0.10);
+
+  --serif:        'Cormorant Garamond', Georgia, serif;
+  --sans:         'Jost', system-ui, sans-serif;
+
+  --t-display:    clamp(56px, 8vw, 110px);
+  --t-hero:       clamp(40px, 5.5vw, 72px);
+  --t-h2:         clamp(28px, 3.5vw, 44px);
+  --t-h3:         clamp(20px, 2.5vw, 28px);
+  --t-sub:        clamp(15px, 1.5vw, 18px);
+  --t-body:       15px;
+  --t-label:      11px;
+  --t-micro:      10px;
+
+  --ls-display:   0.06em;
+  --ls-hero:      0.12em;
+  --ls-label:     0.28em;
+  --ls-wide:      0.15em;
+  --ls-body:      0.02em;
+
+  --section-pad:  clamp(80px, 10vw, 140px);
+  --content-max:  1100px;
+  --col-pad:      clamp(24px, 5vw, 80px);
+
+  --ease-luxury:  cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-in:      cubic-bezier(0.4, 0, 1, 1);
+  --ease-out:     cubic-bezier(0, 0, 0.2, 1);
+  --dur-fast:     0.25s;
+  --dur-med:      0.55s;
+  --dur-slow:     0.9s;
+  --dur-xslow:    1.4s;
+}
+
+/* ===== CUSTOM CURSOR ===== */
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s, opacity 0.2s;
+  will-change: transform;
+}
+.cursor-ring {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--gold-40);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s var(--ease-luxury), height 0.3s var(--ease-luxury),
+              border-color 0.3s, opacity 0.6s, background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+.cursor-ring.cursor-label {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 9px;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  width: 64px;
+  height: 64px;
+}
+body.cursor-hover .cursor-dot {
+  transform: translate(-50%, -50%) scale(0);
+}
+body.cursor-hover .cursor-ring {
+  transform: translate(-50%, -50%) scale(1.8);
+  border-color: var(--gold);
+}
+body.cursor-down .cursor-dot {
+  transform: translate(-50%, -50%) scale(0.5);
+}
+body.cursor-down .cursor-ring {
+  transform: translate(-50%, -50%) scale(0.85);
+}
+
+/* ===== FOCUS VISIBLE ===== */
+:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 4px;
+}
+
+/* ===== PAGE SYSTEM ===== */
+.page {
+  display: none;
+  min-height: 100vh;
+}
+.page.active {
+  display: block;
+}
+
+/* ===== ORNAMENTAL DIVIDER ===== */
+.ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px auto;
+}
+.ornament-line {
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.8s var(--ease-out);
+}
+.ornament-line.animate-in { width: 0; }
+.ornament-line.animate-in.in-view { width: 60px; }
+.ornament-diamond {
+  width: 5px;
+  height: 5px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+/* ===== SECTION LABEL ===== */
+.section-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: var(--t-micro);
+  color: var(--gold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.section-label::before,
+.section-label::after {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--gold-40);
+}
+
+/* ===== BUTTONS ===== */
+.btn-primary {
+  background: var(--gold);
+  color: #0a0a0a;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  padding: 18px 40px;
+  transition: background 0.3s, transform 0.3s;
+  display: inline-block;
+}
+.btn-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-1px);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--white-65);
+  border: 1px solid var(--white-20);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  padding: 18px 40px;
+  transition: border-color 0.3s, color 0.3s;
+  display: inline-block;
+}
+.btn-secondary:hover {
+  border-color: var(--gold-40);
+  color: var(--white);
+}
+
+/* ===== SCROLL ANIMATIONS ===== */
+.animate-in {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity var(--dur-slow) var(--ease-out),
+              transform var(--dur-slow) var(--ease-out);
+  will-change: transform;
+}
+.animate-in.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+.animate-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity var(--dur-slow) var(--ease-out),
+              transform var(--dur-slow) var(--ease-out);
+}
+.animate-left.in-view {
+  opacity: 1;
+  transform: translateX(0);
+}
+.animate-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity var(--dur-slow) var(--ease-out),
+              transform var(--dur-slow) var(--ease-out);
+}
+.animate-right.in-view {
+  opacity: 1;
+  transform: translateX(0);
+}
+.animate-scale {
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity var(--dur-slow) var(--ease-out),
+              transform var(--dur-slow) var(--ease-out);
+}
+.animate-scale.in-view {
+  opacity: 1;
+  transform: scale(1);
+}
+.animate-fade {
+  opacity: 0;
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+.animate-fade.in-view {
+  opacity: 1;
+}
+[data-delay="1"] { transition-delay: 0.12s; }
+[data-delay="2"] { transition-delay: 0.24s; }
+[data-delay="3"] { transition-delay: 0.36s; }
+[data-delay="4"] { transition-delay: 0.48s; }
+[data-delay="5"] { transition-delay: 0.60s; }
+
+/* ===== HOME PAGE ===== */
+
+/* Hero */
+.hero {
+  height: 100vh;
+  min-height: 700px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 var(--col-pad);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 40%, rgba(30,25,18,0.6) 0%, transparent 70%),
+    #080808;
+  z-index: 0;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 60% at 50% 100%, rgba(201,169,110,0.04) 0%, transparent 70%);
+  z-index: 0;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+.hero-pre {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: var(--t-micro);
+  color: var(--gold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  animation: heroFadeUp 1s var(--ease-out) 0s both;
+}
+.hero-pre-line {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+}
+.hero-headline {
+  line-height: 0.92;
+  margin-bottom: 36px;
+  animation: heroFadeUp 1s var(--ease-out) 0.2s both;
+}
+.hero-line {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: var(--t-display);
+  color: var(--white);
+  letter-spacing: var(--ls-display);
+  text-transform: uppercase;
+}
+.hero-line.gold {
+  font-weight: 400;
+  color: var(--gold-light);
+}
+.hero-ornament {
+  animation: heroFadeUp 1s var(--ease-out) 0.4s both;
+  margin-bottom: 8px;
+}
+.hero-tagline {
+  font-family: var(--sans);
+  font-weight: 200;
+  font-size: 16px;
+  color: var(--white-65);
+  letter-spacing: 0.12em;
+  margin-bottom: 52px;
+  animation: heroFadeUp 1s var(--ease-out) 0.5s both;
+}
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: heroFadeUp 1s var(--ease-out) 0.7s both;
+  margin-bottom: 20px;
+}
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 1;
+  animation: heroFadeUp 1s var(--ease-out) 0.9s both;
+}
+.scroll-text {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 9px;
+  color: var(--white-40);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: var(--gold-25);
+  position: relative;
+  overflow: hidden;
+}
+.scroll-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: var(--gold);
+  animation: scrollTravel 2s ease-in-out infinite;
+}
+@keyframes scrollTravel {
+  0% { transform: translateY(-100%); opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Brand Statement Strip */
+.brand-strip {
+  background: var(--bg-raised);
+  border-top: 1px solid var(--gold-15);
+  border-bottom: 1px solid var(--gold-15);
+  padding: 80px var(--col-pad);
+  text-align: center;
+}
+.brand-quote {
+  max-width: 740px;
+  margin: 0 auto;
+}
+.brand-quote-text {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(28px, 4vw, 46px);
+  color: var(--white-85);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  margin-bottom: 24px;
+}
+.brand-quote-attr {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+}
+
+/* Services Overview */
+.services-overview {
+  background: var(--bg);
+  padding: var(--section-pad) var(--col-pad);
+}
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 64px;
+}
+.section-headline {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: var(--t-hero);
+  color: var(--white);
+  letter-spacing: var(--ls-display);
+  margin-bottom: 16px;
+}
+.section-sub {
+  font-family: var(--sans);
+  font-weight: 200;
+  font-size: 17px;
+  color: var(--white-65);
+  letter-spacing: 0.06em;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  background: var(--gold-15);
+}
+.service-card {
+  background: var(--bg-card);
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--gold-15);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.45s var(--ease-luxury);
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 16px;
+  height: 1px;
+  background: var(--gold-25);
+  transition: background 0.45s;
+}
+.service-card::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 1px;
+  height: 16px;
+  background: var(--gold-25);
+  transition: background 0.45s;
+}
+.service-card:hover {
+  background: var(--bg-card-2);
+  border-color: var(--gold-40);
+  transform: translateY(-4px);
+}
+.service-card:hover::before,
+.service-card:hover::after {
+  background: var(--gold-40);
+}
+.service-card:hover .service-icon {
+  transform: scale(1.05);
+}
+.service-number {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  margin-bottom: 28px;
+}
+.service-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 20px;
+  transition: transform 0.45s var(--ease-luxury);
+  flex-shrink: 0;
+}
+.service-name {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--white);
+  letter-spacing: 0.03em;
+  margin-bottom: 12px;
+}
+.service-divider {
+  width: 32px;
+  height: 1px;
+  background: var(--gold-40);
+  margin-bottom: 16px;
+}
+.service-desc {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 14px;
+  color: var(--white-65);
+  line-height: 1.75;
+  letter-spacing: var(--ls-body);
+  flex: 1;
+}
+.service-learn {
+  margin-top: auto;
+  padding-top: 24px;
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  opacity: 0.35;
+  transition: opacity 0.4s, color 0.3s;
+  text-decoration: none;
+  display: block;
+  cursor: none;
+}
+.service-card:hover .service-learn {
+  opacity: 1;
+}
+.services-note {
+  text-align: center;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 13px;
+  color: var(--white-40);
+  letter-spacing: 0.1em;
+  font-style: italic;
+  margin-top: 40px;
+}
+
+/* Cinematic Statement */
+.cinematic {
+  height: 70vh;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 var(--col-pad);
+  position: relative;
+  background:
+    linear-gradient(rgba(201,169,110,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,169,110,0.02) 1px, transparent 1px),
+    radial-gradient(ellipse 60% 80% at 70% 50%, rgba(40,32,20,0.5) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 20% 60%, rgba(20,15,8,0.4) 0%, transparent 60%),
+    linear-gradient(180deg, #0a0a0a 0%, #060606 100%);
+  background-size: 60px 60px, 60px 60px, auto, auto, auto;
+}
+.cinematic-headline {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(44px, 6vw, 80px);
+  color: var(--white);
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  margin-bottom: 28px;
+}
+.cinematic-body {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 16px;
+  color: var(--white-65);
+  max-width: 520px;
+  line-height: 1.85;
+}
+
+/* How It Works */
+.process {
+  background: var(--bg-raised);
+  padding: var(--section-pad) var(--col-pad);
+}
+.process-steps {
+  display: flex;
+  align-items: flex-start;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  gap: 0;
+}
+.process-step {
+  flex: 1;
+  padding: 0 32px;
+}
+.process-connector {
+  flex-shrink: 0;
+  width: 80px;
+  height: 1px;
+  background: var(--gold-25);
+  margin-top: 60px;
+}
+.step-big-num {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 80px;
+  color: var(--gold-15);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.step-label {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.step-divider {
+  width: 32px;
+  height: 1px;
+  background: var(--gold-40);
+  margin-bottom: 16px;
+}
+.step-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.step-body {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 14px;
+  color: var(--white-65);
+  line-height: 1.75;
+}
+
+/* Destinations Strip */
+.destinations-strip {
+  background: var(--bg);
+  border-top: 1px solid var(--gold-15);
+  border-bottom: 1px solid var(--gold-15);
+  padding: 0;
+  overflow: hidden;
+}
+.destinations-label {
+  text-align: center;
+  padding: 28px var(--col-pad) 20px;
+}
+.marquee-wrapper {
+  overflow: hidden;
+  padding: 20px 0 28px;
+}
+.marquee-track {
+  display: flex;
+  gap: 0;
+  animation: marquee 35s linear infinite;
+  width: max-content;
+}
+.marquee-item {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 13px;
+  color: var(--white-40);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 0 20px;
+}
+.marquee-sep {
+  font-size: 8px;
+  color: var(--gold-40);
+  padding: 0 4px;
+  display: inline-block;
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Testimonials */
+.testimonials {
+  background: var(--bg);
+  padding: var(--section-pad) var(--col-pad);
+}
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--gold-15);
+  border-top: 2px solid var(--gold);
+  padding: 40px 32px;
+}
+.quote-mark {
+  display: none;
+}
+.quote-text {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--white-85);
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  margin-bottom: 24px;
+}
+.quote-divider {
+  width: 24px;
+  height: 1px;
+  background: var(--gold-40);
+  margin-bottom: 16px;
+}
+.quote-name {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 11px;
+  color: var(--white);
+  letter-spacing: 0.12em;
+  margin-bottom: 4px;
+}
+.quote-role {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+}
+
+/* Final CTA */
+.final-cta {
+  background: #080808;
+  padding: 120px var(--col-pad);
+  text-align: center;
+}
+.final-cta-headline {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(36px, 5vw, 64px);
+  color: var(--white);
+  margin-bottom: 24px;
+}
+.final-cta-body {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--white-65);
+  margin-bottom: 52px;
+}
+.contact-options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+.contact-option {
+  text-align: center;
+}
+.contact-label {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: var(--t-micro);
+  color: var(--gold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.contact-value {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--white);
+  transition: color 0.3s;
+}
+.contact-value:hover { color: var(--gold); }
+.contact-separator {
+  width: 1px;
+  height: 48px;
+  background: var(--gold-25);
+  flex-shrink: 0;
+}
+.final-note {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 12px;
+  color: var(--white-40);
+  letter-spacing: 0.08em;
+  font-style: italic;
+}
+
+/* ===== SERVICES PAGE ===== */
+.page-hero {
+  height: 60vh;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px var(--col-pad) 0;
+  background: var(--bg);
+}
+.page-hero-headline {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: var(--t-display);
+  color: var(--gold-light);
+  letter-spacing: var(--ls-display);
+  line-height: 1;
+  margin-bottom: 20px;
+}
+.page-hero-tag {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 16px;
+  color: var(--white-65);
+  max-width: 500px;
+}
+.service-detail {
+  min-height: 80vh;
+  display: grid;
+  grid-template-columns: 55% 45%;
+  border-top: 1px solid var(--gold-15);
+}
+.service-detail.reverse {
+  grid-template-columns: 45% 55%;
+}
+.service-detail.reverse .service-content {
+  order: 2;
+}
+.service-detail.reverse .service-visual {
+  order: 1;
+}
+.service-content {
+  padding: 80px 60px;
+  position: relative;
+}
+.service-big-num {
+  position: absolute;
+  top: 40px;
+  left: 30px;
+  font-family: var(--serif);
+  font-size: 120px;
+  color: var(--gold-08);
+  line-height: 1;
+  pointer-events: none;
+  z-index: 0;
+  font-weight: 300;
+}
+.service-content > * {
+  position: relative;
+  z-index: 1;
+}
+.service-tag {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: var(--t-micro);
+  color: var(--gold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.service-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: var(--t-h2);
+  color: var(--white);
+  margin-bottom: 20px;
+}
+.service-line {
+  width: 40px;
+  height: 1px;
+  background: var(--gold-40);
+  margin-bottom: 28px;
+}
+.service-paragraph {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 16px;
+  color: var(--white-65);
+  line-height: 1.9;
+  max-width: 440px;
+  margin-bottom: 36px;
+}
+.service-includes-label {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.service-includes li {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 14px;
+  color: var(--white-65);
+  line-height: 2.2;
+  padding-left: 20px;
+  position: relative;
+}
+.service-includes li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size: 12px;
+}
+.service-inquire {
+  display: inline-block;
+  margin-top: 32px;
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  position: relative;
+  cursor: none;
+}
+.service-inquire::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.35s var(--ease-out);
+}
+.service-inquire:hover::after { width: 100%; }
+.service-visual {
+  background: var(--bg-card);
+  border: 1px solid var(--gold-15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+}
+.service-visual-watermark {
+  position: absolute;
+  opacity: 0.07;
+}
+.service-visual-name {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(40px, 5vw, 80px);
+  color: var(--gold);
+  opacity: 0.08;
+  text-align: center;
+  padding: 0 20px;
+  line-height: 1.1;
+}
+
+/* ===== ABOUT PAGE ===== */
+.about-hero {
+  height: 50vh;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px var(--col-pad) 0;
+  background: var(--bg);
+}
+.about-hero-headline {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: var(--t-display);
+  color: var(--white);
+  letter-spacing: var(--ls-display);
+}
+.about-main {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 60% 40%;
+}
+.about-content {
+  background: var(--bg);
+  padding: 0 60px 0 0;
+  border-right: 1px solid var(--gold-15);
+}
+.about-block {
+  margin-bottom: 52px;
+}
+.about-block-label {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.about-block-text {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 17px;
+  color: var(--white-65);
+  line-height: 1.9;
+}
+.about-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  padding-top: 16px;
+}
+.about-value {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 14px;
+  color: var(--gold);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+}
+.about-value-sep {
+  color: var(--gold-25);
+  font-size: 14px;
+}
+.about-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--gold-15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.about-panel-watermark {
+  position: absolute;
+  opacity: 1;
+  pointer-events: none;
+}
+.about-est {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+.about-year {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 60px;
+  color: var(--gold-25);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.about-brand-mark {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 11px;
+  color: var(--gold-40);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.about-panel-statement {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(15px, 1.6vw, 19px);
+  color: rgba(255,255,255,0.22);
+  line-height: 1.75;
+  text-align: center;
+  max-width: 240px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== DESTINATIONS EDITORIAL (home page) ===== */
+.dest-editorial {
+  background: var(--bg);
+  border-top: 1px solid var(--gold-15);
+  border-bottom: 1px solid var(--gold-15);
+  padding: 80px var(--col-pad);
+}
+.dest-editorial-inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+.dest-editorial-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 52px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.dest-editorial-title {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(28px, 3.5vw, 42px);
+  color: var(--white-85);
+  letter-spacing: 0.01em;
+}
+.dest-editorial-link {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+}
+.dest-editorial-link:hover { opacity: 1; }
+.dest-editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--gold-08);
+  border-left: 1px solid var(--gold-08);
+}
+.dest-editorial-col {
+  border-right: 1px solid var(--gold-08);
+  border-bottom: 1px solid var(--gold-08);
+  padding: 36px 28px;
+}
+.dest-editorial-region {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.dest-editorial-places {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.dest-editorial-places li {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 16px;
+  color: var(--white-65);
+  letter-spacing: 0.02em;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(201,169,110,0.05);
+  line-height: 1;
+}
+.dest-editorial-places li:last-child { border-bottom: none; }
+@media (max-width: 900px) {
+  .dest-editorial-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .dest-editorial-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== SERVICE SUB-PAGES ===== */
+.svc-page-hero {
+  padding: 140px var(--col-pad) 72px;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+.svc-page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 100% 0%, rgba(201,169,110,0.04) 0%, transparent 60%);
+}
+.svc-page-hero-inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+}
+.svc-page-tag {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: var(--t-micro);
+  color: var(--gold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  position: relative;
+}
+.svc-page-headline {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(44px, 7vw, 92px);
+  color: var(--white);
+  line-height: 0.97;
+  letter-spacing: 0.01em;
+  margin-bottom: 28px;
+  position: relative;
+}
+.svc-page-sub {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 17px;
+  color: var(--white-65);
+  line-height: 1.8;
+  max-width: 420px;
+  position: relative;
+}
+.svc-img-ph {
+  aspect-ratio: 4 / 5;
+  background: var(--bg-card);
+  border: 1px solid var(--gold-08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.svc-img-ph::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, #141414 0%, #0a0a0a 100%);
+}
+.svc-img-ph-label {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(201,169,110,0.3);
+  letter-spacing: 0.06em;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 0 24px;
+}
+.svc-img-ph-rule {
+  width: 28px;
+  height: 1px;
+  background: rgba(201,169,110,0.2);
+  position: relative;
+  z-index: 1;
+}
+.svc-body-section {
+  border-top: 1px solid var(--gold-15);
+}
+.svc-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  min-height: 520px;
+}
+.svc-body-grid.flip .svc-body-text-col { order: 2; }
+.svc-body-grid.flip .svc-body-img-col  { order: 1; }
+.svc-body-text-col {
+  padding: 72px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--bg);
+}
+.svc-body-img-col {
+  background: var(--bg-card);
+  border-left: 1px solid var(--gold-08);
+  display: flex;
+  align-items: stretch;
+}
+.svc-body-img-col .svc-img-ph {
+  aspect-ratio: auto;
+  flex: 1;
+  border: none;
+}
+.svc-body-img-col.no-border { border-left: none; border-right: 1px solid var(--gold-08); }
+.svc-section-tag {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.svc-section-h {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: var(--t-h2);
+  color: var(--white);
+  margin-bottom: 20px;
+  line-height: 1.15;
+}
+.svc-section-rule {
+  width: 36px;
+  height: 1px;
+  background: var(--gold-40);
+  margin-bottom: 24px;
+}
+.svc-section-body {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 16px;
+  color: var(--white-65);
+  line-height: 1.9;
+  margin-bottom: 16px;
+}
+.svc-includes-section {
+  background: var(--bg-raised);
+  padding: var(--section-pad) var(--col-pad);
+  border-top: 1px solid var(--gold-15);
+}
+.svc-includes-inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+.svc-includes-label {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+.svc-includes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-top: 1px solid var(--gold-08);
+  border-left: 1px solid var(--gold-08);
+}
+.svc-include-item {
+  border-right: 1px solid var(--gold-08);
+  border-bottom: 1px solid var(--gold-08);
+  padding: 20px 28px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.svc-include-num {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  flex-shrink: 0;
+  padding-top: 3px;
+  opacity: 0.6;
+}
+.svc-include-text {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 14px;
+  color: var(--white-65);
+  line-height: 1.55;
+}
+.svc-depth-section {
+  padding: var(--section-pad) var(--col-pad);
+  background: var(--bg);
+  border-top: 1px solid var(--gold-15);
+}
+.svc-depth-inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.svc-depth-img {
+  aspect-ratio: 3 / 4;
+  background: var(--bg-card);
+  border: 1px solid var(--gold-08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.svc-depth-img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(200deg, #111 0%, #0a0a0a 100%);
+}
+@media (max-width: 1024px) {
+  .svc-page-hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .svc-body-grid, .svc-body-grid.flip { grid-template-columns: 1fr; }
+  .svc-body-grid.flip .svc-body-text-col,
+  .svc-body-grid.flip .svc-body-img-col { order: unset; }
+  .svc-body-img-col { min-height: 300px; border-left: none; border-top: 1px solid var(--gold-08); }
+  .svc-body-text-col { padding: 48px 24px; }
+  .svc-depth-inner { grid-template-columns: 1fr; gap: 40px; }
+  .svc-includes-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== CONTACT PAGE ===== */
+.contact-page {
+  background: var(--bg);
+  padding: 140px var(--col-pad) var(--section-pad);
+  max-width: 640px;
+  margin: 0 auto;
+}
+.contact-headline {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: var(--t-hero);
+  color: var(--white);
+  margin-bottom: 24px;
+}
+.contact-intro {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 16px;
+  color: var(--white-65);
+  line-height: 1.85;
+  margin-bottom: 52px;
+}
+.form-field {
+  margin-bottom: 8px;
+}
+.form-label {
+  display: block;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.form-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--gold-25);
+  color: var(--white);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 15px;
+  padding: 12px 0;
+  outline: none;
+  letter-spacing: 0.04em;
+  transition: border-color 0.3s;
+}
+.form-input::placeholder { color: var(--white-40); }
+.form-input:focus { border-bottom-color: var(--gold); }
+.form-textarea {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--gold-25);
+  color: var(--white);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 15px;
+  padding: 16px;
+  outline: none;
+  letter-spacing: 0.04em;
+  resize: none;
+  border-radius: 0;
+  transition: border-color 0.3s;
+  line-height: 1.7;
+}
+.form-textarea::placeholder { color: var(--white-40); }
+.form-textarea:focus { border-color: var(--gold); }
+.pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 0 12px;
+}
+.pill {
+  border: 1px solid var(--gold-15);
+  color: var(--white-40);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  padding: 8px 16px;
+  border-radius: 2px;
+  cursor: none;
+  transition: all 0.25s;
+  text-transform: uppercase;
+}
+.pill.active {
+  border-color: var(--gold);
+  background: var(--gold-08);
+  color: var(--gold);
+}
+.pill:hover:not(.active) {
+  border-color: var(--gold-25);
+  color: var(--white-65);
+}
+.btn-submit {
+  width: 100%;
+  padding: 20px;
+  background: var(--gold);
+  color: #0a0a0a;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  border: none;
+  cursor: none;
+  transition: background 0.3s;
+  margin-top: 12px;
+}
+.btn-submit:hover { background: var(--gold-light); }
+.form-note {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 12px;
+  color: var(--white-40);
+  font-style: italic;
+  text-align: center;
+  margin-top: 20px;
+}
+.form-alt {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid var(--gold-15);
+}
+.form-alt-text {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 13px;
+  color: var(--white-40);
+  margin-bottom: 8px;
+}
+.form-alt-email {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--gold);
+  transition: color 0.3s;
+}
+.form-alt-email:hover { color: var(--gold-light); }
+.form-spacer { margin-bottom: 28px; }
+
+/* Phone field toggle */
+#phone-field { display: none; }
+#phone-field.visible { display: block; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: #080808;
+  border-top: 1px solid var(--gold-15);
+  padding: 64px var(--col-pad) 40px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 48px;
+  max-width: var(--content-max);
+  margin: 0 auto 40px;
+}
+.footer-brand-text {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 13px;
+  color: var(--white-40);
+  line-height: 1.8;
+  margin-top: 16px;
+}
+.footer-col-label {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.footer-links li {
+  margin-bottom: 4px;
+}
+.footer-link {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 13px;
+  color: var(--white-40);
+  line-height: 2.2;
+  transition: color 0.25s;
+  cursor: none;
+}
+.footer-link:hover { color: var(--gold); }
+.footer-email {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 13px;
+  color: var(--white-65);
+  margin-bottom: 20px;
+}
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--gold-15);
+  max-width: var(--content-max);
+  margin: 0 auto 24px;
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-copy {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.08em;
+}
+.footer-tagline {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 11px;
+  color: var(--gold-40);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+}
+
+/* ===== DESTINATIONS PAGE ===== */
+.dest-hero {
+  height: 55vh;
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 80px var(--col-pad) 60px;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+.dest-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 80% at 80% 30%, rgba(201,169,110,0.05) 0%, transparent 65%);
+}
+.dest-hero-eyebrow {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: var(--t-micro);
+  color: var(--gold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  position: relative;
+}
+.dest-hero-headline {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: var(--t-display);
+  color: var(--white);
+  letter-spacing: var(--ls-display);
+  line-height: 0.95;
+  margin-bottom: 28px;
+  max-width: 700px;
+  position: relative;
+}
+.dest-hero-sub {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 16px;
+  color: var(--white-40);
+  letter-spacing: 0.05em;
+  max-width: 480px;
+  position: relative;
+}
+.dest-regions {
+  padding: var(--section-pad) var(--col-pad);
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+.dest-region {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 60px;
+  padding: 52px 0;
+  border-top: 1px solid var(--gold-15);
+  align-items: start;
+}
+.dest-region:last-child {
+  border-bottom: 1px solid var(--gold-15);
+}
+.dest-region-name {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--gold);
+  letter-spacing: 0.03em;
+  padding-top: 4px;
+}
+.dest-region-cities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+}
+.dest-city {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 14px;
+  color: var(--white-65);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 10px 0;
+  border-bottom: 1px solid transparent;
+  transition: color 0.25s, border-color 0.25s;
+  cursor: default;
+}
+.dest-city:hover {
+  color: var(--white);
+  border-bottom-color: var(--gold-40);
+}
+.dest-note {
+  padding: 0 var(--col-pad) var(--section-pad);
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+.dest-note-text {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(20px, 2.5vw, 28px);
+  color: var(--white-40);
+  line-height: 1.7;
+  border-left: 2px solid var(--gold-40);
+  padding-left: 32px;
+}
+@media (max-width: 767px) {
+  .dest-region {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* ===== CONCIERGE PAGE ===== */
+.conc-hero {
+  height: 55vh;
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 80px var(--col-pad) 60px;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+.conc-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 70% at 20% 70%, rgba(201,169,110,0.04) 0%, transparent 65%);
+}
+.conc-hero-eyebrow {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: var(--t-micro);
+  color: var(--gold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  position: relative;
+}
+.conc-hero-headline {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: var(--t-display);
+  color: var(--white);
+  letter-spacing: var(--ls-display);
+  line-height: 0.95;
+  margin-bottom: 28px;
+  max-width: 700px;
+  position: relative;
+}
+.conc-hero-sub {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 16px;
+  color: var(--white-40);
+  max-width: 480px;
+  line-height: 1.75;
+  position: relative;
+}
+.conc-statement {
+  padding: 80px var(--col-pad);
+  background: var(--bg-raised);
+  border-top: 1px solid var(--gold-15);
+  border-bottom: 1px solid var(--gold-15);
+}
+.conc-statement-inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.conc-statement-text {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(24px, 3.5vw, 40px);
+  color: var(--white-85);
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+}
+.conc-categories {
+  padding: var(--section-pad) var(--col-pad);
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+.conc-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--gold-08);
+  border: 1px solid var(--gold-15);
+}
+.conc-cat {
+  background: var(--bg-card);
+  padding: 48px 44px;
+  position: relative;
+}
+.conc-cat-num {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 60px;
+  color: var(--gold-08);
+  line-height: 1;
+  position: absolute;
+  top: 28px;
+  right: 28px;
+}
+.conc-cat-label {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.conc-cat-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 26px;
+  color: var(--white);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+.conc-cat-line {
+  width: 32px;
+  height: 1px;
+  background: var(--gold-40);
+  margin-bottom: 20px;
+}
+.conc-cat-body {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 14px;
+  color: var(--white-65);
+  line-height: 1.85;
+}
+.conc-examples {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  margin-top: 16px;
+  opacity: 0.7;
+  font-style: italic;
+}
+.conc-how {
+  padding: var(--section-pad) var(--col-pad);
+  background: var(--bg-raised);
+}
+.conc-how-inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.conc-how-left h2 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: var(--t-h2);
+  color: var(--white);
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+.conc-how-left p {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 16px;
+  color: var(--white-65);
+  line-height: 1.9;
+  margin-bottom: 16px;
+}
+.conc-how-list {
+  margin-top: 36px;
+}
+.conc-how-item {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--gold-08);
+}
+.conc-how-item:first-child {
+  border-top: 1px solid var(--gold-08);
+}
+.conc-how-item-num {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+.conc-how-item-text {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--white-65);
+  line-height: 1.7;
+}
+.conc-how-item-text strong {
+  font-weight: 500;
+  color: var(--white-85);
+  display: block;
+  margin-bottom: 4px;
+}
+@media (max-width: 900px) {
+  .conc-categories-grid { grid-template-columns: 1fr; }
+  .conc-how-inner { grid-template-columns: 1fr; gap: 48px; }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1199px) {
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .service-detail {
+    grid-template-columns: 1fr 1fr;
+  }
+  .service-detail.reverse {
+    grid-template-columns: 1fr 1fr;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 900px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .process-steps { flex-direction: column; }
+  .process-connector { width: 1px; height: 48px; margin: 0 0 0 32px; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .service-detail, .service-detail.reverse {
+    grid-template-columns: 1fr;
+  }
+  .service-detail.reverse .service-content { order: 1; }
+  .service-detail.reverse .service-visual { order: 2; }
+  .service-visual { min-height: 300px; }
+  .about-main { grid-template-columns: 1fr; }
+  .about-content { padding: 40px 0; }
+  .about-panel { min-height: 300px; }
+}
+@media (max-width: 767px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .hero-ctas { flex-direction: column; align-items: center; }
+  .contact-options { flex-direction: column; gap: 32px; }
+  .contact-separator { display: none; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .process-step { padding: 0 0 0 8px; }
+  .service-content { padding: 48px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== CUSTOM CURSOR ===== -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ===== NAVIGATION ===== -->
+
+<!-- Fixed Bar -->
+<header class="nav-bar" id="navBar" role="banner">
+
+  <!-- Logo -->
+  <a class="nav-logo" href="#" onclick="showPage('home')" aria-label="ARYON PRIVATE, return to homepage">
+    <svg class="nav-chevron" width="36" height="26" viewBox="0 0 100 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <polygon points="0,70 50,0 50,42" fill="#ffffff"/>
+      <polygon points="100,70 50,0 50,42" fill="#ffffff"/>
+    </svg>
+    <div class="nav-wordmark">
+      <span class="nav-name">ARYON</span>
+      <span class="nav-sub">PRIVATE</span>
+    </div>
+  </a>
+
+  <!-- Center tagline — fades out on scroll -->
+  <div class="nav-center-tag" id="navCenterTag" aria-hidden="true">
+    <span class="nav-center-line"></span>
+    <span class="nav-tagline-text">A Private Standard</span>
+    <span class="nav-center-line"></span>
+  </div>
+
+  <!-- Menu trigger -->
+  <div class="nav-right">
+    <button
+      class="nav-menu-trigger"
+      id="menuTrigger"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="navOverlay"
+    >
+      <span class="trigger-label" id="triggerLabel">
+        <span class="trigger-char" style="--i:0">M</span>
+        <span class="trigger-char" style="--i:1">E</span>
+        <span class="trigger-char" style="--i:2">N</span>
+        <span class="trigger-char" style="--i:3">U</span>
+      </span>
+      <span class="trigger-glyph" id="triggerGlyph" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <circle cx="9" cy="9" r="8" stroke="currentColor" stroke-width="0.75"/>
+          <line class="m-line m-line-1" x1="4" y1="6.5" x2="14" y2="6.5" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+          <line class="m-line m-line-2" x1="4" y1="9" x2="14" y2="9" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+          <line class="m-line m-line-3" x1="4" y1="11.5" x2="14" y2="11.5" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+        </svg>
+      </span>
+    </button>
+  </div>
+
+</header>
+
+<!-- Full-Screen Overlay -->
+<div class="nav-overlay" id="navOverlay" role="dialog" aria-modal="true" aria-label="Site navigation" aria-hidden="true">
+
+  <div class="overlay-curtain" id="overlayCurtain"></div>
+
+  <div class="overlay-content" id="overlayContent">
+
+    <!-- LEFT — Primary links -->
+    <nav class="overlay-left" aria-label="Primary">
+      <ol class="overlay-nav-list">
+        <li class="overlay-nav-item" data-nav-i="0">
+          <a class="overlay-nav-link" href="#" onclick="navGoTo('home')" data-cursor-expand>
+            <span class="nav-item-num">01</span>
+            <span class="nav-item-text">Home</span>
+            <span class="nav-item-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li class="overlay-nav-item" data-nav-i="1">
+          <a class="overlay-nav-link" href="#" onclick="navGoTo('services')" data-cursor-expand>
+            <span class="nav-item-num">02</span>
+            <span class="nav-item-text">Services</span>
+            <span class="nav-item-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li class="overlay-nav-item" data-nav-i="2">
+          <a class="overlay-nav-link" href="#" onclick="navGoTo('destinations')" data-cursor-expand>
+            <span class="nav-item-num">03</span>
+            <span class="nav-item-text">Destinations</span>
+            <span class="nav-item-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li class="overlay-nav-item" data-nav-i="3">
+          <a class="overlay-nav-link" href="#" onclick="navGoTo('concierge')" data-cursor-expand>
+            <span class="nav-item-num">04</span>
+            <span class="nav-item-text">Concierge</span>
+            <span class="nav-item-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li class="overlay-nav-item" data-nav-i="4">
+          <a class="overlay-nav-link" href="#" onclick="navGoTo('about')" data-cursor-expand>
+            <span class="nav-item-num">05</span>
+            <span class="nav-item-text">About</span>
+            <span class="nav-item-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li class="overlay-nav-item" data-nav-i="5">
+          <a class="overlay-nav-link" href="#" onclick="navGoTo('contact')" data-cursor-expand>
+            <span class="nav-item-num">06</span>
+            <span class="nav-item-text">Contact</span>
+            <span class="nav-item-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+      </ol>
+
+      <div class="overlay-left-foot">
+        <span class="overlay-foot-line"></span>
+        <span class="overlay-foot-text">EST. 2024</span>
+      </div>
+    </nav>
+
+    <!-- Vertical separator -->
+    <div class="overlay-separator" aria-hidden="true">
+      <div class="overlay-sep-line"></div>
+      <div class="overlay-sep-diamond"></div>
+      <div class="overlay-sep-line"></div>
+    </div>
+
+    <!-- RIGHT — Secondary info -->
+    <aside class="overlay-right" aria-label="Secondary navigation and contact">
+
+      <div class="overlay-right-block">
+        <div class="overlay-right-label">SERVICES</div>
+        <ul class="overlay-sub-list">
+          <li><a class="overlay-sub-link" href="#" onclick="navGoTo('residences')" data-cursor-expand>Private Residences</a></li>
+          <li><a class="overlay-sub-link" href="#" onclick="navGoTo('mobility')" data-cursor-expand>Private Mobility</a></li>
+          <li><a class="overlay-sub-link" href="#" onclick="navGoTo('yachting')" data-cursor-expand>Yachting</a></li>
+          <li><a class="overlay-sub-link" href="#" onclick="navGoTo('concierge')" data-cursor-expand>Lifestyle Concierge</a></li>
+          <li><a class="overlay-sub-link" href="#" onclick="navGoTo('protection')" data-cursor-expand>Protection</a></li>
+        </ul>
+      </div>
+
+      <div class="overlay-right-block">
+        <div class="overlay-right-label">PRIVATE INQUIRY</div>
+        <a class="overlay-email" href="mailto:private@aryonprivate.com" data-cursor-expand>
+          private@aryonprivate.com
+        </a>
+        <a class="overlay-cta" href="#" onclick="navGoTo('contact')" data-cursor-expand aria-label="Request access">
+          REQUEST ACCESS
+        </a>
+      </div>
+
+      <div class="overlay-right-block overlay-statement-block">
+        <p class="overlay-statement">
+          "We do not offer packages.<br>We handle lives."
+        </p>
+      </div>
+
+      <svg class="overlay-watermark" viewBox="0 0 100 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <polygon points="0,70 50,0 50,42" fill="#c9a96e"/>
+        <polygon points="100,70 50,0 50,42" fill="#c9a96e"/>
+      </svg>
+
+    </aside>
+
+  </div>
+
+  <button class="overlay-backdrop-close" id="overlayBackdropClose" aria-label="Close navigation menu" tabindex="-1"></button>
+
+</div>
+
+<!-- ===== HOME PAGE ===== -->
+<main id="page-home" class="page active">
+
+  <!-- Hero -->
+  <section class="hero" aria-label="Hero">
+    <div class="hero-content">
+      <h1 class="hero-headline">
+        <span class="hero-line">A PRIVATE</span>
+        <span class="hero-line gold">STANDARD</span>
+        <span class="hero-line">OF LUXURY</span>
+      </h1>
+      <div class="hero-ornament">
+        <div class="ornament">
+          <div class="ornament-line" style="transition:none;width:60px;"></div>
+          <div class="ornament-diamond"></div>
+          <div class="ornament-line" style="transition:none;width:60px;"></div>
+        </div>
+      </div>
+      <p class="hero-tagline">Discreet. Refined. Relentless.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn-primary" onclick="showPage('contact')" aria-label="Request access">REQUEST ACCESS</a>
+        <a href="#" class="btn-secondary" onclick="scrollToServices()" aria-label="Explore services">EXPLORE SERVICES</a>
+      </div>
+    </div>
+    <div class="scroll-indicator" aria-hidden="true">
+      <span class="scroll-text">SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Brand Strip -->
+  <section class="brand-strip" aria-label="Brand statement">
+    <div class="brand-quote">
+      <p class="brand-quote-text animate-in" data-delay="0">"We do not offer packages. We handle lives."</p>
+    </div>
+  </section>
+
+  <!-- Services Overview -->
+  <section class="services-overview" id="services-section" aria-label="Services overview">
+    <div class="section-header">
+      <div class="section-label animate-in" data-delay="0">WHAT WE HANDLE</div>
+      <div class="ornament animate-in" data-delay="1">
+        <div class="ornament-line"></div>
+        <div class="ornament-diamond"></div>
+        <div class="ornament-line"></div>
+      </div>
+      <h2 class="section-headline animate-in" data-delay="2">A Complete Private Standard</h2>
+      <p class="section-sub animate-in" data-delay="3">Five pillars. One standard.</p>
+      <div class="ornament animate-in" data-delay="4">
+        <div class="ornament-line"></div>
+        <div class="ornament-diamond"></div>
+        <div class="ornament-line"></div>
+      </div>
+    </div>
+
+    <div class="services-grid">
+      <!-- Card 01 -->
+      <article class="service-card animate-scale" data-delay="0">
+        <div class="service-number">01</div>
+        <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <!-- Building base -->
+          <rect x="4" y="30" width="40" height="14" />
+          <!-- Columns -->
+          <line x1="12" y1="18" x2="12" y2="30"/>
+          <line x1="20" y1="18" x2="20" y2="30"/>
+          <line x1="28" y1="18" x2="28" y2="30"/>
+          <line x1="36" y1="18" x2="36" y2="30"/>
+          <!-- Pediment top -->
+          <polyline points="2,18 24,6 46,18"/>
+          <line x1="2" y1="18" x2="46" y2="18"/>
+          <!-- Door -->
+          <rect x="20" y="36" width="8" height="8"/>
+          <!-- Windows -->
+          <rect x="8" y="34" width="6" height="5"/>
+          <rect x="34" y="34" width="6" height="5"/>
+        </svg>
+        <h3 class="service-name">Private Residences</h3>
+        <div class="service-divider"></div>
+        <p class="service-desc">Exclusive villa stays, private estates, and personally managed residence access worldwide.</p>
+        <a href="#" class="service-learn" onclick="showPage('residences')">Explore</a>
+      </article>
+
+      <!-- Card 02 -->
+      <article class="service-card animate-scale" data-delay="1">
+        <div class="service-number">02</div>
+        <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <!-- Car body -->
+          <path d="M4,32 Q4,28 8,28 L14,22 Q17,19 24,19 Q31,19 34,22 L40,28 Q44,28 44,32 L44,36 Q44,38 42,38 L6,38 Q4,38 4,36 Z"/>
+          <!-- Windshield -->
+          <line x1="14" y1="22" x2="16" y2="28"/>
+          <line x1="34" y1="22" x2="32" y2="28"/>
+          <!-- Rear window -->
+          <line x1="36" y1="24" x2="38" y2="28"/>
+          <!-- Wheels -->
+          <circle cx="14" cy="38" r="5"/>
+          <circle cx="14" cy="38" r="2.5"/>
+          <circle cx="34" cy="38" r="5"/>
+          <circle cx="34" cy="38" r="2.5"/>
+        </svg>
+        <h3 class="service-name">Private Mobility</h3>
+        <div class="service-divider"></div>
+        <p class="service-desc">Chauffeur-driven prestige vehicles, private transfers, and seamless ground coordination.</p>
+        <a href="#" class="service-learn" onclick="showPage('mobility')">Explore</a>
+      </article>
+
+      <!-- Card 03 -->
+      <article class="service-card animate-scale" data-delay="2">
+        <div class="service-number">03</div>
+        <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <!-- Hull -->
+          <path d="M2,34 Q4,40 24,40 Q44,40 46,34 L42,28 L6,28 Z"/>
+          <!-- Deck -->
+          <line x1="6" y1="28" x2="42" y2="28"/>
+          <!-- Superstructure -->
+          <rect x="14" y="20" width="18" height="8"/>
+          <!-- Mast -->
+          <line x1="24" y1="4" x2="24" y2="20"/>
+          <!-- Flag -->
+          <polyline points="24,4 30,7 24,10"/>
+          <!-- Water lines -->
+          <path d="M2,43 Q10,41 18,43 Q26,45 34,43 Q42,41 46,43" stroke-opacity="0.5"/>
+        </svg>
+        <h3 class="service-name">Yachting</h3>
+        <div class="service-divider"></div>
+        <p class="service-desc">Tailored access to private yachts and beautifully managed sea experiences.</p>
+        <a href="#" class="service-learn" onclick="showPage('yachting')">Explore</a>
+      </article>
+
+      <!-- Card 04 -->
+      <article class="service-card animate-scale" data-delay="3">
+        <div class="service-number">04</div>
+        <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <!-- Bell dome -->
+          <path d="M10,28 Q10,14 24,14 Q38,14 38,28 Z"/>
+          <!-- Base platform -->
+          <rect x="6" y="28" width="36" height="4" rx="1"/>
+          <!-- Handle base -->
+          <rect x="14" y="32" width="20" height="3" rx="1"/>
+          <!-- Knob on top -->
+          <circle cx="24" cy="14" r="2.5"/>
+          <!-- Button to ring -->
+          <line x1="24" y1="11" x2="24" y2="8"/>
+          <circle cx="24" cy="7" r="1.5"/>
+        </svg>
+        <h3 class="service-name">Lifestyle Concierge</h3>
+        <div class="service-divider"></div>
+        <p class="service-desc">Personal coordination for dining, reservations, events, and every request between.</p>
+        <a href="#" class="service-learn" onclick="showPage('concierge')">Explore</a>
+      </article>
+
+      <!-- Card 05 -->
+      <article class="service-card animate-scale" data-delay="4">
+        <div class="service-number">05</div>
+        <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <!-- Shield -->
+          <path d="M24,4 L44,12 L44,26 Q44,38 24,44 Q4,38 4,26 L4,12 Z"/>
+          <!-- Compass rose center -->
+          <circle cx="24" cy="24" r="3"/>
+          <!-- Cardinal points -->
+          <polygon points="24,10 22,18 24,20 26,18" fill="var(--gold)" opacity="0.7"/>
+          <polygon points="24,38 22,30 24,28 26,30" fill="var(--gold)" opacity="0.7"/>
+          <polygon points="10,24 18,22 20,24 18,26" fill="var(--gold)" opacity="0.7"/>
+          <polygon points="38,24 30,22 28,24 30,26" fill="var(--gold)" opacity="0.7"/>
+          <!-- Inter-cardinal points -->
+          <polygon points="14.5,14.5 18.5,19.5 19.5,18.5" fill="var(--gold)" opacity="0.4"/>
+          <polygon points="33.5,14.5 29.5,19.5 28.5,18.5" fill="var(--gold)" opacity="0.4"/>
+          <polygon points="14.5,33.5 18.5,28.5 19.5,29.5" fill="var(--gold)" opacity="0.4"/>
+          <polygon points="33.5,33.5 29.5,28.5 28.5,29.5" fill="var(--gold)" opacity="0.4"/>
+        </svg>
+        <h3 class="service-name">Protection</h3>
+        <div class="service-divider"></div>
+        <p class="service-desc">Discreet security coordination and protection support for elevated travel and presence.</p>
+        <a href="#" class="service-learn" onclick="showPage('protection')">Explore</a>
+      </article>
+    </div>
+
+    <p class="services-note animate-fade">Selected destination handling available upon inquiry.</p>
+  </section>
+
+  <!-- Cinematic Statement -->
+  <section class="cinematic" aria-label="Privacy statement">
+    <div class="section-label animate-in">THE ARYON STANDARD</div>
+    <div class="ornament animate-in" data-delay="1">
+      <div class="ornament-line" style="width:60px;"></div>
+      <div class="ornament-diamond"></div>
+      <div class="ornament-line" style="width:60px;"></div>
+    </div>
+    <h2 class="cinematic-headline animate-in" data-delay="2">Privacy is our principle.</h2>
+    <p class="cinematic-body animate-in" data-delay="3">We operate in the background, so our clients can move freely in the foreground. Discretion is not a feature. It is the foundation.</p>
+  </section>
+
+  <!-- How It Works -->
+  <section class="process" aria-label="How it works">
+    <div class="section-header">
+      <div class="section-label animate-in">THE PROCESS</div>
+      <h2 class="section-headline animate-in" data-delay="1">Handled from first contact.</h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step animate-left" data-delay="0">
+        <div class="step-big-num">01</div>
+        <div class="step-label">INQUIRY</div>
+        <div class="step-divider"></div>
+        <h3 class="step-title">Private inquiry.</h3>
+        <p class="step-body">All introductions begin privately. No public forms, no automated replies. A member of the team responds personally.</p>
+      </div>
+      <div class="process-connector" aria-hidden="true"></div>
+      <div class="process-step animate-in" data-delay="2">
+        <div class="step-big-num">02</div>
+        <div class="step-label">CURATION</div>
+        <div class="step-divider"></div>
+        <h3 class="step-title">Tailored arrangement.</h3>
+        <p class="step-body">Your requirements are understood in full. Services are assembled around your world, not the other way around.</p>
+      </div>
+      <div class="process-connector" aria-hidden="true"></div>
+      <div class="process-step animate-right" data-delay="4">
+        <div class="step-big-num">03</div>
+        <div class="step-label">HANDLING</div>
+        <div class="step-divider"></div>
+        <h3 class="step-title">Seamless execution.</h3>
+        <p class="step-body">Everything proceeds quietly. You experience the result. We handle what happens in between.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Destinations Editorial -->
+  <section class="dest-editorial" aria-label="Where we work">
+    <div class="dest-editorial-inner">
+      <div class="dest-editorial-header">
+        <h2 class="dest-editorial-title animate-in">Where we work.</h2>
+        <a href="#" class="dest-editorial-link animate-in" data-delay="1" onclick="showPage('destinations')">All destinations</a>
+      </div>
+      <div class="dest-editorial-grid animate-fade" data-delay="2">
+        <div class="dest-editorial-col">
+          <div class="dest-editorial-region">Mediterranean</div>
+          <ul class="dest-editorial-places">
+            <li>Côte d'Azur</li>
+            <li>Monte Carlo</li>
+            <li>Capri</li>
+            <li>Amalfi Coast</li>
+            <li>Portofino</li>
+            <li>Saint-Tropez</li>
+          </ul>
+        </div>
+        <div class="dest-editorial-col">
+          <div class="dest-editorial-region">Islands</div>
+          <ul class="dest-editorial-places">
+            <li>Mykonos</li>
+            <li>Santorini</li>
+            <li>Ibiza</li>
+            <li>Formentera</li>
+            <li>Mallorca</li>
+            <li>Corfu</li>
+          </ul>
+        </div>
+        <div class="dest-editorial-col">
+          <div class="dest-editorial-region">Middle East &amp; Asia</div>
+          <ul class="dest-editorial-places">
+            <li>Dubai</li>
+            <li>Maldives</li>
+            <li>Bali</li>
+            <li>Singapore</li>
+            <li>Seychelles</li>
+            <li>Tokyo</li>
+          </ul>
+        </div>
+        <div class="dest-editorial-col">
+          <div class="dest-editorial-region">Alpine &amp; Americas</div>
+          <ul class="dest-editorial-places">
+            <li>Courchevel</li>
+            <li>St. Moritz</li>
+            <li>Aspen</li>
+            <li>Geneva</li>
+            <li>London</li>
+            <li>Miami</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials" aria-label="Client perspectives">
+    <div class="section-header">
+      <div class="section-label animate-in">CLIENT PERSPECTIVES</div>
+      <h2 class="section-headline animate-in" data-delay="1" style="font-style:italic;">Words carry weight here.</h2>
+    </div>
+    <div class="testimonials-grid">
+      <article class="testimonial-card animate-scale" data-delay="0">
+        <p class="quote-text">ARYON handles everything before I even think to ask. That level of anticipation is rare.</p>
+        <div class="quote-divider"></div>
+        <div class="quote-name">J.R.</div>
+        <div class="quote-role">Private Client, Monaco</div>
+      </article>
+      <article class="testimonial-card animate-scale" data-delay="2">
+        <p class="quote-text">I've worked with every major concierge service. None of them operate at this level of discretion.</p>
+        <div class="quote-divider"></div>
+        <div class="quote-name">A.M.</div>
+        <div class="quote-role">Principal, Dubai</div>
+      </article>
+      <article class="testimonial-card animate-scale" data-delay="4">
+        <p class="quote-text">The yacht arrangement was flawless. Three days in, nothing had gone wrong. That never happens.</p>
+        <div class="quote-divider"></div>
+        <div class="quote-name">T.W.</div>
+        <div class="quote-role">Family Office, Geneva</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta" aria-label="Contact">
+    <div class="section-label animate-in">PRIVATE INQUIRIES</div>
+    <div class="ornament animate-in" data-delay="1">
+      <div class="ornament-line" style="width:60px;"></div>
+      <div class="ornament-diamond"></div>
+      <div class="ornament-line" style="width:60px;"></div>
+    </div>
+    <h2 class="final-cta-headline animate-in" data-delay="2">Access begins with a conversation.</h2>
+    <div class="ornament animate-in" data-delay="3">
+      <div class="ornament-line" style="width:60px;"></div>
+      <div class="ornament-diamond"></div>
+      <div class="ornament-line" style="width:60px;"></div>
+    </div>
+    <p class="final-cta-body animate-in" data-delay="4">For private introductions, please reach us directly.</p>
+    <div class="contact-options animate-in" data-delay="5">
+      <div class="contact-option">
+        <div class="contact-label">EMAIL</div>
+        <a href="mailto:private@aryonprivate.com" class="contact-value">private@aryonprivate.com</a>
+      </div>
+      <div class="contact-separator" aria-hidden="true"></div>
+      <div class="contact-option">
+        <div class="contact-label">SECURE INQUIRY</div>
+        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+      </div>
+    </div>
+    <p class="final-note animate-fade">All communications are handled with absolute confidentiality.</p>
+  </section>
+
+</main>
+
+<!-- ===== SERVICES PAGE ===== -->
+<div id="page-services" class="page">
+
+  <div class="page-hero">
+    <div class="section-label animate-in">WHAT WE HANDLE</div>
+    <h1 class="page-hero-headline animate-in" data-delay="1">Five pillars.</h1>
+    <p class="page-hero-tag animate-in" data-delay="2">Each service personally handled. None outsourced without your awareness.</p>
+  </div>
+
+  <!-- 01 Private Residences -->
+  <div class="service-detail animate-fade">
+    <div class="service-content">
+      <div class="service-big-num" aria-hidden="true">01</div>
+      <div class="service-tag">PRIVATE RESIDENCES</div>
+      <h2 class="service-title">Villa, Estate & Residence</h2>
+      <div class="service-line"></div>
+      <p class="service-paragraph">From single-night villa arrangements to long-term estate access, we manage every detail of your private residence experience: before, during, and after arrival.</p>
+      <div class="service-includes-label">INCLUDES:</div>
+      <ul class="service-includes">
+        <li>Exclusive villa & estate bookings</li>
+        <li>Residence setup and pre-arrival preparation</li>
+        <li>On-site staff coordination</li>
+        <li>Property sourcing and advisory</li>
+        <li>Long-stay management support</li>
+      </ul>
+      <a href="#" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
+    </div>
+    <div class="service-visual" aria-hidden="true">
+      <svg class="service-visual-watermark" width="120" height="120" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="0.8" stroke-linecap="round">
+        <rect x="4" y="30" width="40" height="14"/>
+        <line x1="12" y1="18" x2="12" y2="30"/>
+        <line x1="20" y1="18" x2="20" y2="30"/>
+        <line x1="28" y1="18" x2="28" y2="30"/>
+        <line x1="36" y1="18" x2="36" y2="30"/>
+        <polyline points="2,18 24,6 46,18"/>
+        <line x1="2" y1="18" x2="46" y2="18"/>
+        <rect x="20" y="36" width="8" height="8"/>
+      </svg>
+      <div class="service-visual-name">Residence</div>
+    </div>
+  </div>
+
+  <!-- 02 Private Mobility -->
+  <div class="service-detail reverse animate-fade">
+    <div class="service-content">
+      <div class="service-big-num" aria-hidden="true">02</div>
+      <div class="service-tag">PRIVATE MOBILITY</div>
+      <h2 class="service-title">Ground, Air & Transfer</h2>
+      <div class="service-line"></div>
+      <p class="service-paragraph">Every journey, executed flawlessly. From airport greetings to cross-border coordination, we ensure your movement is as refined as your destination.</p>
+      <div class="service-includes-label">INCLUDES:</div>
+      <ul class="service-includes">
+        <li>Chauffeur services in all major cities</li>
+        <li>Prestige vehicle hire and transfer</li>
+        <li>Airport greeting and airside handling</li>
+        <li>Helicopter and charter coordination</li>
+        <li>Cross-border journey management</li>
+      </ul>
+      <a href="#" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
+    </div>
+    <div class="service-visual" aria-hidden="true">
+      <svg class="service-visual-watermark" width="120" height="120" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="0.8" stroke-linecap="round">
+        <path d="M4,32 Q4,28 8,28 L14,22 Q17,19 24,19 Q31,19 34,22 L40,28 Q44,28 44,32 L44,36 Q44,38 42,38 L6,38 Q4,38 4,36 Z"/>
+        <circle cx="14" cy="38" r="5"/>
+        <circle cx="34" cy="38" r="5"/>
+      </svg>
+      <div class="service-visual-name">Mobility</div>
+    </div>
+  </div>
+
+  <!-- 03 Yachting -->
+  <div class="service-detail animate-fade">
+    <div class="service-content">
+      <div class="service-big-num" aria-hidden="true">03</div>
+      <div class="service-tag">YACHTING</div>
+      <h2 class="service-title">Private Sea Arrangements</h2>
+      <div class="service-line"></div>
+      <p class="service-paragraph">From bareboat selection to fully crewed voyages, our yachting arrangements place you precisely where you want to be, with everything in order before you board.</p>
+      <div class="service-includes-label">INCLUDES:</div>
+      <ul class="service-includes">
+        <li>Private yacht selection and charter</li>
+        <li>Captain and crew arrangement</li>
+        <li>Route planning and port clearances</li>
+        <li>Provisioning and onboard preferences</li>
+        <li>Extended voyage coordination</li>
+      </ul>
+      <a href="#" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
+    </div>
+    <div class="service-visual" aria-hidden="true">
+      <svg class="service-visual-watermark" width="120" height="120" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="0.8" stroke-linecap="round">
+        <path d="M2,34 Q4,40 24,40 Q44,40 46,34 L42,28 L6,28 Z"/>
+        <rect x="14" y="20" width="18" height="8"/>
+        <line x1="24" y1="4" x2="24" y2="20"/>
+      </svg>
+      <div class="service-visual-name">Yachting</div>
+    </div>
+  </div>
+
+  <!-- 04 Lifestyle Concierge -->
+  <div class="service-detail reverse animate-fade">
+    <div class="service-content">
+      <div class="service-big-num" aria-hidden="true">04</div>
+      <div class="service-tag">LIFESTYLE CONCIERGE</div>
+      <h2 class="service-title">Daily Life, Managed</h2>
+      <div class="service-line"></div>
+      <p class="service-paragraph">The invisible layer that keeps your world running. From impossible dinner reservations to bespoke gifts, we handle the details you'd rather not think about.</p>
+      <div class="service-includes-label">INCLUDES:</div>
+      <ul class="service-includes">
+        <li>Restaurant and private dining reservations</li>
+        <li>Event access and ticket acquisition</li>
+        <li>Bespoke experiences and gifting</li>
+        <li>Local intelligence and introductions</li>
+        <li>Ongoing daily lifestyle management</li>
+      </ul>
+      <a href="#" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
+    </div>
+    <div class="service-visual" aria-hidden="true">
+      <svg class="service-visual-watermark" width="120" height="120" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="0.8" stroke-linecap="round">
+        <path d="M10,28 Q10,14 24,14 Q38,14 38,28 Z"/>
+        <rect x="6" y="28" width="36" height="4" rx="1"/>
+        <circle cx="24" cy="14" r="2.5"/>
+      </svg>
+      <div class="service-visual-name">Concierge</div>
+    </div>
+  </div>
+
+  <!-- 05 Protection -->
+  <div class="service-detail animate-fade">
+    <div class="service-content">
+      <div class="service-big-num" aria-hidden="true">05</div>
+      <div class="service-tag">PROTECTION COORDINATION</div>
+      <h2 class="service-title">Discreet Security Support</h2>
+      <div class="service-line"></div>
+      <p class="service-paragraph">Security handled with the same elegance as every other aspect of your life. Presence without presence. Protection that never announces itself.</p>
+      <div class="service-includes-label">INCLUDES:</div>
+      <ul class="service-includes">
+        <li>Discreet close protection arrangement</li>
+        <li>Secure transport coordination</li>
+        <li>Advance arrival and sweep arrangements</li>
+        <li>Digital and communication privacy advisory</li>
+        <li>Threat and risk briefing support</li>
+      </ul>
+      <a href="#" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
+    </div>
+    <div class="service-visual" aria-hidden="true">
+      <svg class="service-visual-watermark" width="120" height="120" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="0.8" stroke-linecap="round">
+        <path d="M24,4 L44,12 L44,26 Q44,38 24,44 Q4,38 4,26 L4,12 Z"/>
+        <circle cx="24" cy="24" r="3"/>
+      </svg>
+      <div class="service-visual-name">Protection</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== ABOUT PAGE ===== -->
+<div id="page-about" class="page">
+
+  <div class="about-hero">
+    <div class="section-label animate-in">THE STANDARD</div>
+    <h1 class="about-hero-headline animate-in" data-delay="1">Built on discretion.</h1>
+  </div>
+
+  <div style="padding: var(--section-pad) var(--col-pad); background: var(--bg);">
+    <div class="about-main">
+      <div class="about-content">
+        <div class="about-block animate-left" data-delay="0">
+          <div class="about-block-label">WHO WE ARE</div>
+          <p class="about-block-text">ARYON PRIVATE is a lifestyle management firm serving a select clientele. We operate at the intersection of access, discretion, and execution. Quietly handling the details that define a private life.</p>
+        </div>
+        <div class="about-block animate-left" data-delay="1">
+          <div class="about-block-label">THE APPROACH</div>
+          <p class="about-block-text">We work with a small number of principals at any time. This is deliberate. Every engagement receives personal attention from our senior team: not a junior coordinator, not an automated system. You. Us. Nothing else.</p>
+        </div>
+        <div class="about-block animate-left" data-delay="2">
+          <div class="about-block-label">CONFIDENTIALITY</div>
+          <p class="about-block-text">ARYON PRIVATE does not discuss its clients. Not publicly, not privately. Inquiries about our clientele are declined without exception. This policy is itself a service.</p>
+        </div>
+        <div class="about-values animate-in" data-delay="3">
+          <span class="about-value">DISCRETION</span>
+          <span class="about-value-sep">·</span>
+          <span class="about-value">ELEGANCE</span>
+          <span class="about-value-sep">·</span>
+          <span class="about-value">TRUST</span>
+          <span class="about-value-sep">·</span>
+          <span class="about-value">TAILORED ACCESS</span>
+          <span class="about-value-sep">·</span>
+          <span class="about-value">SEAMLESS HANDLING</span>
+        </div>
+      </div>
+      <div class="about-panel animate-right">
+        <svg class="about-panel-watermark" width="220" height="160" viewBox="0 0 100 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polygon points="0,70 50,0 50,42" fill="var(--gold)" opacity="0.07"/>
+          <polygon points="100,70 50,0 50,42" fill="var(--gold)" opacity="0.07"/>
+        </svg>
+        <div class="about-brand-mark">ARYON PRIVATE</div>
+        <div style="width:28px;height:1px;background:rgba(201,169,110,0.35);margin:20px auto;"></div>
+        <p class="about-panel-statement">"A private standard is not announced. It is recognised."</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== CONTACT PAGE ===== -->
+<div id="page-contact" class="page">
+  <div class="contact-page">
+    <div class="section-label animate-in">PRIVATE INTRODUCTIONS</div>
+    <h1 class="contact-headline animate-in" data-delay="1">Begin here.</h1>
+    <p class="contact-intro animate-in" data-delay="2">Introductions are private and handled personally. Please share what you need. We will respond on the same day.</p>
+
+    <div class="animate-in" data-delay="3">
+      <div class="form-spacer">
+        <div class="form-field">
+          <label class="form-label" for="fullname">FULL NAME</label>
+          <input class="form-input" type="text" id="fullname" name="fullname" placeholder="Your name" autocomplete="name">
+        </div>
+      </div>
+
+      <div class="form-spacer">
+        <label class="form-label">ENQUIRY TYPE</label>
+        <div class="pill-group" role="group" aria-label="Select enquiry type">
+          <button class="pill active" onclick="selectPill(this)" type="button">RESIDENCES</button>
+          <button class="pill" onclick="selectPill(this)" type="button">MOBILITY</button>
+          <button class="pill" onclick="selectPill(this)" type="button">YACHTING</button>
+          <button class="pill" onclick="selectPill(this)" type="button">CONCIERGE</button>
+          <button class="pill" onclick="selectPill(this)" type="button">PROTECTION</button>
+          <button class="pill" onclick="selectPill(this)" type="button">OTHER</button>
+        </div>
+      </div>
+
+      <div class="form-spacer">
+        <div class="form-field">
+          <label class="form-label" for="email">EMAIL</label>
+          <input class="form-input" type="email" id="email" name="email" placeholder="Contact email" autocomplete="email">
+        </div>
+      </div>
+
+      <div class="form-spacer">
+        <div class="form-field">
+          <label class="form-label" for="message">YOUR MESSAGE</label>
+          <textarea class="form-textarea" id="message" name="message" rows="5" placeholder="Please describe your requirements..."></textarea>
+        </div>
+      </div>
+
+      <div class="form-spacer">
+        <label class="form-label">PREFERRED CONTACT METHOD</label>
+        <div class="pill-group" role="group" aria-label="Select contact method">
+          <button class="pill active" onclick="selectContactMethod(this,'email')" type="button">EMAIL</button>
+          <button class="pill" onclick="selectContactMethod(this,'phone')" type="button">TELEPHONE</button>
+        </div>
+      </div>
+
+      <div id="phone-field" class="form-spacer">
+        <div class="form-field">
+          <label class="form-label" for="phone">PHONE (OPTIONAL)</label>
+          <input class="form-input" type="tel" id="phone" name="phone" placeholder="+1 000 000 0000" autocomplete="tel">
+        </div>
+      </div>
+
+      <button type="button" class="btn-submit" aria-label="Submit private inquiry" onclick="handleSubmit()">SUBMIT PRIVATE INQUIRY</button>
+
+      <p class="form-note">All information shared is handled with the same discretion as our services. We do not contact you unsolicited.</p>
+
+      <div class="form-alt">
+        <p class="form-alt-text">Prefer direct contact?</p>
+        <a href="mailto:private@aryonprivate.com" class="form-alt-email">private@aryonprivate.com</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PRIVATE RESIDENCES PAGE ===== -->
+<div id="page-residences" class="page">
+
+  <div class="svc-page-hero">
+    <div class="svc-page-hero-inner">
+      <div>
+        <div class="svc-page-tag animate-in">PRIVATE RESIDENCES</div>
+        <h1 class="svc-page-headline animate-in" data-delay="1">The right<br>property,<br>prepared.</h1>
+        <p class="svc-page-sub animate-in" data-delay="2">Estates, villas, and private residences arranged with precision. Not just booked. Managed from the moment you confirm to the day you leave.</p>
+      </div>
+      <div class="svc-img-ph animate-fade" data-delay="2">
+        <div class="svc-img-ph-rule"></div>
+        <span class="svc-img-ph-label">Estate exterior, Mediterranean coast</span>
+        <div class="svc-img-ph-rule"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-body-section">
+    <div class="svc-body-grid">
+      <div class="svc-body-text-col animate-left">
+        <div class="svc-section-tag">THE APPROACH</div>
+        <h2 class="svc-section-h">Most property bookings end at confirmation. Ours begins there.</h2>
+        <div class="svc-section-rule"></div>
+        <p class="svc-section-body">We work directly with estate owners, villa managers, and property groups not listed on any public platform. Access is the first step. What happens next matters more.</p>
+        <p class="svc-section-body">Before you arrive, the property is briefed to your specifications. Staff are introduced. Provisions are organised. Temperature, flowers, linens, preferred toiletries: the details that signal a property has been prepared, not simply unlocked.</p>
+      </div>
+      <div class="svc-body-img-col animate-fade" data-delay="1">
+        <div class="svc-img-ph">
+          <div class="svc-img-ph-rule"></div>
+          <span class="svc-img-ph-label">Interior, private villa library</span>
+          <div class="svc-img-ph-rule"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-includes-section">
+    <div class="svc-includes-inner">
+      <div class="svc-includes-label animate-in">WHAT WE MANAGE</div>
+      <div class="svc-includes-grid animate-fade" data-delay="1">
+        <div class="svc-include-item">
+          <span class="svc-include-num">01</span>
+          <span class="svc-include-text">Off-market villa and estate access through direct owner relationships</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">02</span>
+          <span class="svc-include-text">Pre-arrival briefing: staff introductions, provisions, climate, linens, preferred amenities</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">03</span>
+          <span class="svc-include-text">Resident staff sourcing, vetting, and day-to-day management</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">04</span>
+          <span class="svc-include-text">Maintenance scheduling and contractor coordination during your stay</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">05</span>
+          <span class="svc-include-text">Departure inspection, personal effects forwarding, and post-stay reporting</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">06</span>
+          <span class="svc-include-text">Long-stay coordination, lease arrangement, and extended occupancy support</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">07</span>
+          <span class="svc-include-text">Property management in your absence: security checks, maintenance, utility oversight</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">08</span>
+          <span class="svc-include-text">Property acquisition advisory through trusted legal and real estate partners</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-depth-section">
+    <div class="svc-depth-inner">
+      <div class="svc-depth-img animate-scale">
+        <div class="svc-img-ph-rule" style="position:relative;z-index:1;"></div>
+        <span class="svc-img-ph-label" style="position:relative;z-index:1;">Pool terrace, private estate, Tuscany</span>
+        <div class="svc-img-ph-rule" style="position:relative;z-index:1;"></div>
+      </div>
+      <div class="animate-right">
+        <div class="svc-section-tag">THE PROPERTY NETWORK</div>
+        <h2 class="svc-section-h">Access before availability.</h2>
+        <div class="svc-section-rule"></div>
+        <p class="svc-section-body">Our relationships with estate owners, family offices, and property managers have been built over years. When a property that matters is unavailable publicly, our first call is to these relationships.</p>
+        <p class="svc-section-body">Exclusive access is not marketing language here. It is an honest description of how we work. The properties we recommend are ones we know personally, not one we have forwarded from a listing platform.</p>
+        <a href="#" class="service-inquire" onclick="showPage('contact')" style="margin-top:28px;">ARRANGE A PRIVATE INQUIRY</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="final-cta">
+    <h2 class="final-cta-headline animate-in">Ready to discuss a property arrangement?</h2>
+    <p class="final-cta-body animate-in" data-delay="1">Tell us where you are going, when you need to arrive, and what matters to you. We handle the rest.</p>
+    <div class="contact-options animate-in" data-delay="2">
+      <div class="contact-option">
+        <div class="contact-label">EMAIL</div>
+        <a href="mailto:private@aryonprivate.com" class="contact-value">private@aryonprivate.com</a>
+      </div>
+      <div class="contact-separator" aria-hidden="true"></div>
+      <div class="contact-option">
+        <div class="contact-label">PRIVATE INQUIRY</div>
+        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== PRIVATE MOBILITY PAGE ===== -->
+<div id="page-mobility" class="page">
+
+  <div class="svc-page-hero">
+    <div class="svc-page-hero-inner">
+      <div>
+        <div class="svc-page-tag animate-in">PRIVATE MOBILITY</div>
+        <h1 class="svc-page-headline animate-in" data-delay="1">Every<br>transfer,<br>handled.</h1>
+        <p class="svc-page-sub animate-in" data-delay="2">Ground, air, and water. From the moment you land, your movement is managed without your involvement.</p>
+      </div>
+      <div class="svc-img-ph animate-fade" data-delay="2">
+        <div class="svc-img-ph-rule"></div>
+        <span class="svc-img-ph-label">Chauffeur and prestige vehicle, Monaco</span>
+        <div class="svc-img-ph-rule"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-body-section">
+    <div class="svc-body-grid flip">
+      <div class="svc-body-text-col animate-right">
+        <div class="svc-section-tag">THE APPROACH</div>
+        <h2 class="svc-section-h">The difference is preparation, not presentation.</h2>
+        <div class="svc-section-rule"></div>
+        <p class="svc-section-body">We brief drivers on your preferences before you board. We monitor your flight in real time. We place the car before you clear customs. The transfer works before it is needed.</p>
+        <p class="svc-section-body">In every city where we operate, we work with the finest operators: not the largest, not the most visible. The ones who understand what a principal expects without being told.</p>
+      </div>
+      <div class="svc-body-img-col no-border animate-fade" data-delay="1">
+        <div class="svc-img-ph">
+          <div class="svc-img-ph-rule"></div>
+          <span class="svc-img-ph-label">Interior detail, prestige saloon</span>
+          <div class="svc-img-ph-rule"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-includes-section">
+    <div class="svc-includes-inner">
+      <div class="svc-includes-label animate-in">WHAT WE ARRANGE</div>
+      <div class="svc-includes-grid animate-fade" data-delay="1">
+        <div class="svc-include-item">
+          <span class="svc-include-num">01</span>
+          <span class="svc-include-text">Airport meet-and-greet and fast-track facilitation at over 50 international airports</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">02</span>
+          <span class="svc-include-text">Chauffeur services across 50+ global cities, with briefed and vetted drivers</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">03</span>
+          <span class="svc-include-text">Prestige vehicle hire: Rolls-Royce, Bentley, Maybach, and equivalent</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">04</span>
+          <span class="svc-include-text">Helicopter and seaplane transfers: point to point, arranged with precision</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">05</span>
+          <span class="svc-include-text">Private jet charter coordination through trusted aviation partners</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">06</span>
+          <span class="svc-include-text">Cross-border route planning, customs facilitation, and carnet management</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">07</span>
+          <span class="svc-include-text">Marine transfers, water taxi arrangements, and tender coordination</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">08</span>
+          <span class="svc-include-text">Armoured vehicle coordination available on request for sensitive itineraries</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-depth-section">
+    <div class="svc-depth-inner">
+      <div class="animate-left">
+        <div class="svc-section-tag">DRIVERS AND OPERATORS</div>
+        <h2 class="svc-section-h">Every driver reviewed. Every vehicle confirmed.</h2>
+        <div class="svc-section-rule"></div>
+        <p class="svc-section-body">We do not aggregate. We vet personally. Every driver in our network has been assessed for professionalism, route knowledge, discretion, and composure under pressure.</p>
+        <p class="svc-section-body">Vehicles are confirmed before each engagement. When something does not meet standard, it is replaced before you know there was a problem. The standard is not negotiated down to fit availability.</p>
+        <a href="#" class="service-inquire" onclick="showPage('contact')" style="margin-top:28px;">DISCUSS YOUR ITINERARY</a>
+      </div>
+      <div class="svc-depth-img animate-scale">
+        <div class="svc-img-ph-rule" style="position:relative;z-index:1;"></div>
+        <span class="svc-img-ph-label" style="position:relative;z-index:1;">Helicopter transfer, coastal transfer</span>
+        <div class="svc-img-ph-rule" style="position:relative;z-index:1;"></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="final-cta">
+    <h2 class="final-cta-headline animate-in">Planning a journey?</h2>
+    <p class="final-cta-body animate-in" data-delay="1">Share the itinerary. We will arrange every transfer before you need to think about it.</p>
+    <div class="contact-options animate-in" data-delay="2">
+      <div class="contact-option">
+        <div class="contact-label">EMAIL</div>
+        <a href="mailto:private@aryonprivate.com" class="contact-value">private@aryonprivate.com</a>
+      </div>
+      <div class="contact-separator" aria-hidden="true"></div>
+      <div class="contact-option">
+        <div class="contact-label">PRIVATE INQUIRY</div>
+        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== YACHTING PAGE ===== -->
+<div id="page-yachting" class="page">
+
+  <div class="svc-page-hero">
+    <div class="svc-page-hero-inner">
+      <div>
+        <div class="svc-page-tag animate-in">YACHTING</div>
+        <h1 class="svc-page-headline animate-in" data-delay="1">The sea,<br>arranged.</h1>
+        <p class="svc-page-sub animate-in" data-delay="2">Private yacht access across the Mediterranean, Indian Ocean, and Caribbean. We handle what happens before you step aboard.</p>
+      </div>
+      <div class="svc-img-ph animate-fade" data-delay="2">
+        <div class="svc-img-ph-rule"></div>
+        <span class="svc-img-ph-label">Motor yacht at anchor, Greek Islands</span>
+        <div class="svc-img-ph-rule"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-body-section">
+    <div class="svc-body-grid">
+      <div class="svc-body-text-col animate-left">
+        <div class="svc-section-tag">THE APPROACH</div>
+        <h2 class="svc-section-h">We know the vessels worth boarding.</h2>
+        <div class="svc-section-rule"></div>
+        <p class="svc-section-body">The charter market is large and largely undifferentiated. We know the vessels worth boarding and the ones that look better in photographs. Our recommendations are based on direct knowledge and client experience, not marketing materials.</p>
+        <p class="svc-section-body">Every charter we arrange is fully provisioned to your preferences. The captain is briefed before departure. The route is confirmed. Nothing on board is a surprise, unless you requested one.</p>
+      </div>
+      <div class="svc-body-img-col animate-fade" data-delay="1">
+        <div class="svc-img-ph">
+          <div class="svc-img-ph-rule"></div>
+          <span class="svc-img-ph-label">Sundeck, crewed superyacht</span>
+          <div class="svc-img-ph-rule"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-includes-section">
+    <div class="svc-includes-inner">
+      <div class="svc-includes-label animate-in">WHAT WE HANDLE</div>
+      <div class="svc-includes-grid animate-fade" data-delay="1">
+        <div class="svc-include-item">
+          <span class="svc-include-num">01</span>
+          <span class="svc-include-text">Vessel selection from a curated fleet: motor yachts, sailing yachts, gulets, superyachts</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">02</span>
+          <span class="svc-include-text">Captain selection and full crew arrangement, briefed on your preferences in advance</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">03</span>
+          <span class="svc-include-text">Full provisioning to your dietary preferences, beverages, and personal supplies</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">04</span>
+          <span class="svc-include-text">Route planning, port clearances, and marina berth reservations</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">05</span>
+          <span class="svc-include-text">Onboard catering, wine and spirits curation, and private chef arrangement</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">06</span>
+          <span class="svc-include-text">Tender, water sports equipment, and on-water activity coordination</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">07</span>
+          <span class="svc-include-text">Extended voyage logistics: fuel stops, crew rotation, and technical support</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">08</span>
+          <span class="svc-include-text">Shore-side arrangements: restaurants, vehicles, and excursions at each port</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-depth-section">
+    <div class="svc-depth-inner">
+      <div class="svc-depth-img animate-scale">
+        <div class="svc-img-ph-rule" style="position:relative;z-index:1;"></div>
+        <span class="svc-img-ph-label" style="position:relative;z-index:1;">Interior salon, private motor yacht</span>
+        <div class="svc-img-ph-rule" style="position:relative;z-index:1;"></div>
+      </div>
+      <div class="animate-right">
+        <div class="svc-section-tag">THE FLEET WE RECOMMEND</div>
+        <h2 class="svc-section-h">Vessels we know personally.</h2>
+        <div class="svc-section-rule"></div>
+        <p class="svc-section-body">We do not forward you a catalogue and ask you to choose. We ask what matters: space, speed, privacy, style of travel. Then we present two or three options we can stand behind.</p>
+        <p class="svc-section-body">The fleet changes seasonally. Our knowledge of it does not. When a vessel is not performing at the right standard, we remove it from our recommendations before a client encounters the problem.</p>
+        <a href="#" class="service-inquire" onclick="showPage('contact')" style="margin-top:28px;">ARRANGE A YACHT INQUIRY</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="final-cta">
+    <h2 class="final-cta-headline animate-in">Where would you like to be on the water?</h2>
+    <p class="final-cta-body animate-in" data-delay="1">Tell us the dates, the party size, and the general idea. We will handle the vessel and everything around it.</p>
+    <div class="contact-options animate-in" data-delay="2">
+      <div class="contact-option">
+        <div class="contact-label">EMAIL</div>
+        <a href="mailto:private@aryonprivate.com" class="contact-value">private@aryonprivate.com</a>
+      </div>
+      <div class="contact-separator" aria-hidden="true"></div>
+      <div class="contact-option">
+        <div class="contact-label">PRIVATE INQUIRY</div>
+        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== PROTECTION PAGE ===== -->
+<div id="page-protection" class="page">
+
+  <div class="svc-page-hero">
+    <div class="svc-page-hero-inner">
+      <div>
+        <div class="svc-page-tag animate-in">PROTECTION COORDINATION</div>
+        <h1 class="svc-page-headline animate-in" data-delay="1">Presence<br>without<br>announcement.</h1>
+        <p class="svc-page-sub animate-in" data-delay="2">Security handled with the same elegance as every other aspect of your life. Close protection that does not change how you move.</p>
+      </div>
+      <div class="svc-img-ph animate-fade" data-delay="2">
+        <div class="svc-img-ph-rule"></div>
+        <span class="svc-img-ph-label">Principal arrival, private event</span>
+        <div class="svc-img-ph-rule"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-body-section">
+    <div class="svc-body-grid flip">
+      <div class="svc-body-text-col animate-right">
+        <div class="svc-section-tag">THE APPROACH</div>
+        <h2 class="svc-section-h">The principal should not feel protected. They should feel comfortable.</h2>
+        <div class="svc-section-rule"></div>
+        <p class="svc-section-body">We arrange professionals who understand this distinction. Officers who dress appropriately, adapt to your environment, and operate without creating scenes or drawing attention to the very person they are protecting.</p>
+        <p class="svc-section-body">Security is an extension of service here. Not a separate function, not a separate team. One point of contact, fully briefed on all aspects of your schedule and personal requirements.</p>
+      </div>
+      <div class="svc-body-img-col no-border animate-fade" data-delay="1">
+        <div class="svc-img-ph">
+          <div class="svc-img-ph-rule"></div>
+          <span class="svc-img-ph-label">Secure transport, city transfer</span>
+          <div class="svc-img-ph-rule"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-includes-section">
+    <div class="svc-includes-inner">
+      <div class="svc-includes-label animate-in">WHAT WE COORDINATE</div>
+      <div class="svc-includes-grid animate-fade" data-delay="1">
+        <div class="svc-include-item">
+          <span class="svc-include-num">01</span>
+          <span class="svc-include-text">Close protection officer arrangement: discreet, non-uniformed, fully vetted</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">02</span>
+          <span class="svc-include-text">Secure and armoured transport coordination for sensitive itineraries</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">03</span>
+          <span class="svc-include-text">Advance team deployment and venue assessment before principal arrival</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">04</span>
+          <span class="svc-include-text">Residential security review and household protocol recommendation</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">05</span>
+          <span class="svc-include-text">Digital privacy advisory and communications security guidance</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">06</span>
+          <span class="svc-include-text">Emergency response planning and extraction protocols for high-risk destinations</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">07</span>
+          <span class="svc-include-text">Threat assessment and intelligence briefings before travel to unfamiliar regions</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">08</span>
+          <span class="svc-include-text">Family and multi-principal coordination across concurrent itineraries</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-depth-section">
+    <div class="svc-depth-inner">
+      <div class="animate-left">
+        <div class="svc-section-tag">THE NETWORK</div>
+        <h2 class="svc-section-h">Vetted across three continents.</h2>
+        <div class="svc-section-rule"></div>
+        <p class="svc-section-body">Our protection officers are drawn from military, intelligence, and law enforcement backgrounds. They are selected for competence and for judgment. We do not place individuals who attract attention. We place professionals who remove risk quietly.</p>
+        <p class="svc-section-body">Every officer in our network has been personally assessed. References are verified. Conduct under pressure is discussed directly. We do not work with agencies we cannot account for.</p>
+        <a href="#" class="service-inquire" onclick="showPage('contact')" style="margin-top:28px;">DISCUSS PROTECTION REQUIREMENTS</a>
+      </div>
+      <div class="svc-depth-img animate-scale">
+        <div class="svc-img-ph-rule" style="position:relative;z-index:1;"></div>
+        <span class="svc-img-ph-label" style="position:relative;z-index:1;">Advance review, private venue</span>
+        <div class="svc-img-ph-rule" style="position:relative;z-index:1;"></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="final-cta">
+    <h2 class="final-cta-headline animate-in">Security should not feel like a burden.</h2>
+    <p class="final-cta-body animate-in" data-delay="1">Tell us the context and the itinerary. We will propose the appropriate level of support, without overcomplicating what does not need to be complicated.</p>
+    <div class="contact-options animate-in" data-delay="2">
+      <div class="contact-option">
+        <div class="contact-label">EMAIL</div>
+        <a href="mailto:private@aryonprivate.com" class="contact-value">private@aryonprivate.com</a>
+      </div>
+      <div class="contact-separator" aria-hidden="true"></div>
+      <div class="contact-option">
+        <div class="contact-label">PRIVATE INQUIRY</div>
+        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== DESTINATIONS PAGE ===== -->
+<div id="page-destinations" class="page">
+
+  <div class="dest-hero">
+    <div class="dest-hero-eyebrow animate-in">GLOBAL PRESENCE</div>
+    <h1 class="dest-hero-headline animate-in" data-delay="1">Wherever<br>you are going.</h1>
+    <p class="dest-hero-sub animate-in" data-delay="2">We work across five continents. Our reach is not a list. It is a permanent arrangement of relationships, access, and local intelligence built over time.</p>
+  </div>
+
+  <div class="dest-regions">
+
+    <div class="dest-region animate-fade">
+      <div class="dest-region-name">Mediterranean</div>
+      <div class="dest-region-cities">
+        <span class="dest-city">Côte d'Azur</span>
+        <span class="dest-city">Monte Carlo</span>
+        <span class="dest-city">Saint-Tropez</span>
+        <span class="dest-city">Capri</span>
+        <span class="dest-city">Amalfi Coast</span>
+        <span class="dest-city">Portofino</span>
+        <span class="dest-city">Positano</span>
+        <span class="dest-city">Taormina</span>
+      </div>
+    </div>
+
+    <div class="dest-region animate-fade" data-delay="1">
+      <div class="dest-region-name">Greek Islands</div>
+      <div class="dest-region-cities">
+        <span class="dest-city">Mykonos</span>
+        <span class="dest-city">Santorini</span>
+        <span class="dest-city">Corfu</span>
+        <span class="dest-city">Rhodes</span>
+        <span class="dest-city">Paros</span>
+      </div>
+    </div>
+
+    <div class="dest-region animate-fade" data-delay="1">
+      <div class="dest-region-name">Balearics</div>
+      <div class="dest-region-cities">
+        <span class="dest-city">Ibiza</span>
+        <span class="dest-city">Formentera</span>
+        <span class="dest-city">Mallorca</span>
+      </div>
+    </div>
+
+    <div class="dest-region animate-fade" data-delay="2">
+      <div class="dest-region-name">Middle East</div>
+      <div class="dest-region-cities">
+        <span class="dest-city">Dubai</span>
+        <span class="dest-city">Abu Dhabi</span>
+        <span class="dest-city">Doha</span>
+        <span class="dest-city">Riyadh</span>
+      </div>
+    </div>
+
+    <div class="dest-region animate-fade" data-delay="2">
+      <div class="dest-region-name">Indian Ocean</div>
+      <div class="dest-region-cities">
+        <span class="dest-city">Maldives</span>
+        <span class="dest-city">Seychelles</span>
+        <span class="dest-city">Mauritius</span>
+      </div>
+    </div>
+
+    <div class="dest-region animate-fade" data-delay="3">
+      <div class="dest-region-name">Asia Pacific</div>
+      <div class="dest-region-cities">
+        <span class="dest-city">Bali</span>
+        <span class="dest-city">Tokyo</span>
+        <span class="dest-city">Singapore</span>
+        <span class="dest-city">Bangkok</span>
+        <span class="dest-city">Phuket</span>
+        <span class="dest-city">Hong Kong</span>
+      </div>
+    </div>
+
+    <div class="dest-region animate-fade" data-delay="3">
+      <div class="dest-region-name">Alpine</div>
+      <div class="dest-region-cities">
+        <span class="dest-city">Courchevel</span>
+        <span class="dest-city">Megève</span>
+        <span class="dest-city">St. Moritz</span>
+        <span class="dest-city">Verbier</span>
+        <span class="dest-city">Aspen</span>
+        <span class="dest-city">Geneva</span>
+        <span class="dest-city">Zermatt</span>
+      </div>
+    </div>
+
+    <div class="dest-region animate-fade" data-delay="4">
+      <div class="dest-region-name">Capitals</div>
+      <div class="dest-region-cities">
+        <span class="dest-city">London</span>
+        <span class="dest-city">Paris</span>
+        <span class="dest-city">Milan</span>
+        <span class="dest-city">New York</span>
+        <span class="dest-city">Miami</span>
+        <span class="dest-city">Zurich</span>
+        <span class="dest-city">Vienna</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="dest-note">
+    <p class="dest-note-text animate-in">
+      "If you are going somewhere we are not yet present, tell us. We will be there."
+    </p>
+  </div>
+
+  <section class="final-cta" aria-label="Contact">
+    <h2 class="final-cta-headline animate-in">Planning a trip?</h2>
+    <p class="final-cta-body animate-in" data-delay="1">Share the destination. We handle what happens when you arrive.</p>
+    <div class="contact-options animate-in" data-delay="2">
+      <div class="contact-option">
+        <div class="contact-label">EMAIL</div>
+        <a href="mailto:private@aryonprivate.com" class="contact-value">private@aryonprivate.com</a>
+      </div>
+      <div class="contact-separator" aria-hidden="true"></div>
+      <div class="contact-option">
+        <div class="contact-label">PRIVATE INQUIRY</div>
+        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== CONCIERGE PAGE ===== -->
+<div id="page-concierge" class="page">
+
+  <div class="conc-hero">
+    <div class="conc-hero-eyebrow animate-in">LIFESTYLE CONCIERGE</div>
+    <h1 class="conc-hero-headline animate-in" data-delay="1">The detail<br>work.</h1>
+    <p class="conc-hero-sub animate-in" data-delay="2">Most of what we do will never be noticed. That is the point. We operate in the background so everything in front of you works without effort.</p>
+  </div>
+
+  <div class="conc-statement">
+    <div class="conc-statement-inner">
+      <p class="conc-statement-text animate-in">"The best concierge is the one you never have to think about. Requests disappear before they become problems."</p>
+    </div>
+  </div>
+
+  <div class="conc-categories">
+    <div style="max-width:680px;margin:0 auto 64px;">
+      <h2 class="section-headline animate-in" style="margin-bottom:16px;">What we actually handle.</h2>
+      <p class="section-sub animate-in" data-delay="1">No vague offerings. These are the categories of work we take on, from the everyday to the irregular.</p>
+    </div>
+
+    <div class="conc-categories-grid">
+
+      <div class="conc-cat animate-fade">
+        <div class="conc-cat-num">01</div>
+        <div class="conc-cat-label">DINING</div>
+        <h3 class="conc-cat-title">Reservations and private tables</h3>
+        <div class="conc-cat-line"></div>
+        <p class="conc-cat-body">Fully booked restaurants. Chef's tables. Private dining rooms. Venues that do not take reservations. We know who to call, and we have already called them.</p>
+        <p class="conc-examples">Recent: Last-minute table for 8 in Monaco on New Year's Eve.</p>
+      </div>
+
+      <div class="conc-cat animate-fade" data-delay="1">
+        <div class="conc-cat-num">02</div>
+        <div class="conc-cat-label">EVENTS</div>
+        <h3 class="conc-cat-title">Access to the inaccessible</h3>
+        <div class="conc-cat-line"></div>
+        <p class="conc-cat-body">Formula 1 hospitality. Cannes accreditation. Art Basel private previews. Sold-out performances. We secure access to events that do not have a public ticket window.</p>
+        <p class="conc-examples">Recent: Front-row access and hospitality suite at Monaco Grand Prix.</p>
+      </div>
+
+      <div class="conc-cat animate-fade" data-delay="1">
+        <div class="conc-cat-num">03</div>
+        <div class="conc-cat-label">GIFTING</div>
+        <h3 class="conc-cat-title">Considered and curated</h3>
+        <div class="conc-cat-line"></div>
+        <p class="conc-cat-body">Bespoke gifts for people who have everything. We source, personalise, and deliver. Jewellery. Rare bottles. Commissioned pieces. Delivered exactly when and where required.</p>
+        <p class="conc-examples">Recent: Custom Hermès order delivered to client's villa before arrival.</p>
+      </div>
+
+      <div class="conc-cat animate-fade" data-delay="2">
+        <div class="conc-cat-num">04</div>
+        <div class="conc-cat-label">HOUSEHOLD</div>
+        <h3 class="conc-cat-title">Property and domestic management</h3>
+        <div class="conc-cat-line"></div>
+        <p class="conc-cat-body">Staff sourcing and vetting. Maintenance scheduling. Pre-arrival setup. Property checks while you are away. We manage your home in your absence so it is ready on your return.</p>
+        <p class="conc-examples">Recent: Full pre-arrival setup for a 10-bedroom estate in Antibes.</p>
+      </div>
+
+      <div class="conc-cat animate-fade" data-delay="2">
+        <div class="conc-cat-num">05</div>
+        <div class="conc-cat-label">PERSONAL</div>
+        <h3 class="conc-cat-title">The things that should not take your time</h3>
+        <div class="conc-cat-line"></div>
+        <p class="conc-cat-body">Medical appointments. School research. Wardrobe sourcing. Document handling. Anything that sits on your list and keeps being moved forward: we remove it from your list entirely.</p>
+        <p class="conc-examples">Recent: School enrolment research and appointment coordination across three countries.</p>
+      </div>
+
+      <div class="conc-cat animate-fade" data-delay="3">
+        <div class="conc-cat-num">06</div>
+        <div class="conc-cat-label">THE IRREGULAR</div>
+        <h3 class="conc-cat-title">We handle the unusual</h3>
+        <div class="conc-cat-line"></div>
+        <p class="conc-cat-body">The requests that do not have a category. The ask that seems unreasonable. If you have thought about it, it is worth asking us. We have handled things clients assumed were impossible.</p>
+        <p class="conc-examples">Recent: Charter aircraft arranged and departed within 4 hours of initial request.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="conc-how">
+    <div class="conc-how-inner">
+      <div class="conc-how-left animate-left">
+        <h2>How an ongoing relationship works.</h2>
+        <p>Concierge at ARYON is not transactional. You are not paying per request. We manage your life as a continuous engagement: available, aware, and already thinking ahead.</p>
+        <p>You will have a named contact. They will know your preferences, your patterns, and your standards before you need to explain them.</p>
+      </div>
+      <div class="conc-how-list animate-right">
+        <div class="conc-how-item">
+          <div class="conc-how-item-num">01</div>
+          <div class="conc-how-item-text">
+            <strong>Introduction</strong>
+            We meet privately. You tell us what your life looks like. We tell you how we work. No contract until you are satisfied.
+          </div>
+        </div>
+        <div class="conc-how-item">
+          <div class="conc-how-item-num">02</div>
+          <div class="conc-how-item-text">
+            <strong>Onboarding</strong>
+            We learn your preferences in detail. Dietary requirements. Travel style. Vendor relationships. What you care about and what you have stopped thinking about.
+          </div>
+        </div>
+        <div class="conc-how-item">
+          <div class="conc-how-item-num">03</div>
+          <div class="conc-how-item-text">
+            <strong>Ongoing access</strong>
+            A direct line. Available. Responsive. We do not route through call centres or ticket systems. When you reach out, a person answers.
+          </div>
+        </div>
+        <div class="conc-how-item">
+          <div class="conc-how-item-num">04</div>
+          <div class="conc-how-item-text">
+            <strong>Proactive handling</strong>
+            We anticipate before you ask. Renewals, anniversaries, seasonal arrangements. Handled before they become a reminder on your phone.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="final-cta" aria-label="Concierge contact">
+    <h2 class="final-cta-headline animate-in">Ready to stop managing the details?</h2>
+    <p class="final-cta-body animate-in" data-delay="1">One conversation is all it takes to begin. We will handle the rest.</p>
+    <div class="contact-options animate-in" data-delay="2">
+      <div class="contact-option">
+        <div class="contact-label">EMAIL</div>
+        <a href="mailto:private@aryonprivate.com" class="contact-value">private@aryonprivate.com</a>
+      </div>
+      <div class="contact-separator" aria-hidden="true"></div>
+      <div class="contact-option">
+        <div class="contact-label">PRIVATE INQUIRY</div>
+        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer role="contentinfo">
+  <div class="footer-grid">
+    <div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <svg width="32" height="23" viewBox="0 0 100 72" fill="none" aria-hidden="true">
+          <polygon points="0,70 50,0 50,42" fill="#ffffff" opacity="0.7"/>
+          <polygon points="100,70 50,0 50,42" fill="#ffffff" opacity="0.7"/>
+        </svg>
+        <div>
+          <span style="font-family:'Jost',sans-serif;font-weight:500;font-size:13px;color:#fff;letter-spacing:0.38em;text-transform:uppercase;display:block;">ARYON</span>
+          <span style="font-family:'Jost',sans-serif;font-weight:300;font-size:8px;color:#c9a96e;letter-spacing:0.32em;text-transform:uppercase;opacity:0.7;display:block;">PRIVATE</span>
+        </div>
+      </div>
+      <p class="footer-brand-text">A Private Standard of Luxury.<br>Lifestyle managed personally.</p>
+    </div>
+    <div>
+      <div class="footer-col-label">SERVICES</div>
+      <ul class="footer-links">
+        <li><a href="#" class="footer-link" onclick="showPage('residences')">Private Residences</a></li>
+        <li><a href="#" class="footer-link" onclick="showPage('mobility')">Private Mobility</a></li>
+        <li><a href="#" class="footer-link" onclick="showPage('yachting')">Yachting</a></li>
+        <li><a href="#" class="footer-link" onclick="showPage('concierge')">Lifestyle Concierge</a></li>
+        <li><a href="#" class="footer-link" onclick="showPage('protection')">Protection</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-label">COMPANY</div>
+      <ul class="footer-links">
+        <li><a href="#" class="footer-link" onclick="showPage('about')">About</a></li>
+        <li><a href="#" class="footer-link" onclick="showPage('destinations')">Destinations</a></li>
+        <li><a href="#" class="footer-link">Privacy</a></li>
+        <li><a href="#" class="footer-link">Terms</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-label">PRIVATE INQUIRY</div>
+      <p class="footer-email">private@aryonprivate.com</p>
+      <a href="#" class="btn-access-outline" onclick="showPage('contact')" style="display:inline-block;padding:10px 20px;font-size:10px;" data-cursor-expand>REQUEST ACCESS</a>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2024 ARYON PRIVATE. All rights reserved.</span>
+    <span class="footer-tagline">GLOBAL SERVICES. &nbsp; ABSOLUTE PRIVACY.</span>
+  </div>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+/* ===== CUSTOM CURSOR ===== */
+const dot = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+let mouseX = 0, mouseY = 0;
+let ringX = 0, ringY = 0;
+let cursorTextEl = null;
+
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  dot.style.left = mouseX + 'px';
+  dot.style.top = mouseY + 'px';
+});
+
+function lerpCursor() {
+  ringX += (mouseX - ringX) * 0.12;
+  ringY += (mouseY - ringY) * 0.12;
+  ring.style.left = ringX + 'px';
+  ring.style.top = ringY + 'px';
+  requestAnimationFrame(lerpCursor);
+}
+lerpCursor();
+
+const hoverEls = document.querySelectorAll('a, button, [data-cursor-expand]');
+hoverEls.forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    document.body.classList.add('cursor-hover');
+    const label = el.getAttribute('data-cursor-text');
+    if (label) {
+      ring.classList.add('cursor-label');
+      ring.textContent = label;
+    }
+  });
+  el.addEventListener('mouseleave', () => {
+    document.body.classList.remove('cursor-hover');
+    ring.classList.remove('cursor-label');
+    ring.textContent = '';
+  });
+});
+
+document.addEventListener('mousedown', () => document.body.classList.add('cursor-down'));
+document.addEventListener('mouseup', () => document.body.classList.remove('cursor-down'));
+
+/* ===== PAGE SYSTEM ===== */
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + pageId);
+  if (target) {
+    target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(initObserver, 100);
+  }
+}
+
+
+function scrollToServices() {
+  const el = document.getElementById('services-section');
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+/* ===== INTERSECTION OBSERVER ===== */
+function initObserver() {
+  const animatables = document.querySelectorAll('.animate-in:not(.in-view), .animate-left:not(.in-view), .animate-right:not(.in-view), .animate-scale:not(.in-view), .animate-fade:not(.in-view), .ornament-line:not(.in-view)');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  animatables.forEach(el => observer.observe(el));
+}
+
+// Also observe dynamic ornament lines
+function observeOrnamentLines() {
+  document.querySelectorAll('.ornament-line').forEach(line => {
+    line.classList.add('animate-in');
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initObserver();
+});
+
+/* ===== CONTACT FORM ===== */
+function selectPill(el) {
+  const group = el.closest('.pill-group');
+  group.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function selectContactMethod(el, method) {
+  const group = el.closest('.pill-group');
+  group.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  const phoneField = document.getElementById('phone-field');
+  if (method === 'phone') {
+    phoneField.classList.add('visible');
+  } else {
+    phoneField.classList.remove('visible');
+  }
+}
+
+function handleSubmit() {
+  const name = document.getElementById('fullname').value;
+  const email = document.getElementById('email').value;
+  const msg = document.getElementById('message').value;
+  if (!name || !email || !msg) {
+    // Subtle indication — highlight empty fields
+    [document.getElementById('fullname'), document.getElementById('email'), document.getElementById('message')].forEach(f => {
+      if (!f.value) {
+        f.style.borderBottomColor = 'rgba(201,169,110,0.8)';
+        f.focus();
+      }
+    });
+    return;
+  }
+  // Success state
+  const submitBtn = document.querySelector('.btn-submit');
+  submitBtn.textContent = 'INQUIRY RECEIVED. WE WILL BE IN TOUCH';
+  submitBtn.style.background = 'rgba(201,169,110,0.2)';
+  submitBtn.style.color = 'var(--gold)';
+  submitBtn.style.border = '1px solid var(--gold-40)';
+  submitBtn.disabled = true;
+}
+
+/* ===== RE-ATTACH CURSOR HOVER TO DYNAMIC ELEMENTS ===== */
+function refreshCursorListeners() {
+  document.querySelectorAll('a:not([data-cursor-init]), button:not([data-cursor-init])').forEach(el => {
+    el.setAttribute('data-cursor-init', '1');
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+  });
+}
+document.addEventListener('DOMContentLoaded', refreshCursorListeners);
+</script>
+
+<script src="nav.js"></script>
+</body>
+</html>
