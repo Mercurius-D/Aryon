@@ -81,16 +81,24 @@
 
 .nav-name {
   font-family: 'Jost', sans-serif;
-  font-weight: 500;
+  font-weight: 700;
   font-size: 15px;
   color: #ffffff;
-  letter-spacing: 0.38em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   line-height: 1;
   transition: color 0.4s;
 }
 .menu-open .nav-name {
   color: var(--gold, #c9a96e);
+}
+
+.nav-reg {
+  font-size: 0.48em;
+  font-weight: 400;
+  vertical-align: super;
+  letter-spacing: 0;
+  margin-left: 0.08em;
 }
 
 .nav-sub {
