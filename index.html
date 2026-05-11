@@ -379,7 +379,6 @@ body.cursor-down .cursor-ring {
   gap: 16px;
   justify-content: center;
   flex-wrap: wrap;
-  width: 100%;
   animation: heroFadeUp 1s var(--ease-out) 0.7s both;
   margin-bottom: 20px;
 }
@@ -2085,7 +2084,10 @@ footer {
 
   <!-- Logo -->
   <a class="nav-logo" href="#" onclick="showPage('home')" aria-label="ARYON PRIVATE, return to homepage">
-    <img class="nav-chevron" src="aryon%20logo.jpeg" alt="" aria-hidden="true" width="34" height="34">
+    <svg class="nav-chevron" width="34" height="24" viewBox="0 0 100 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <polygon points="0,70 50,0 50,40" fill="#ffffff"/>
+      <polygon points="100,70 50,0 50,40" fill="#ffffff"/>
+    </svg>
     <div class="nav-wordmark">
       <span class="nav-name">ARYON<span class="nav-reg">®</span></span>
     </div>

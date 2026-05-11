@@ -59,13 +59,18 @@
 .nav-chevron {
   display: block;
   flex-shrink: 0;
-  height: 34px;
-  width: auto;
-  object-fit: contain;
   transition: transform 0.5s cubic-bezier(0.25,0.1,0.25,1);
 }
 .nav-logo:hover .nav-chevron {
   transform: translateY(-2px);
+}
+
+.nav-logo .nav-chevron polygon {
+  fill: #ffffff;
+  transition: fill 0.4s ease;
+}
+.menu-open .nav-logo .nav-chevron polygon {
+  fill: var(--gold, #c9a96e);
 }
 
 .nav-wordmark {
