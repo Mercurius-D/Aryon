@@ -1300,7 +1300,13 @@ body.cursor-down .cursor-ring {
   z-index: 1;
 }
 .globe-wrap:active { cursor: grabbing; }
-#globeEl { width: 100%; height: 100%; }
+#globeStars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+#globeEl { position: relative; z-index: 1; width: 100%; height: 100%; }
 #globeEl canvas { filter: none; }
 .globe-destinations {
   display: flex;
@@ -2620,6 +2626,7 @@ footer {
       <p class="globe-sub animate-in" data-delay="3">Select a destination to discover what we handle there.</p>
     </div>
     <div class="globe-wrap" id="globeWrap">
+      <canvas id="globeStars" aria-hidden="true"></canvas>
       <div id="globeEl"></div>
     </div>
     <div class="globe-destinations">
@@ -4193,6 +4200,41 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
         }
       });
 
+    /* Graticule — meridians, parallels, equator, tropics */
+    var _grat = [], _step = 5;
+    for (var _lo = -180; _lo < 180; _lo += 30) {
+      var _mc = [];
+      for (var _la = -85; _la <= 85; _la += _step) _mc.push([_la, _lo]);
+      _grat.push({ c: _mc, t: 'grid' });
+    }
+    [-60, -30, 30, 60].forEach(function(lat) {
+      var _pc = [];
+      for (var lo2 = -180; lo2 <= 180; lo2 += _step) _pc.push([lat, lo2]);
+      _grat.push({ c: _pc, t: 'grid' });
+    });
+    var _eq = [];
+    for (var lo3 = -180; lo3 <= 180; lo3 += _step) _eq.push([0, lo3]);
+    _grat.push({ c: _eq, t: 'equator' });
+    [23.5, -23.5].forEach(function(lat) {
+      var _tc = [];
+      for (var lo4 = -180; lo4 <= 180; lo4 += _step) _tc.push([lat, lo4]);
+      _grat.push({ c: _tc, t: 'tropic' });
+    });
+    globe
+      .pathsData(_grat)
+      .pathPoints('c')
+      .pathPointLat(function(p) { return p[0]; })
+      .pathPointLng(function(p) { return p[1]; })
+      .pathColor(function(d) {
+        return d.t === 'equator' ? 'rgba(201,169,110,0.55)'
+             : d.t === 'tropic'  ? 'rgba(201,169,110,0.24)'
+             : 'rgba(201,169,110,0.09)';
+      })
+      .pathStroke(function(d) {
+        return d.t === 'equator' ? 1.0 : d.t === 'tropic' ? 0.55 : 0.28;
+      })
+      .pathAltitude(0.001);
+
     /* Sizing — guard against zero-dimension (hidden parent) */
     function resize() {
       var wrap = document.getElementById('globeWrap');
@@ -4203,6 +4245,27 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     }
     resize();
     window.addEventListener('resize', resize);
+
+    /* Starfield — scattered dots around globe edges */
+    (function() {
+      var sc = document.getElementById('globeStars');
+      if (!sc) return;
+      var w = sc.offsetWidth || 780, h = sc.offsetHeight || 780;
+      sc.width = w; sc.height = h;
+      var ctx = sc.getContext('2d');
+      var cx = w / 2, cy = h / 2, r = w / 2 * 0.94;
+      for (var i = 0; i < 260; i++) {
+        var x = Math.random() * w, y = Math.random() * h;
+        var dx = x - cx, dy = y - cy;
+        if (dx * dx + dy * dy < r * r) continue; /* skip inside globe */
+        var s = Math.random() > 0.86 ? 1.3 : 0.7;
+        var a = Math.random() * 0.5 + 0.12;
+        ctx.beginPath();
+        ctx.arc(x, y, s, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,' + a + ')';
+        ctx.fill();
+      }
+    })();
 
     /* Camera */
     globe.pointOfView({ lat: 33, lng: 28, altitude: 2.0 }, 0);
