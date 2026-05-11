@@ -760,9 +760,6 @@ body.cursor-down .cursor-ring {
   border-top: 2px solid var(--gold);
   padding: 40px 32px;
 }
-.quote-mark {
-  display: none;
-}
 .quote-text {
   font-family: var(--serif);
   font-weight: 400;
@@ -2332,8 +2329,6 @@ footer {
         </li>
       </ol>
 
-      <div class="overlay-left-foot">
-      </div>
     </nav>
 
     <!-- Vertical separator -->
@@ -4130,11 +4125,12 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
       .onPointClick(function(d) { showPage(d.page); })
       (el);
 
-    /* Sizing */
+    /* Sizing — guard against zero-dimension (hidden parent) */
     function resize() {
       var wrap = document.getElementById('globeWrap');
       if (!wrap || !globe) return;
       var w = wrap.offsetWidth;
+      if (w === 0) return;
       globe.width(w).height(w);
     }
     resize();
@@ -4149,13 +4145,15 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     globe.controls().minPolarAngle   = Math.PI * 0.25;
     globe.controls().maxPolarAngle   = Math.PI * 0.75;
 
-    /* Pause on drag, resume after */
-    el.addEventListener('pointerdown', function() {
+    /* Pause on drag, resume after — use capture on wrapper so Globe.gl's
+       internal canvas handlers cannot prevent propagation */
+    var wrap = document.getElementById('globeWrap');
+    wrap.addEventListener('pointerdown', function() {
       globe.controls().autoRotate = false;
-    });
-    el.addEventListener('pointerup', function() {
+    }, true);
+    wrap.addEventListener('pointerup', function() {
       setTimeout(function() { globe.controls().autoRotate = true; }, 2800);
-    });
+    }, true);
   }
 
   /* Fly-to called by destination buttons */
