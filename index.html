@@ -1272,6 +1272,9 @@ body.cursor-down .cursor-ring {
   padding: var(--section-pad) var(--col-pad) 0;
   text-align: center;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .globe-headline {
   font-family: var(--serif);
@@ -1294,10 +1297,11 @@ body.cursor-down .cursor-ring {
   width: 780px;
   max-width: 100%;
   aspect-ratio: 1 / 1;
-  margin: -32px auto 0;
+  margin-top: -32px;
   cursor: grab;
   position: relative;
   z-index: 1;
+  flex-shrink: 0;
 }
 .globe-wrap:active { cursor: grabbing; }
 #globeStars {
@@ -1315,6 +1319,8 @@ body.cursor-down .cursor-ring {
   border-top: 1px solid var(--gold-15);
   position: relative;
   z-index: 2;
+  width: 100%;
+  align-self: stretch;
 }
 .globe-dest-btn {
   display: flex;
@@ -4196,7 +4202,7 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
       .then(function(r) { return r.json(); })
       .then(function(world) {
         if (window.topojson && globe) {
-          globe.polygonsData(topojson.feature(world, world.objects.land).features);
+          globe.polygonsData(topojson.feature(world, world.objects.countries).features);
         }
       });
 
