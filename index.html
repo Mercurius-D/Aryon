@@ -1272,9 +1272,9 @@ body.cursor-down .cursor-ring {
   padding: var(--section-pad) var(--col-pad) 0;
   text-align: center;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
 }
 .globe-headline {
   font-family: var(--serif);
@@ -1297,12 +1297,11 @@ body.cursor-down .cursor-ring {
   width: 780px;
   max-width: 100%;
   aspect-ratio: 1 / 1;
-  margin: -32px auto 0;
+  margin-top: -32px;
+  justify-self: center;
   cursor: grab;
   position: relative;
   z-index: 1;
-  flex-shrink: 0;
-  align-self: center;
 }
 .globe-wrap:active { cursor: grabbing; }
 #globeStars {
@@ -1312,7 +1311,7 @@ body.cursor-down .cursor-ring {
   z-index: 0;
 }
 #globeEl { position: relative; z-index: 1; width: 100%; height: 100%; }
-#globeEl canvas { filter: none; }
+#globeEl canvas { filter: none; display: block; }
 .globe-destinations {
   display: flex;
   justify-content: center;
@@ -4282,16 +4281,16 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     globe.controls().enablePan       = false;
     globe.controls().minPolarAngle   = Math.PI * 0.25;
     globe.controls().maxPolarAngle   = Math.PI * 0.75;
-    globe.controls().minDistance     = 180;
-    globe.controls().maxDistance     = 380;
 
-    /* Zoom only when cursor is directly over the globe */
-    el.addEventListener('mouseenter', function() {
-      globe.controls().enableZoom = true;
-    });
-    el.addEventListener('mouseleave', function() {
-      globe.controls().enableZoom = false;
-    });
+    /* Zoom via wheel — only fires when cursor is on the globe element */
+    el.addEventListener('wheel', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var pov = globe.pointOfView();
+      var delta = e.deltaY > 0 ? 0.15 : -0.15;
+      var newAlt = Math.max(1.0, Math.min(3.0, pov.altitude + delta));
+      globe.pointOfView({ lat: pov.lat, lng: pov.lng, altitude: newAlt }, 80);
+    }, { passive: false });
 
     /* Pause on drag, resume after — use capture on wrapper so Globe.gl's
        internal canvas handlers cannot prevent propagation */
