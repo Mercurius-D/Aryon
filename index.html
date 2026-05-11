@@ -1275,9 +1275,6 @@ body.cursor-down .cursor-ring {
   padding: var(--section-pad) var(--col-pad) 0;
   text-align: center;
   overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-items: center;
 }
 .globe-headline {
   font-family: var(--serif);
@@ -1300,11 +1297,11 @@ body.cursor-down .cursor-ring {
   width: 780px;
   max-width: 100%;
   aspect-ratio: 1 / 1;
-  margin-top: -32px;
-  justify-self: center;
+  margin: -32px auto 0;
   cursor: grab;
   position: relative;
   z-index: 1;
+  overflow: hidden;
 }
 .globe-wrap:active { cursor: grabbing; }
 #globeStars {
@@ -1313,8 +1310,8 @@ body.cursor-down .cursor-ring {
   pointer-events: none;
   z-index: 0;
 }
-#globeEl { position: relative; z-index: 1; width: 100%; height: 100%; }
-#globeEl canvas { filter: none; display: block; }
+#globeEl { position: absolute; inset: 0; z-index: 1; }
+#globeEl canvas { display: block; }
 .globe-destinations {
   display: flex;
   justify-content: center;
@@ -4285,19 +4282,21 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     globe.controls().minPolarAngle   = Math.PI * 0.25;
     globe.controls().maxPolarAngle   = Math.PI * 0.75;
 
-    /* Zoom via wheel — only fires when cursor is on the globe element */
-    el.addEventListener('wheel', function(e) {
+    var wrap = document.getElementById('globeWrap');
+
+    /* Zoom via wheel — capture phase on wrapper, only applies when cursor is
+       directly over the globe canvas (el.contains check filters out buttons etc.) */
+    wrap.addEventListener('wheel', function(e) {
+      if (!el.contains(e.target)) return;
       e.preventDefault();
       e.stopPropagation();
       var pov = globe.pointOfView();
       var delta = e.deltaY > 0 ? 0.15 : -0.15;
-      var newAlt = Math.max(1.0, Math.min(3.0, pov.altitude + delta));
+      var newAlt = Math.max(1.5, Math.min(2.5, pov.altitude + delta));
       globe.pointOfView({ lat: pov.lat, lng: pov.lng, altitude: newAlt }, 80);
-    }, { passive: false });
+    }, { passive: false, capture: true });
 
-    /* Pause on drag, resume after — use capture on wrapper so Globe.gl's
-       internal canvas handlers cannot prevent propagation */
-    var wrap = document.getElementById('globeWrap');
+    /* Pause on drag, resume after */
     wrap.addEventListener('pointerdown', function() {
       globe.controls().autoRotate = false;
     }, true);
