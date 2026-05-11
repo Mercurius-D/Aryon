@@ -1298,9 +1298,7 @@ body.cursor-down .cursor-ring {
 }
 .globe-wrap:active { cursor: grabbing; }
 #globeEl { width: 100%; height: 100%; }
-#globeEl canvas {
-  filter: sepia(1) saturate(2.8) hue-rotate(8deg) brightness(0.62);
-}
+#globeEl canvas { filter: none; }
 .globe-destinations {
   display: flex;
   justify-content: center;
@@ -4061,6 +4059,7 @@ function refreshCursorListeners() {
 document.addEventListener('DOMContentLoaded', refreshCursorListeners);
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/topojson@3/dist/topojson.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/globe.gl@2.45.3/dist/globe.gl.min.js"></script>
 <script>
 (function () {
@@ -4082,12 +4081,23 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     var el = document.getElementById('globeEl');
     if (!el || !window.Globe) return;
 
+    var _oc = document.createElement('canvas');
+    _oc.width = 2; _oc.height = 2;
+    _oc.getContext('2d').fillStyle = '#070503';
+    _oc.getContext('2d').fillRect(0, 0, 2, 2);
+
     globe = Globe()
-      /* Appearance */
-      .globeImageUrl('//cdn.jsdelivr.net/npm/three-globe/example/img/earth-blue-marble.jpg')
+      /* Appearance — dark ocean base, land via polygons */
+      .globeImageUrl(_oc.toDataURL())
       .backgroundColor('rgba(0,0,0,0)')
       .atmosphereColor('#c9a96e')
       .atmosphereAltitude(0.18)
+      /* Land polygons — solid site-gold, no borders */
+      .polygonsData([])
+      .polygonCapColor(function() { return '#c9a96e'; })
+      .polygonSideColor(function() { return 'rgba(201,169,110,0.06)'; })
+      .polygonAltitude(0.004)
+      .polygonStrokeColor(function() { return 'rgba(0,0,0,0)'; })
       /* Points */
       .pointsData(destinations)
       .pointLat('lat').pointLng('lng')
@@ -4128,6 +4138,15 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
       /* Click */
       .onPointClick(function(d) { showPage(d.page); })
       (el);
+
+    /* Fetch land polygons and paint them gold */
+    fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+      .then(function(r) { return r.json(); })
+      .then(function(world) {
+        if (window.topojson && globe) {
+          globe.polygonsData(topojson.feature(world, world.objects.land).features);
+        }
+      });
 
     /* Sizing — guard against zero-dimension (hidden parent) */
     function resize() {
