@@ -59,7 +59,7 @@
 .nav-chevron {
   display: block;
   flex-shrink: 0;
-  height: 34px;
+  height: 46px;
   width: auto;
   object-fit: contain;
   transition: transform 0.5s cubic-bezier(0.25,0.1,0.25,1);
