@@ -1297,11 +1297,12 @@ body.cursor-down .cursor-ring {
   width: 780px;
   max-width: 100%;
   aspect-ratio: 1 / 1;
-  margin-top: -32px;
+  margin: -32px auto 0;
   cursor: grab;
   position: relative;
   z-index: 1;
   flex-shrink: 0;
+  align-self: center;
 }
 .globe-wrap:active { cursor: grabbing; }
 #globeStars {
@@ -4281,6 +4282,16 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     globe.controls().enablePan       = false;
     globe.controls().minPolarAngle   = Math.PI * 0.25;
     globe.controls().maxPolarAngle   = Math.PI * 0.75;
+    globe.controls().minDistance     = 180;
+    globe.controls().maxDistance     = 380;
+
+    /* Zoom only when cursor is directly over the globe */
+    el.addEventListener('mouseenter', function() {
+      globe.controls().enableZoom = true;
+    });
+    el.addEventListener('mouseleave', function() {
+      globe.controls().enableZoom = false;
+    });
 
     /* Pause on drag, resume after — use capture on wrapper so Globe.gl's
        internal canvas handlers cannot prevent propagation */
