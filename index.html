@@ -4092,12 +4092,12 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
       .backgroundColor('rgba(0,0,0,0)')
       .atmosphereColor('#c9a96e')
       .atmosphereAltitude(0.18)
-      /* Land polygons — solid site-gold, no borders */
+      /* Land polygons — dark interior, bright contour stroke */
       .polygonsData([])
-      .polygonCapColor(function() { return 'rgba(179, 155, 0, 0.82)'; })
-      .polygonSideColor(function() { return 'rgba(201,169,110,0.06)'; })
-      .polygonAltitude(0.004)
-      .polygonStrokeColor(function() { return 'rgba(0,0,0,0)'; })
+      .polygonCapColor(function() { return 'rgba(87, 75, 0, 0.76)'; })
+      .polygonSideColor(function() { return 'rgba(87, 75, 0, 0.28)'; })
+      .polygonAltitude(0.006)
+      .polygonStrokeColor(function() { return '#b39b00'; })
       /* Points */
       .pointsData(destinations)
       .pointLat('lat').pointLng('lng')
