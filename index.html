@@ -445,7 +445,7 @@ body.cursor-down .cursor-ring {
   font-family: var(--serif);
   font-weight: 400;
   font-style: italic;
-  font-size: clamp(28px, 4vw, 46px);
+  font-size: clamp(20px, 4vw, 46px);
   color: var(--white-85);
   line-height: 1.4;
   letter-spacing: 0.02em;
@@ -552,7 +552,7 @@ body.cursor-down .cursor-ring {
 .service-name {
   font-family: var(--serif);
   font-weight: 500;
-  font-size: 22px;
+  font-size: clamp(18px, 2vw, 22px);
   color: var(--white);
   letter-spacing: 0.03em;
   margin-bottom: 12px;
@@ -623,7 +623,7 @@ body.cursor-down .cursor-ring {
   font-family: var(--serif);
   font-weight: 400;
   font-style: italic;
-  font-size: clamp(44px, 6vw, 80px);
+  font-size: clamp(28px, 6vw, 80px);
   color: var(--white);
   letter-spacing: 0.02em;
   line-height: 1.15;
@@ -687,7 +687,7 @@ body.cursor-down .cursor-ring {
 .step-title {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: 22px;
+  font-size: clamp(18px, 2.5vw, 22px);
   color: var(--white);
   margin-bottom: 12px;
 }
@@ -1727,7 +1727,7 @@ body.cursor-down .cursor-ring {
   font-weight: 300;
   font-size: 11px;
   letter-spacing: 0.12em;
-  padding: 8px 16px;
+  padding: 11px 16px;
   border-radius: 2px;
   cursor: none;
   transition: all 0.25s;
@@ -2258,10 +2258,25 @@ footer {
   .globe-dest-dot { margin-bottom: 0; }
 }
 
+/* Additional mobile refinements */
+@media (max-width: 767px) {
+  /* Faster animation tokens — snappier feel on touch */
+  :root { --dur-slow: 0.5s; --dur-med: 0.35s; }
+  /* Tighter card padding */
+  .service-card { padding: 32px 20px; }
+  .testimonial-card { border-top-width: 1px; padding: 32px 20px; }
+  /* Footer column gap */
+  .footer-grid { gap: 24px; }
+  /* Kill continuous canvas repaint from globe pulse rings */
+  .globe-dest-dot::before, .globe-dest-dot::after { animation: none; }
+}
+
 /* Touch / pointer-coarse devices — hide custom cursor, restore native */
 @media (hover: none), (pointer: coarse) {
   body, button, a { cursor: auto !important; }
   .cursor-dot, .cursor-ring { display: none !important; }
+  /* Keep service learn links visible without hover */
+  .service-learn { opacity: 0.7; }
 }
 </style>
 </head>
