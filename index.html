@@ -1234,6 +1234,29 @@ body.cursor-down .cursor-ring {
   line-height: 1;
 }
 .dest-editorial-places li:last-child { border-bottom: none; }
+.dest-city-link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold-25);
+  transition: color 0.3s, border-color 0.3s;
+}
+.dest-city-link:hover {
+  color: var(--gold-light);
+  border-color: var(--gold);
+}
+.dest-back-link {
+  display: inline-block;
+  margin-top: 24px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+.dest-back-link:hover { opacity: 0.7; }
 @media (max-width: 900px) {
   .dest-editorial-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -2167,8 +2190,6 @@ footer {
       </ol>
 
       <div class="overlay-left-foot">
-        <span class="overlay-foot-line"></span>
-        <span class="overlay-foot-text">EST. 2024</span>
       </div>
     </nav>
 
@@ -3183,7 +3204,7 @@ footer {
     <div class="dest-region animate-fade" data-delay="1">
       <div class="dest-region-name">Greek Islands</div>
       <div class="dest-region-cities">
-        <span class="dest-city">Mykonos</span>
+        <a href="#" class="dest-city dest-city-link" onclick="showPage('mykonos')">Mykonos</a>
         <span class="dest-city">Santorini</span>
         <span class="dest-city">Corfu</span>
         <span class="dest-city">Rhodes</span>
@@ -3194,7 +3215,7 @@ footer {
     <div class="dest-region animate-fade" data-delay="1">
       <div class="dest-region-name">Balearics</div>
       <div class="dest-region-cities">
-        <span class="dest-city">Ibiza</span>
+        <a href="#" class="dest-city dest-city-link" onclick="showPage('ibiza')">Ibiza</a>
         <span class="dest-city">Formentera</span>
         <span class="dest-city">Mallorca</span>
       </div>
@@ -3203,7 +3224,7 @@ footer {
     <div class="dest-region animate-fade" data-delay="2">
       <div class="dest-region-name">Middle East</div>
       <div class="dest-region-cities">
-        <span class="dest-city">Dubai</span>
+        <a href="#" class="dest-city dest-city-link" onclick="showPage('dubai')">Dubai</a>
         <span class="dest-city">Abu Dhabi</span>
         <span class="dest-city">Doha</span>
         <span class="dest-city">Riyadh</span>
@@ -3406,6 +3427,258 @@ footer {
   <section class="final-cta" aria-label="Concierge contact">
     <h2 class="final-cta-headline animate-in">Ready to stop managing the details?</h2>
     <p class="final-cta-body animate-in" data-delay="1">One conversation is all it takes to begin. We will handle the rest.</p>
+    <div class="contact-options animate-in" data-delay="2">
+      <div class="contact-option">
+        <div class="contact-label">EMAIL</div>
+        <a href="mailto:private@aryonprivate.com" class="contact-value">private@aryonprivate.com</a>
+      </div>
+      <div class="contact-separator" aria-hidden="true"></div>
+      <div class="contact-option">
+        <div class="contact-label">PRIVATE INQUIRY</div>
+        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== DUBAI PAGE ===== -->
+<div id="page-dubai" class="page">
+
+  <div class="svc-page-hero">
+    <div class="svc-page-hero-inner">
+      <div>
+        <div class="svc-page-tag animate-in">MIDDLE EAST</div>
+        <h1 class="svc-page-headline animate-in" data-delay="1">Dubai.</h1>
+        <p class="svc-page-sub animate-in" data-delay="2">Where ambition meets excess — and discretion becomes rare. We provide both, without compromise.</p>
+        <a href="#" class="dest-back-link animate-in" data-delay="3" onclick="showPage('destinations')">← All Destinations</a>
+      </div>
+      <div class="svc-img-ph animate-fade" data-delay="2">
+        <div class="svc-img-ph-rule"></div>
+        <span class="svc-img-ph-label">Dubai skyline from private terrace</span>
+        <div class="svc-img-ph-rule"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-body-section">
+    <div class="svc-body-grid">
+      <div class="svc-body-text-col animate-left">
+        <div class="svc-section-tag">THE DESTINATION</div>
+        <h2 class="svc-section-h">Dubai operates at speed. We ensure every detail keeps pace.</h2>
+        <div class="svc-section-rule"></div>
+        <p class="svc-section-body">Dubai is one of the world's most ambitious cities — and one of the most demanding to navigate well. From Palm Jumeirah estates to private DIFC dining, our team maintains permanent relationships with the right people.</p>
+        <p class="svc-section-body">Nothing is left to chance. Every arrival is prepared. Every arrangement confirmed before you land.</p>
+      </div>
+      <div class="svc-body-img-col animate-fade" data-delay="1">
+        <div class="svc-img-ph">
+          <div class="svc-img-ph-rule"></div>
+          <span class="svc-img-ph-label">Private pool villa, Palm Jumeirah</span>
+          <div class="svc-img-ph-rule"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-includes-section">
+    <div class="svc-includes-inner">
+      <div class="svc-includes-label animate-in">WHAT WE HANDLE IN DUBAI</div>
+      <div class="svc-includes-grid animate-fade" data-delay="1">
+        <div class="svc-include-item">
+          <span class="svc-include-num">01</span>
+          <span class="svc-include-text">Private residence and villa arrangements in Palm Jumeirah, Emirates Hills, and Downtown</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">02</span>
+          <span class="svc-include-text">Yacht charters and marina access across Dubai Marina and Port Rashid</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">03</span>
+          <span class="svc-include-text">Supercar hire, chauffeur services, and private airport transfers</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">04</span>
+          <span class="svc-include-text">Private dining arrangements and reserved tables without a public waitlist</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">05</span>
+          <span class="svc-include-text">Discreet event access and VIP arrangements during high-profile calendar moments</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="final-cta" aria-label="Dubai contact">
+    <h2 class="final-cta-headline animate-in">Planning time in Dubai?</h2>
+    <p class="final-cta-body animate-in" data-delay="1">Reach us directly. We will handle everything that follows.</p>
+    <div class="contact-options animate-in" data-delay="2">
+      <div class="contact-option">
+        <div class="contact-label">EMAIL</div>
+        <a href="mailto:private@aryonprivate.com" class="contact-value">private@aryonprivate.com</a>
+      </div>
+      <div class="contact-separator" aria-hidden="true"></div>
+      <div class="contact-option">
+        <div class="contact-label">PRIVATE INQUIRY</div>
+        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== MYKONOS PAGE ===== -->
+<div id="page-mykonos" class="page">
+
+  <div class="svc-page-hero">
+    <div class="svc-page-hero-inner">
+      <div>
+        <div class="svc-page-tag animate-in">GREEK ISLANDS</div>
+        <h1 class="svc-page-headline animate-in" data-delay="1">Mykonos.</h1>
+        <p class="svc-page-sub animate-in" data-delay="2">The island moves fast in season. We move faster — so you never have to.</p>
+        <a href="#" class="dest-back-link animate-in" data-delay="3" onclick="showPage('destinations')">← All Destinations</a>
+      </div>
+      <div class="svc-img-ph animate-fade" data-delay="2">
+        <div class="svc-img-ph-rule"></div>
+        <span class="svc-img-ph-label">Private villa overlooking the Aegean</span>
+        <div class="svc-img-ph-rule"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-body-section">
+    <div class="svc-body-grid">
+      <div class="svc-body-text-col animate-left">
+        <div class="svc-section-tag">THE DESTINATION</div>
+        <h2 class="svc-section-h">Mykonos in season is unlike anywhere else. Navigating it well requires knowing the right people.</h2>
+        <div class="svc-section-rule"></div>
+        <p class="svc-section-body">The island operates on relationships — with villa owners, marina captains, and the people who quietly control access to the things that aren't listed. We have those relationships.</p>
+        <p class="svc-section-body">From arrival to departure, every element of your time on the island is handled. Nothing improvised. Nothing uncertain.</p>
+      </div>
+      <div class="svc-body-img-col animate-fade" data-delay="1">
+        <div class="svc-img-ph">
+          <div class="svc-img-ph-rule"></div>
+          <span class="svc-img-ph-label">Infinity pool, hillside villa, Mykonos</span>
+          <div class="svc-img-ph-rule"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-includes-section">
+    <div class="svc-includes-inner">
+      <div class="svc-includes-label animate-in">WHAT WE HANDLE IN MYKONOS</div>
+      <div class="svc-includes-grid animate-fade" data-delay="1">
+        <div class="svc-include-item">
+          <span class="svc-include-num">01</span>
+          <span class="svc-include-text">Private villa arrangements with direct owner access — not through public platforms</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">02</span>
+          <span class="svc-include-text">Yacht charters and superyacht provisioning from Mykonos Marina and Ornos</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">03</span>
+          <span class="svc-include-text">Private beach club access and dining without the seasonal waitlist</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">04</span>
+          <span class="svc-include-text">Helicopter transfers from Athens and surrounding islands</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">05</span>
+          <span class="svc-include-text">Personal provisioning, staff sourcing, and in-stay concierge management</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="final-cta" aria-label="Mykonos contact">
+    <h2 class="final-cta-headline animate-in">Planning a season in Mykonos?</h2>
+    <p class="final-cta-body animate-in" data-delay="1">Reach us directly. We will handle the rest from there.</p>
+    <div class="contact-options animate-in" data-delay="2">
+      <div class="contact-option">
+        <div class="contact-label">EMAIL</div>
+        <a href="mailto:private@aryonprivate.com" class="contact-value">private@aryonprivate.com</a>
+      </div>
+      <div class="contact-separator" aria-hidden="true"></div>
+      <div class="contact-option">
+        <div class="contact-label">PRIVATE INQUIRY</div>
+        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== IBIZA PAGE ===== -->
+<div id="page-ibiza" class="page">
+
+  <div class="svc-page-hero">
+    <div class="svc-page-hero-inner">
+      <div>
+        <div class="svc-page-tag animate-in">BALEARICS</div>
+        <h1 class="svc-page-headline animate-in" data-delay="1">Ibiza.</h1>
+        <p class="svc-page-sub animate-in" data-delay="2">Not just a season — a circuit. For those who want it done properly, quietly, and entirely on their terms.</p>
+        <a href="#" class="dest-back-link animate-in" data-delay="3" onclick="showPage('destinations')">← All Destinations</a>
+      </div>
+      <div class="svc-img-ph animate-fade" data-delay="2">
+        <div class="svc-img-ph-rule"></div>
+        <span class="svc-img-ph-label">Private finca, Northern Ibiza</span>
+        <div class="svc-img-ph-rule"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-body-section">
+    <div class="svc-body-grid">
+      <div class="svc-body-text-col animate-left">
+        <div class="svc-section-tag">THE DESTINATION</div>
+        <h2 class="svc-section-h">Ibiza has two faces. We operate across both — with the same standard.</h2>
+        <div class="svc-section-rule"></div>
+        <p class="svc-section-body">The north is quiet, private, and architecturally remarkable. The south moves differently — louder, faster, with access that requires the right introductions. We handle both ends of the island without treating them as separate worlds.</p>
+        <p class="svc-section-body">Every arrangement is made before you arrive. Every detail confirmed. The island at its best, without the effort it usually costs.</p>
+      </div>
+      <div class="svc-body-img-col animate-fade" data-delay="1">
+        <div class="svc-img-ph">
+          <div class="svc-img-ph-rule"></div>
+          <span class="svc-img-ph-label">Private terrace, finca estate, Ibiza</span>
+          <div class="svc-img-ph-rule"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="svc-includes-section">
+    <div class="svc-includes-inner">
+      <div class="svc-includes-label animate-in">WHAT WE HANDLE IN IBIZA</div>
+      <div class="svc-includes-grid animate-fade" data-delay="1">
+        <div class="svc-include-item">
+          <span class="svc-include-num">01</span>
+          <span class="svc-include-text">Private finca and villa arrangements across the north and south of the island</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">02</span>
+          <span class="svc-include-text">Yacht charter and water sports provisioning from Ibiza Marina and Formentera</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">03</span>
+          <span class="svc-include-text">Helicopter transfers from mainland Spain and neighbouring islands</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">04</span>
+          <span class="svc-include-text">Private dining, beach club access, and evening arrangements without a queue</span>
+        </div>
+        <div class="svc-include-item">
+          <span class="svc-include-num">05</span>
+          <span class="svc-include-text">Airport meet-and-greet, private transfers, and full in-stay concierge support</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="final-cta" aria-label="Ibiza contact">
+    <h2 class="final-cta-headline animate-in">Planning time in Ibiza?</h2>
+    <p class="final-cta-body animate-in" data-delay="1">One conversation is all it takes. We handle everything from there.</p>
     <div class="contact-options animate-in" data-delay="2">
       <div class="contact-option">
         <div class="contact-label">EMAIL</div>
