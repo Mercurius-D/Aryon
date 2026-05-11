@@ -653,6 +653,20 @@ body.nav-open {
   .nav-item-text  { font-size: clamp(26px, 9vw, 40px); }
 }
 
+/* Notch / Dynamic Island safe area */
+.nav-bar {
+  padding-top: env(safe-area-inset-top, 0px);
+  height: calc(72px + env(safe-area-inset-top, 0px));
+}
+.nav-bar.scrolled {
+  height: calc(54px + env(safe-area-inset-top, 0px));
+}
+
+/* Touch devices — restore native cursor */
+@media (hover: none), (pointer: coarse) {
+  .nav-menu-trigger, .nav-logo, .overlay-nav-link { cursor: auto !important; }
+}
+
 
 /* ============================================================
    13. FOCUS VISIBLE (accessibility)

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="ARYON PRIVATE. A discreet lifestyle management firm. Private residences, yachting, mobility, and personal concierge services.">
 <title>ARYON PRIVATE: A Private Standard</title>
 
@@ -2226,15 +2226,42 @@ footer {
 }
 @media (max-width: 767px) {
   .services-grid { grid-template-columns: 1fr; }
+  /* Hero */
   .hero-ctas { display: block; }
   .hero-ctas .btn-primary,
-  .hero-ctas .btn-secondary { display: block; max-width: 320px; margin: 8px auto; }
+  .hero-ctas .btn-secondary { display: block; max-width: 100%; margin: 8px auto; }
+  /* Larger, thumb-friendly buttons */
+  .btn-primary, .btn-secondary { font-size: 12px; padding: 16px 28px; }
+  /* Contact / footer */
   .contact-options { flex-direction: column; gap: 32px; }
   .contact-separator { display: none; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; text-align: center; }
+  footer { padding-bottom: max(40px, env(safe-area-inset-bottom, 0px)); }
+  /* Sections */
   .process-step { padding: 0 0 0 8px; }
   .service-content { padding: 48px 24px; }
+  /* Service / destination subpage heroes — less top padding on mobile */
+  .svc-page-hero { padding-top: 100px; padding-bottom: 48px; }
+  /* Globe destination buttons — stack vertically */
+  .globe-destinations { flex-direction: column; }
+  .globe-dest-btn {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--gold-15);
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    padding: 18px 24px;
+  }
+  .globe-dest-btn:first-child { border-top: none; }
+  .globe-dest-dot { margin-bottom: 0; }
+}
+
+/* Touch / pointer-coarse devices — hide custom cursor, restore native */
+@media (hover: none), (pointer: coarse) {
+  body, button, a { cursor: auto !important; }
+  .cursor-dot, .cursor-ring { display: none !important; }
 }
 </style>
 </head>
