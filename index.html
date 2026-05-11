@@ -1264,6 +1264,149 @@ body.cursor-down .cursor-ring {
   .dest-editorial-grid { grid-template-columns: 1fr; }
 }
 
+/* ===== GLOBE SECTION ===== */
+.globe-section {
+  background: var(--bg);
+  border-top: 1px solid var(--gold-15);
+  border-bottom: 1px solid var(--gold-15);
+  padding: var(--section-pad) var(--col-pad) 0;
+  text-align: center;
+  overflow: hidden;
+}
+.globe-headline {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: var(--t-hero);
+  color: var(--white);
+  letter-spacing: var(--ls-display);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.globe-sub {
+  font-family: var(--sans);
+  font-weight: 200;
+  font-size: 15px;
+  color: var(--white-65);
+  letter-spacing: 0.06em;
+  margin-bottom: 0;
+}
+.globe-wrap {
+  width: 640px;
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+  margin: -32px auto 0;
+  cursor: grab;
+  position: relative;
+  z-index: 1;
+}
+.globe-wrap:active { cursor: grabbing; }
+#globeEl { width: 100%; height: 100%; }
+.globe-destinations {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--gold-15);
+  position: relative;
+  z-index: 2;
+}
+.globe-dest-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 28px 48px;
+  background: transparent;
+  border: none;
+  border-left: 1px solid var(--gold-15);
+  color: var(--white-65);
+  cursor: pointer;
+  font-family: inherit;
+  position: relative;
+  transition: background 0.4s, color 0.4s;
+}
+.globe-dest-btn:first-child { border-left: none; }
+.globe-dest-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.45s var(--ease-out);
+}
+.globe-dest-btn:hover::after,
+.globe-dest-btn.active::after { transform: scaleX(1); }
+.globe-dest-btn:hover,
+.globe-dest-btn.active {
+  background: var(--gold-08);
+  color: var(--white);
+}
+.globe-dest-dot {
+  display: block;
+  width: 7px;
+  height: 7px;
+  background: var(--gold);
+  border-radius: 50%;
+  margin-bottom: 10px;
+  position: relative;
+}
+.globe-dest-dot::before,
+.globe-dest-dot::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-40);
+  animation: gdPulse 2.4s ease-out infinite;
+}
+.globe-dest-dot::after { animation-delay: 1.2s; }
+@keyframes gdPulse {
+  0%   { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(3); opacity: 0; }
+}
+.globe-dest-name {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+}
+.globe-dest-region {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+}
+.globe-tip {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #c9a96e;
+  background: rgba(8,8,8,0.92);
+  border: 1px solid rgba(201,169,110,0.35);
+  padding: 9px 16px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.globe-tip em {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.55);
+  text-transform: none;
+  margin-top: 3px;
+}
+@media (max-width: 767px) {
+  .globe-wrap { margin-top: -16px; }
+  .globe-dest-btn { padding: 22px 28px; }
+}
+
 /* ===== SERVICE SUB-PAGES ===== */
 .svc-page-hero {
   padding: 140px var(--col-pad) 72px;
@@ -2419,6 +2562,40 @@ footer {
     </div>
 
     <p class="services-note animate-fade">Selected destination handling available upon inquiry.</p>
+  </section>
+
+  <!-- Interactive Globe -->
+  <section class="globe-section" aria-label="Global presence">
+    <div class="section-header">
+      <div class="section-label animate-in">GLOBAL PRESENCE</div>
+      <div class="ornament animate-in" data-delay="1">
+        <div class="ornament-line"></div>
+        <div class="ornament-diamond"></div>
+        <div class="ornament-line"></div>
+      </div>
+      <h2 class="globe-headline animate-in" data-delay="2">Three destinations.<br>One standard.</h2>
+      <p class="globe-sub animate-in" data-delay="3">Select a destination to discover what we handle there.</p>
+    </div>
+    <div class="globe-wrap" id="globeWrap">
+      <div id="globeEl"></div>
+    </div>
+    <div class="globe-destinations">
+      <button class="globe-dest-btn animate-in" data-delay="4" onclick="globeFlyTo('dubai')" data-dest="dubai">
+        <span class="globe-dest-dot"></span>
+        <span class="globe-dest-name">Dubai</span>
+        <span class="globe-dest-region">Middle East</span>
+      </button>
+      <button class="globe-dest-btn animate-in" data-delay="5" onclick="globeFlyTo('mykonos')" data-dest="mykonos">
+        <span class="globe-dest-dot"></span>
+        <span class="globe-dest-name">Mykonos</span>
+        <span class="globe-dest-region">Greek Islands</span>
+      </button>
+      <button class="globe-dest-btn animate-in" data-delay="6" onclick="globeFlyTo('ibiza')" data-dest="ibiza">
+        <span class="globe-dest-dot"></span>
+        <span class="globe-dest-name">Ibiza</span>
+        <span class="globe-dest-region">Balearics</span>
+      </button>
+    </div>
   </section>
 
   <!-- Final CTA -->
@@ -3884,6 +4061,129 @@ function refreshCursorListeners() {
 document.addEventListener('DOMContentLoaded', refreshCursorListeners);
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/globe.gl@2.45.3/dist/globe.gl.min.js"></script>
+<script>
+(function () {
+  var destinations = [
+    { lat: 25.2048, lng: 55.2708, label: 'Dubai',   region: 'Middle East',   page: 'dubai'   },
+    { lat: 37.4467, lng: 25.3289, label: 'Mykonos', region: 'Greek Islands', page: 'mykonos' },
+    { lat: 38.9067, lng:  1.4206, label: 'Ibiza',   region: 'Balearics',     page: 'ibiza'   }
+  ];
+
+  var arcs = [
+    { sLat: 25.2048, sLng: 55.2708, eLat: 37.4467, eLng: 25.3289 },
+    { sLat: 37.4467, sLng: 25.3289, eLat: 38.9067, eLng:  1.4206 },
+    { sLat: 38.9067, sLng:  1.4206, eLat: 25.2048, eLng: 55.2708 }
+  ];
+
+  var globe;
+
+  function initGlobe() {
+    var el = document.getElementById('globeEl');
+    if (!el || !window.Globe) return;
+
+    globe = Globe()
+      /* Appearance */
+      .globeImageUrl('//cdn.jsdelivr.net/npm/three-globe/example/img/earth-dark.jpg')
+      .bumpImageUrl('//cdn.jsdelivr.net/npm/three-globe/example/img/earth-topology.png')
+      .backgroundColor('rgba(0,0,0,0)')
+      .atmosphereColor('#c9a96e')
+      .atmosphereAltitude(0.18)
+      /* Points */
+      .pointsData(destinations)
+      .pointLat('lat').pointLng('lng')
+      .pointColor(function() { return '#c9a96e'; })
+      .pointAltitude(0.055)
+      .pointRadius(0.38)
+      .pointLabel(function(d) {
+        return '<div class="globe-tip">' + d.label + '<em>' + d.region + '</em></div>';
+      })
+      /* Pulsing rings */
+      .ringsData(destinations)
+      .ringLat('lat').ringLng('lng')
+      .ringColor(function() {
+        return function(t) { return 'rgba(201,169,110,' + (Math.sqrt(1 - t) * 0.65) + ')'; };
+      })
+      .ringMaxRadius(4)
+      .ringPropagationSpeed(1.1)
+      .ringRepeatPeriod(1800)
+      /* Animated arcs */
+      .arcsData(arcs)
+      .arcStartLat('sLat').arcStartLng('sLng')
+      .arcEndLat('eLat').arcEndLng('eLng')
+      .arcColor(function() { return ['rgba(201,169,110,0.7)', 'rgba(201,169,110,0.05)']; })
+      .arcAltitude(0.22)
+      .arcStroke(0.55)
+      .arcDashLength(0.22)
+      .arcDashGap(0.85)
+      .arcDashAnimateTime(3600)
+      /* Labels */
+      .labelsData(destinations)
+      .labelLat('lat').labelLng('lng')
+      .labelText('label')
+      .labelSize(0.42)
+      .labelColor(function() { return 'rgba(219,190,138,0.92)'; })
+      .labelAltitude(0.02)
+      .labelDotRadius(0)
+      .labelResolution(3)
+      /* Click */
+      .onPointClick(function(d) { showPage(d.page); })
+      (el);
+
+    /* Sizing */
+    function resize() {
+      var wrap = document.getElementById('globeWrap');
+      if (!wrap || !globe) return;
+      var w = wrap.offsetWidth;
+      globe.width(w).height(w);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    /* Camera */
+    globe.pointOfView({ lat: 33, lng: 28, altitude: 2.0 }, 0);
+    globe.controls().autoRotate      = true;
+    globe.controls().autoRotateSpeed = 0.38;
+    globe.controls().enableZoom      = false;
+    globe.controls().enablePan       = false;
+    globe.controls().minPolarAngle   = Math.PI * 0.25;
+    globe.controls().maxPolarAngle   = Math.PI * 0.75;
+
+    /* Pause on drag, resume after */
+    el.addEventListener('pointerdown', function() {
+      globe.controls().autoRotate = false;
+    });
+    el.addEventListener('pointerup', function() {
+      setTimeout(function() { globe.controls().autoRotate = true; }, 2800);
+    });
+  }
+
+  /* Fly-to called by destination buttons */
+  window.globeFlyTo = function(dest) {
+    var d = destinations.filter(function(x) { return x.page === dest; })[0];
+    if (!d) return;
+    if (globe) {
+      globe.controls().autoRotate = false;
+      globe.pointOfView({ lat: d.lat, lng: d.lng, altitude: 1.65 }, 900);
+    }
+    document.querySelectorAll('.globe-dest-btn').forEach(function(b) {
+      b.classList.remove('active');
+    });
+    var btn = document.querySelector('.globe-dest-btn[data-dest="' + dest + '"]');
+    if (btn) btn.classList.add('active');
+    setTimeout(function() {
+      showPage(dest);
+      if (globe) globe.controls().autoRotate = true;
+    }, 1200);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGlobe);
+  } else {
+    initGlobe();
+  }
+})();
+</script>
 <script src="nav.js"></script>
 </body>
 </html>
