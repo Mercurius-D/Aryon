@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta name="description" content="ARYON PRIVATE. A discreet lifestyle management firm. Private residences, yachting, mobility, and personal concierge services.">
@@ -4425,26 +4425,44 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     ctrl.minPolarAngle   = Math.PI * 0.25;
     ctrl.maxPolarAngle   = Math.PI * 0.75;
 
-    /* Lock camera distance at the initial altitude so OrbitControls
-       cannot zoom even if enableZoom is bypassed internally */
+    /* Patch ctrl.update immediately — before Globe.gl can cache the reference —
+       so every OrbitControls tick snaps the camera back to the locked distance */
+    var _lockedDist = null;
+    var _origUpdate = ctrl.update.bind(ctrl);
+    ctrl.update = function() {
+      var r = _origUpdate();
+      if (_lockedDist !== null && ctrl.object) {
+        var d = ctrl.object.position.length();
+        if (Math.abs(d - _lockedDist) > 0.1) {
+          ctrl.object.position.normalize().multiplyScalar(_lockedDist);
+        }
+      }
+      return r;
+    };
+    /* Set the locked distance once the camera has settled at altitude 2.5,
+       and also clamp OrbitControls min/max to that exact distance */
     setTimeout(function() {
       if (ctrl.object) {
-        var d = ctrl.object.position.length();
-        ctrl.minDistance = d;
-        ctrl.maxDistance = d;
+        _lockedDist = ctrl.object.position.length();
+        ctrl.minDistance = _lockedDist;
+        ctrl.maxDistance = _lockedDist;
       }
     }, 300);
 
-    /* Intercept at window capture phase — fires before Globe.gl's own
-       listeners regardless of where they are attached in the DOM tree */
+    /* Block wheel zoom using bounding-rect check — works regardless of which
+       DOM element is the event target (avoids el.contains() miss on sibling canvases) */
+    function isOverGlobe(cx, cy) {
+      var r = el.getBoundingClientRect();
+      return cx >= r.left && cx <= r.right && cy >= r.top && cy <= r.bottom;
+    }
     window.addEventListener('wheel', function(e) {
-      if (el.contains(e.target)) {
+      if (isOverGlobe(e.clientX, e.clientY)) {
         e.preventDefault();
         e.stopImmediatePropagation();
       }
     }, { passive: false, capture: true });
     window.addEventListener('touchmove', function(e) {
-      if (el.contains(e.target) && e.touches.length > 1) {
+      if (e.touches.length > 1 && isOverGlobe(e.touches[0].clientX, e.touches[0].clientY)) {
         e.preventDefault();
       }
     }, { passive: false, capture: true });
