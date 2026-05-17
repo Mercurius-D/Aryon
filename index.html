@@ -1195,7 +1195,15 @@ body.cursor-down .cursor-ring {
 .dest-back-link:hover { opacity: 0.7; }
 @media (max-width: 900px) {
   .dest-editorial-grid { grid-template-columns: repeat(2, 1fr); }
-  .dest-cards { grid-template-columns: 1fr; gap: 2px; }
+  /* When cards stack to 1 column, hide the placeholder visual and description */
+  .dest-cards { display: flex; flex-direction: column; gap: 0; padding: 0; }
+  .dest-card-visual { display: none; }
+  .dest-card-desc { display: none; }
+  .dest-card { border: none; border-bottom: 1px solid var(--gold-15); background: transparent; }
+  .dest-card:last-child { border-bottom: none; }
+  .dest-card-body { padding: 24px var(--col-pad) 22px; }
+  .dest-card-name { font-size: clamp(32px, 4.5vw, 48px); line-height: 1; margin-bottom: 12px; }
+  .dest-card-link { display: inline-flex; width: auto; border: none; padding: 0; min-height: auto; margin-top: 0; }
 }
 @media (max-width: 600px) {
   .dest-editorial-grid { grid-template-columns: 1fr; }
@@ -2237,6 +2245,7 @@ footer {
 @media (max-width: 900px) {
   .services-grid { grid-template-columns: repeat(2, 1fr); }
   .process-steps { flex-direction: column; }
+  .process-step { width: 100%; }
   .process-connector { width: 1px; height: 48px; margin: 0 0 0 32px; }
   .testimonials-grid { grid-template-columns: 1fr; }
   .service-detail, .service-detail.reverse {
@@ -2267,8 +2276,8 @@ footer {
   .process-step { padding: 0 0 0 8px; }
   .service-content { padding: 48px 24px; }
   /* Service / destination subpage heroes — less top padding on mobile */
-  .svc-page-hero { padding-top: 100px; padding-bottom: 48px; }
-  .dest-hero { padding-top: 100px; min-height: 440px; }
+  .svc-page-hero { padding-top: calc(100px + env(safe-area-inset-top, 0px)); padding-bottom: 48px; }
+  .dest-hero { padding-top: calc(100px + env(safe-area-inset-top, 0px)); min-height: 440px; }
   /* Globe destination buttons — stack vertically */
   .globe-destinations { flex-direction: column; }
   .globe-dest-btn {
@@ -2304,11 +2313,11 @@ footer {
   }
 
   /* Fix navbar overlap on center-aligned hero pages */
-  .page-hero  { padding-top: 100px; min-height: 380px; }
-  .about-hero { padding-top: 100px; min-height: 380px; }
+  .page-hero  { padding-top: calc(100px + env(safe-area-inset-top, 0px)); min-height: 380px; }
+  .about-hero { padding-top: calc(100px + env(safe-area-inset-top, 0px)); min-height: 380px; }
 
   /* Fix concierge hero navbar overlap (same pattern as dest-hero) */
-  .conc-hero { padding-top: 100px; min-height: 440px; }
+  .conc-hero { padding-top: calc(100px + env(safe-area-inset-top, 0px)); min-height: 440px; }
 
   /* iOS: prevent auto-zoom when input receives focus (needs ≥16px) */
   .form-input,
@@ -2317,13 +2326,10 @@ footer {
   /* Hard-coded paddings that don't respond to --section-pad */
   .brand-strip    { padding-top: 48px; padding-bottom: 48px; }
   .final-cta      { padding-top: 64px; padding-bottom: 64px; }
-  .contact-page   { padding-top: 100px; }
+  .contact-page   { padding-top: calc(100px + env(safe-area-inset-top, 0px)); }
   .conc-statement { padding-top: 48px; padding-bottom: 48px; }
   .dest-editorial { padding-top: 48px; padding-bottom: 48px; }
   footer          { padding-top: 48px; }
-
-  /* Destination card visual — 260px too tall in single-column layout */
-  .dest-card-visual { height: 180px; }
 
   /* Concierge category cards */
   .conc-cat { padding: 32px 24px; }
@@ -2346,6 +2352,7 @@ footer {
 
   /* Services page content padding */
   .service-content { padding: 40px 20px; }
+  .svc-body-text-col { padding: 40px 20px; }
 
   /* Hero — 700px is too tall on small phones */
   .hero { min-height: 560px; }
@@ -2356,12 +2363,25 @@ footer {
   .globe-section .section-header { margin-bottom: 28px; }
   .globe-headline { font-size: clamp(26px, 7vw, 40px); margin-bottom: 10px; }
   .globe-sub { font-size: 13px; }
-  .globe-dest-btn { padding: 12px 20px; }
+  .globe-dest-btn { padding: 12px 20px; min-height: 44px; }
 
   /* Service subpages — tall portrait image too large on mobile */
   .svc-page-hero .svc-img-ph { display: none; }
   .svc-body-img-col { min-height: 200px; }
   .svc-depth-img { aspect-ratio: 16 / 9; }
+
+  /* Destinations hero — remove fixed height so it collapses to text content only */
+  .dest-hero { height: auto; min-height: 0; padding-bottom: 32px; }
+  /* Destination cards — ultra-compact editorial strip, all 3 in one viewport */
+  .dest-cards { display: flex; flex-direction: column; gap: 0; padding: 0; }
+  .dest-card-visual { display: none; }
+  .dest-card-desc { display: none; }
+  .dest-card { border: none; border-bottom: 1px solid var(--gold-15); background: transparent; }
+  .dest-card:last-child { border-bottom: none; }
+  .dest-card-body { padding: 18px var(--col-pad) 16px; }
+  .dest-card-tag { margin-bottom: 6px; }
+  .dest-card-name { font-size: clamp(30px, 8.5vw, 38px); line-height: 1; margin-bottom: 8px; }
+  .dest-card-link { display: inline-flex; width: auto; border: none; padding: 0; min-height: auto; margin-top: 0; justify-content: flex-start; }
 }
 
 /* ============================================================
@@ -2371,7 +2391,6 @@ footer {
   :root {
     --t-display: clamp(34px, 11vw, 56px);
   }
-  .dest-card-visual  { height: 150px; }
   .service-card      { padding: 28px 16px; }
   .conc-cat          { padding: 24px 20px; }
   .svc-page-headline { font-size: clamp(36px, 11vw, 64px); }
@@ -3540,23 +3559,8 @@ footer {
 
   <div class="dest-cards">
 
-    <!-- Dubai -->
-    <article class="dest-card animate-fade" data-delay="0" onclick="showPage('dubai')" style="cursor:none;" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showPage('dubai')" aria-label="Explore Dubai">
-      <div class="dest-card-visual">
-        <div class="dest-card-visual-rule"></div>
-        <div class="dest-card-visual-label">Dubai skyline from private terrace</div>
-        <div class="dest-card-visual-rule"></div>
-      </div>
-      <div class="dest-card-body">
-        <div class="dest-card-tag">Middle East</div>
-        <div class="dest-card-name">Dubai.</div>
-        <p class="dest-card-desc">Where ambition meets excess — and discretion becomes rare. We provide both, without compromise.</p>
-        <a href="javascript:void(0)" class="dest-card-link" onclick="event.stopPropagation();showPage('dubai')">Explore</a>
-      </div>
-    </article>
-
     <!-- Mykonos -->
-    <article class="dest-card animate-fade" data-delay="1" onclick="showPage('mykonos')" style="cursor:none;" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showPage('mykonos')" aria-label="Explore Mykonos">
+    <article class="dest-card animate-fade" data-delay="0" onclick="showPage('mykonos')" style="cursor:none;" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showPage('mykonos')" aria-label="Explore Mykonos">
       <div class="dest-card-visual">
         <div class="dest-card-visual-rule"></div>
         <div class="dest-card-visual-label">Private villa overlooking the Aegean</div>
@@ -3567,6 +3571,21 @@ footer {
         <div class="dest-card-name">Mykonos.</div>
         <p class="dest-card-desc">The island moves fast in season. We move faster — so you never have to.</p>
         <a href="javascript:void(0)" class="dest-card-link" onclick="event.stopPropagation();showPage('mykonos')">Explore</a>
+      </div>
+    </article>
+
+    <!-- Dubai -->
+    <article class="dest-card animate-fade" data-delay="1" onclick="showPage('dubai')" style="cursor:none;" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showPage('dubai')" aria-label="Explore Dubai">
+      <div class="dest-card-visual">
+        <div class="dest-card-visual-rule"></div>
+        <div class="dest-card-visual-label">Dubai skyline from private terrace</div>
+        <div class="dest-card-visual-rule"></div>
+      </div>
+      <div class="dest-card-body">
+        <div class="dest-card-tag">Middle East</div>
+        <div class="dest-card-name">Dubai.</div>
+        <p class="dest-card-desc">Where ambition meets excess — and discretion becomes rare. We provide both, without compromise.</p>
+        <a href="javascript:void(0)" class="dest-card-link" onclick="event.stopPropagation();showPage('dubai')">Explore</a>
       </div>
     </article>
 
@@ -4284,6 +4303,9 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
   var globe;
   var flyToTimer = null;
   var _rotating  = false;
+  var _cam       = null;
+  var _flyingTo  = false;
+  var _syncSph   = null;
 
   function initGlobe() {
     var el = document.getElementById('globeCanvas');
@@ -4310,10 +4332,14 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
       }
     }, { passive: false, capture: true });
     window.addEventListener('touchmove', function(e) {
-      if (e.touches.length > 1 && isOverGlobe(e.touches[0].clientX, e.touches[0].clientY)) {
+      if (e.touches.length > 1) {
         e.preventDefault();
+        e.stopImmediatePropagation();
       }
     }, { passive: false, capture: true });
+    /* iOS Safari ignores user-scalable=no since iOS 10 — block at gesture level */
+    document.addEventListener('gesturestart',  function(e) { e.preventDefault(); }, { passive: false });
+    document.addEventListener('gesturechange', function(e) { e.preventDefault(); }, { passive: false });
 
     /* Solid dark 2×2 canvas as the ocean texture */
     var bg = document.createElement('canvas');
@@ -4437,34 +4463,69 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     globe.pointOfView({ lat: 33, lng: 28, altitude: 2.5 }, 0);
 
     var ctrl = globe.controls();
-    ctrl.enableZoom    = false;
-    ctrl.enablePan     = false;
-    ctrl.minPolarAngle = Math.PI * 0.25;
-    ctrl.maxPolarAngle = Math.PI * 0.75;
+    ctrl.enabled = false; /* hand full camera ownership to our spherical-coordinate loop */
 
-    /* Rotate by moving the Three.js camera directly and forcing a render —
-       bypasses Globe.gl's demand-based render loop entirely */
-    var _cam      = globe.camera();
+    _cam = globe.camera();
     var _renderer = globe.renderer();
     var _scene    = globe.scene();
-    var _rad      = 0.00122; /* ~0.07° per frame = full revolution ~85 s */
+
+    /* Own the camera entirely via spherical coordinates — OrbitControls is disabled so
+       nothing can overwrite _cam.position between our _applyCam() calls */
+    var _dist, _phi, _theta;
+    _syncSph = function() {
+      var p = _cam.position;
+      _dist  = p.length() || 350;
+      _phi   = Math.acos(Math.max(-1, Math.min(1, p.y / _dist)));
+      _theta = Math.atan2(p.x, p.z);
+    };
+    _syncSph();
+    setTimeout(_syncSph, 500); /* re-sync in case pointOfView(duration=0) deferred */
+
+    function _applyCam() {
+      var sp = Math.sin(_phi);
+      _cam.position.set(
+        _dist * sp * Math.sin(_theta),
+        _dist * Math.cos(_phi),
+        _dist * sp * Math.cos(_theta)
+      );
+      _cam.lookAt(0, 0, 0);
+    }
+
+    var _autoRad = 0.00122; /* ≈ 0.07°/frame → ~86 s full revolution */
     _rotating = true;
-    (function rotateTick() {
-      requestAnimationFrame(rotateTick);
-      if (_rotating) {
-        var cos = Math.cos(_rad), sin = Math.sin(_rad);
-        var x = _cam.position.x, z = _cam.position.z;
-        _cam.position.x = x * cos - z * sin;
-        _cam.position.z = x * sin + z * cos;
-        _cam.lookAt(0, 0, 0);
+
+    (function tick() {
+      requestAnimationFrame(tick);
+      if (!_flyingTo) {
+        if (_rotating) _theta += _autoRad;
+        _applyCam();
       }
-      _renderer.render(_scene, _cam); /* always render — keeps drag visible too */
+      _renderer.render(_scene, _cam);
     })();
 
-    /* Drag: pause rotation on press, resume after release (window catches
-       releases outside the globe element too) */
-    el.addEventListener('pointerdown', function() { _rotating = false; }, true);
-    window.addEventListener('pointerup', function() {
+    /* Drag: full pointer-based orbit with polar clamp */
+    var _dragging = false, _dragX = 0, _dragY = 0, _pointerId = null;
+    el.addEventListener('pointerdown', function(e) {
+      if (_pointerId !== null) return;
+      _rotating = false;
+      _dragging = true;
+      _pointerId = e.pointerId;
+      _dragX = e.clientX;
+      _dragY = e.clientY;
+      el.setPointerCapture(e.pointerId);
+    }, true);
+    el.addEventListener('pointermove', function(e) {
+      if (!_dragging || e.pointerId !== _pointerId) return;
+      _theta -= (e.clientX - _dragX) * 0.005;
+      _phi   -= (e.clientY - _dragY) * 0.005;
+      _phi = Math.max(Math.PI * 0.25, Math.min(Math.PI * 0.75, _phi));
+      _dragX = e.clientX;
+      _dragY = e.clientY;
+    });
+    window.addEventListener('pointerup', function(e) {
+      if (e.pointerId !== _pointerId) return;
+      _dragging = false;
+      _pointerId = null;
       setTimeout(function() { _rotating = true; }, 2800);
     });
 
@@ -4472,8 +4533,8 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     function resize() {
       var mob = window.innerWidth < 768;
       var w = mob
-        ? Math.max(240, Math.round(window.innerWidth * 0.78))
-        : Math.min(620, window.innerWidth);
+        ? Math.max(288, Math.round(window.innerWidth * 0.94))
+        : Math.min(744, window.innerWidth);
       el.style.width  = w + 'px';
       el.style.height = w + 'px';
       globe.width(w).height(w);
@@ -4486,6 +4547,7 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     if (!d) return;
     if (globe) {
       _rotating = false;
+      _flyingTo = true; /* suspend our _applyCam so Globe.gl's tween can move the camera */
       globe.pointOfView({ lat: d.lat, lng: d.lng, altitude: 2.5 }, 900);
     }
     document.querySelectorAll('.globe-dest-btn').forEach(function(b) {
@@ -4496,7 +4558,11 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     clearTimeout(flyToTimer);
     flyToTimer = setTimeout(function() {
       showPage(dest);
-      if (globe) _rotating = true;
+      if (globe) {
+        if (_syncSph) _syncSph(); /* read post-animation camera back into our spherical state */
+        _flyingTo = false;
+        _rotating = true;
+      }
     }, 1200);
   };
 
