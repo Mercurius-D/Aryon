@@ -4291,8 +4291,8 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     /* Pin the element size with inline styles BEFORE Globe.gl reads offsetWidth */
     var isMob = window.innerWidth < 768;
     var size = isMob
-      ? Math.max(240, Math.round(window.innerWidth * 0.78))
-      : Math.min(620, window.innerWidth);
+      ? Math.max(288, Math.round(window.innerWidth * 0.94))
+      : Math.min(744, window.innerWidth);
     el.style.width  = size + 'px';
     el.style.height = size + 'px';
 
