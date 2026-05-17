@@ -4420,11 +4420,32 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     var ctrl = globe.controls();
     ctrl.autoRotate      = true;
     ctrl.autoRotateSpeed = 0.38;
-    ctrl.enableZoom      = true;
-    ctrl.zoomSpeed       = 0.5;
+    ctrl.enableZoom      = false;
     ctrl.enablePan       = false;
     ctrl.minPolarAngle   = Math.PI * 0.25;
     ctrl.maxPolarAngle   = Math.PI * 0.75;
+
+    /* Block zoom on the exact element OrbitControls listens to */
+    function stopZoom(e) { e.preventDefault(); e.stopImmediatePropagation(); }
+    var zoomEvents = ['wheel', 'mousewheel', 'DOMMouseScroll'];
+    zoomEvents.forEach(function(t) {
+      el.addEventListener(t, stopZoom, { passive: false, capture: true });
+      if (ctrl.domElement) {
+        ctrl.domElement.addEventListener(t, stopZoom, { passive: false, capture: true });
+      }
+    });
+    /* Bind to inner canvas too, after Globe.gl creates it */
+    setTimeout(function() {
+      el.querySelectorAll('canvas').forEach(function(c) {
+        zoomEvents.forEach(function(t) {
+          c.addEventListener(t, stopZoom, { passive: false, capture: true });
+        });
+      });
+    }, 0);
+    /* Block pinch-to-zoom on mobile */
+    el.addEventListener('touchmove', function(e) {
+      if (e.touches.length > 1) e.preventDefault();
+    }, { passive: false });
 
     /* Drag: pause rotation, resume after release */
     el.addEventListener('pointerdown', function() {
