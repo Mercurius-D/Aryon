@@ -4296,6 +4296,24 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     el.style.width  = size + 'px';
     el.style.height = size + 'px';
 
+    /* Register wheel blocker BEFORE Globe.gl init so our capture listener
+       is in the queue first — Globe.gl adds its own listeners during Globe()(el) */
+    function isOverGlobe(cx, cy) {
+      var r = el.getBoundingClientRect();
+      return cx >= r.left && cx <= r.right && cy >= r.top && cy <= r.bottom;
+    }
+    window.addEventListener('wheel', function(e) {
+      if (isOverGlobe(e.clientX, e.clientY)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    }, { passive: false, capture: true });
+    window.addEventListener('touchmove', function(e) {
+      if (e.touches.length > 1 && isOverGlobe(e.touches[0].clientX, e.touches[0].clientY)) {
+        e.preventDefault();
+      }
+    }, { passive: false, capture: true });
+
     /* Solid dark 2×2 canvas as the ocean texture */
     var bg = document.createElement('canvas');
     bg.width = 2; bg.height = 2;
@@ -4425,47 +4443,26 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     ctrl.minPolarAngle   = Math.PI * 0.25;
     ctrl.maxPolarAngle   = Math.PI * 0.75;
 
-    /* Patch ctrl.update immediately — before Globe.gl can cache the reference —
-       so every OrbitControls tick snaps the camera back to the locked distance */
-    var _lockedDist = null;
-    var _origUpdate = ctrl.update.bind(ctrl);
-    ctrl.update = function() {
-      var r = _origUpdate();
-      if (_lockedDist !== null && ctrl.object) {
-        var d = ctrl.object.position.length();
-        if (Math.abs(d - _lockedDist) > 0.1) {
-          ctrl.object.position.normalize().multiplyScalar(_lockedDist);
-        }
+    /* Patch renderer.render() — runs inside Globe.gl's own animation tick,
+       just before Three.js draws the frame. Snapping camera position here
+       guarantees the rendered frame always uses the locked distance,
+       regardless of what Globe.gl or OrbitControls did earlier in the tick. */
+    var _lockDist = null;
+    var _renderer = globe.renderer();
+    var _camera   = globe.camera();
+    var _origRender = _renderer.render.bind(_renderer);
+    _renderer.render = function(scene, cam) {
+      if (_lockDist !== null) {
+        cam.position.setLength(_lockDist);
       }
-      return r;
+      return _origRender(scene, cam);
     };
-    /* Set the locked distance once the camera has settled at altitude 2.5,
-       and also clamp OrbitControls min/max to that exact distance */
+    /* Read the settled camera distance and lock OrbitControls constraints too */
     setTimeout(function() {
-      if (ctrl.object) {
-        _lockedDist = ctrl.object.position.length();
-        ctrl.minDistance = _lockedDist;
-        ctrl.maxDistance = _lockedDist;
-      }
+      _lockDist = _camera.position.length();
+      ctrl.minDistance = _lockDist;
+      ctrl.maxDistance = _lockDist;
     }, 300);
-
-    /* Block wheel zoom using bounding-rect check — works regardless of which
-       DOM element is the event target (avoids el.contains() miss on sibling canvases) */
-    function isOverGlobe(cx, cy) {
-      var r = el.getBoundingClientRect();
-      return cx >= r.left && cx <= r.right && cy >= r.top && cy <= r.bottom;
-    }
-    window.addEventListener('wheel', function(e) {
-      if (isOverGlobe(e.clientX, e.clientY)) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-      }
-    }, { passive: false, capture: true });
-    window.addEventListener('touchmove', function(e) {
-      if (e.touches.length > 1 && isOverGlobe(e.touches[0].clientX, e.touches[0].clientY)) {
-        e.preventDefault();
-      }
-    }, { passive: false, capture: true });
 
     /* Drag: pause rotation, resume after release */
     el.addEventListener('pointerdown', function() {
