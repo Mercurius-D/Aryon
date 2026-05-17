@@ -4437,7 +4437,7 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
 
     var ctrl = globe.controls();
     ctrl.autoRotate      = true;
-    ctrl.autoRotateSpeed = 0.15;
+    ctrl.autoRotateSpeed = 0.3;
     ctrl.enableZoom      = false;
     ctrl.enablePan       = false;
     ctrl.minPolarAngle   = Math.PI * 0.25;
@@ -4452,17 +4452,24 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     var _camera   = globe.camera();
     var _origRender = _renderer.render.bind(_renderer);
     _renderer.render = function(scene, cam) {
-      if (_lockDist !== null) {
+      /* Only snap once _lockDist is confirmed valid (> 0) */
+      if (_lockDist > 0) {
         cam.position.setLength(_lockDist);
       }
       return _origRender(scene, cam);
     };
-    /* Read the settled camera distance and lock OrbitControls constraints too */
-    setTimeout(function() {
-      _lockDist = _camera.position.length();
-      ctrl.minDistance = _lockDist;
-      ctrl.maxDistance = _lockDist;
-    }, 300);
+    /* Poll until the camera has actually been placed at altitude 2.5.
+       A zero or near-zero length means Globe.gl hasn't positioned it yet. */
+    (function pollDist() {
+      var d = _camera.position.length();
+      if (d > 50) {
+        _lockDist = d;
+        ctrl.minDistance = d;
+        ctrl.maxDistance = d;
+      } else {
+        setTimeout(pollDist, 100);
+      }
+    })();
 
     /* Drag: pause rotation, resume after release */
     el.addEventListener('pointerdown', function() {
