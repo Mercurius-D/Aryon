@@ -4437,12 +4437,17 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
 
     var ctrl = globe.controls();
     ctrl.autoRotate      = true;
-    ctrl.autoRotateSpeed = 7;
+    ctrl.autoRotateSpeed = 0.7;
     ctrl.enableZoom      = false;
     ctrl.enablePan       = false;
     ctrl.minPolarAngle   = Math.PI * 0.25;
     ctrl.maxPolarAngle   = Math.PI * 0.75;
 
+    /* Drive ctrl.update() ourselves — Globe.gl's loop doesn't call it */
+    (function tick() {
+      requestAnimationFrame(tick);
+      ctrl.update();
+    })();
 
     /* Drag: pause rotation, resume after release */
     el.addEventListener('pointerdown', function() {
