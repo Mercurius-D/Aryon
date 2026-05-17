@@ -4442,14 +4442,22 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     ctrl.minPolarAngle = Math.PI * 0.25;
     ctrl.maxPolarAngle = Math.PI * 0.75;
 
-    /* Rotate by incrementing longitude directly — bypasses OrbitControls
-       autoRotate which Globe.gl never calls ctrl.update() to drive */
+    /* Rotate by moving the Three.js camera directly and forcing a render —
+       bypasses Globe.gl's demand-based render loop entirely */
+    var _cam      = globe.camera();
+    var _renderer = globe.renderer();
+    var _scene    = globe.scene();
+    var _rad      = 0.00122; /* ~0.07° per frame = full revolution ~85 s */
     _rotating = true;
     (function rotateTick() {
       requestAnimationFrame(rotateTick);
-      if (!_rotating || !globe) return;
-      var pov = globe.pointOfView();
-      globe.pointOfView({ lat: pov.lat, lng: pov.lng + 0.07, altitude: pov.altitude });
+      if (!_rotating) return;
+      var cos = Math.cos(_rad), sin = Math.sin(_rad);
+      var x = _cam.position.x, z = _cam.position.z;
+      _cam.position.x = x * cos - z * sin;
+      _cam.position.z = x * sin + z * cos;
+      _cam.lookAt(0, 0, 0);
+      _renderer.render(_scene, _cam);
     })();
 
     /* Drag: pause rotation, resume after release */
