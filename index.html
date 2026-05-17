@@ -4283,6 +4283,7 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
 
   var globe;
   var flyToTimer = null;
+  var _rotating  = false;
 
   function initGlobe() {
     var el = document.getElementById('globeCanvas');
@@ -4436,25 +4437,25 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     globe.pointOfView({ lat: 33, lng: 28, altitude: 2.5 }, 0);
 
     var ctrl = globe.controls();
-    ctrl.autoRotate      = true;
-    ctrl.autoRotateSpeed = 0.7;
-    ctrl.enableZoom      = false;
-    ctrl.enablePan       = false;
-    ctrl.minPolarAngle   = Math.PI * 0.25;
-    ctrl.maxPolarAngle   = Math.PI * 0.75;
+    ctrl.enableZoom    = false;
+    ctrl.enablePan     = false;
+    ctrl.minPolarAngle = Math.PI * 0.25;
+    ctrl.maxPolarAngle = Math.PI * 0.75;
 
-    /* Drive ctrl.update() ourselves — Globe.gl's loop doesn't call it */
-    (function tick() {
-      requestAnimationFrame(tick);
-      ctrl.update();
+    /* Rotate by incrementing longitude directly — bypasses OrbitControls
+       autoRotate which Globe.gl never calls ctrl.update() to drive */
+    _rotating = true;
+    (function rotateTick() {
+      requestAnimationFrame(rotateTick);
+      if (!_rotating || !globe) return;
+      var pov = globe.pointOfView();
+      globe.pointOfView({ lat: pov.lat, lng: pov.lng + 0.07, altitude: pov.altitude });
     })();
 
     /* Drag: pause rotation, resume after release */
-    el.addEventListener('pointerdown', function() {
-      globe.controls().autoRotate = false;
-    }, true);
+    el.addEventListener('pointerdown', function() { _rotating = false; }, true);
     el.addEventListener('pointerup', function() {
-      setTimeout(function() { globe.controls().autoRotate = true; }, 2800);
+      setTimeout(function() { _rotating = true; }, 2800);
     }, true);
 
     /* Resize */
@@ -4474,7 +4475,7 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     var d = destinations.filter(function(x) { return x.page === dest; })[0];
     if (!d) return;
     if (globe) {
-      globe.controls().autoRotate = false;
+      _rotating = false;
       globe.pointOfView({ lat: d.lat, lng: d.lng, altitude: 2.5 }, 900);
     }
     document.querySelectorAll('.globe-dest-btn').forEach(function(b) {
@@ -4485,7 +4486,7 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     clearTimeout(flyToTimer);
     flyToTimer = setTimeout(function() {
       showPage(dest);
-      if (globe) globe.controls().autoRotate = true;
+      if (globe) _rotating = true;
     }, 1200);
   };
 
