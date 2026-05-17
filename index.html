@@ -1,11 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <meta name="description" content="ARYON PRIVATE. A discreet lifestyle management firm. Private residences, yachting, mobility, and personal concierge services.">
 <title>ARYON PRIVATE: A Private Standard</title>
 
@@ -246,6 +245,7 @@ body.cursor-down .cursor-ring {
 .animate-in.in-view {
   opacity: 1;
   transform: translateY(0);
+  will-change: auto;
 }
 .animate-left {
   opacity: 0;
@@ -284,6 +284,7 @@ body.cursor-down .cursor-ring {
 .animate-fade.in-view {
   opacity: 1;
 }
+[data-delay="0"] { transition-delay: 0s; }
 [data-delay="1"] { transition-delay: 0.12s; }
 [data-delay="2"] { transition-delay: 0.24s; }
 [data-delay="3"] { transition-delay: 0.36s; }
@@ -326,25 +327,6 @@ body.cursor-down .cursor-ring {
   z-index: 1;
   width: 100%;
   text-align: center;
-}
-.hero-pre {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  font-family: var(--sans);
-  font-weight: 400;
-  font-size: var(--t-micro);
-  color: var(--gold);
-  letter-spacing: var(--ls-label);
-  text-transform: uppercase;
-  margin-bottom: 32px;
-  animation: heroFadeUp 1s var(--ease-out) 0s both;
-}
-.hero-pre-line {
-  width: 40px;
-  height: 1px;
-  background: var(--gold);
 }
 .hero-headline {
   line-height: 0.92;
@@ -390,47 +372,6 @@ body.cursor-down .cursor-ring {
   min-width: 220px;
   text-align: center;
 }
-.scroll-indicator {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  z-index: 1;
-  animation: heroFadeUp 1s var(--ease-out) 0.9s both;
-}
-.scroll-text {
-  font-family: var(--sans);
-  font-weight: 300;
-  font-size: 9px;
-  color: var(--white-40);
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-}
-.scroll-line {
-  width: 1px;
-  height: 40px;
-  background: var(--gold-25);
-  position: relative;
-  overflow: hidden;
-}
-.scroll-line::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  background: var(--gold);
-  animation: scrollTravel 2s ease-in-out infinite;
-}
-@keyframes scrollTravel {
-  0% { transform: translateY(-100%); opacity: 1; }
-  100% { transform: translateY(100%); opacity: 0; }
-}
 @keyframes heroFadeUp {
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
@@ -458,14 +399,6 @@ body.cursor-down .cursor-ring {
   letter-spacing: 0.02em;
   margin-bottom: 24px;
 }
-.brand-quote-attr {
-  font-family: var(--sans);
-  font-weight: 300;
-  font-size: 12px;
-  color: var(--gold);
-  letter-spacing: 0.2em;
-}
-
 /* Services Overview */
 .services-overview {
   background: var(--bg);
@@ -1262,6 +1195,7 @@ body.cursor-down .cursor-ring {
 .dest-back-link:hover { opacity: 0.7; }
 @media (max-width: 900px) {
   .dest-editorial-grid { grid-template-columns: repeat(2, 1fr); }
+  .dest-cards { grid-template-columns: 1fr; gap: 2px; }
 }
 @media (max-width: 600px) {
   .dest-editorial-grid { grid-template-columns: 1fr; }
@@ -1272,7 +1206,7 @@ body.cursor-down .cursor-ring {
   background: var(--bg);
   border-top: 1px solid var(--gold-15);
   border-bottom: 1px solid var(--gold-15);
-  padding: var(--section-pad) var(--col-pad) 0;
+  padding: var(--section-pad) 0 0;
   text-align: center;
   overflow: hidden;
 }
@@ -1293,26 +1227,26 @@ body.cursor-down .cursor-ring {
   letter-spacing: 0.06em;
   margin-bottom: 0;
 }
-.globe-wrap {
-  display: inline-block;
-  vertical-align: top;
-  width: 780px;
-  max-width: 100%;
-  aspect-ratio: 1 / 1;
-  margin-top: -32px;
-  cursor: grab;
+#globeCanvas {
   position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: -32px;
+  overflow: hidden;
+  cursor: grab;
   z-index: 1;
+  touch-action: none;
 }
-.globe-wrap:active { cursor: grabbing; }
+#globeCanvas:active { cursor: grabbing; }
+@media (max-width: 767px) {
+  #globeCanvas { margin-top: 0; cursor: default; }
+}
 #globeStars {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 0;
 }
-#globeEl { position: relative; z-index: 1; width: 100%; height: 100%; }
-#globeEl canvas { display: block; }
 .globe-destinations {
   display: flex;
   justify-content: center;
@@ -1321,7 +1255,6 @@ body.cursor-down .cursor-ring {
   position: relative;
   z-index: 2;
   width: 100%;
-  align-self: stretch;
 }
 .globe-dest-btn {
   display: flex;
@@ -1333,7 +1266,7 @@ body.cursor-down .cursor-ring {
   border: none;
   border-left: 1px solid var(--gold-15);
   color: var(--white-65);
-  cursor: pointer;
+  cursor: none;
   font-family: inherit;
   position: relative;
   transition: background 0.4s, color 0.4s;
@@ -1417,7 +1350,6 @@ body.cursor-down .cursor-ring {
   margin-top: 3px;
 }
 @media (max-width: 767px) {
-  .globe-wrap { margin-top: -16px; }
   .globe-dest-btn { padding: 22px 28px; }
 }
 
@@ -1860,6 +1792,23 @@ footer {
   color: var(--white-65);
   margin-bottom: 20px;
 }
+.btn-access-outline {
+  display: inline-block;
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold-40);
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+}
+.btn-access-outline:hover {
+  background: var(--gold-08);
+  color: var(--white);
+}
 .footer-divider {
   width: 100%;
   height: 1px;
@@ -1895,12 +1844,12 @@ footer {
 /* ===== DESTINATIONS PAGE ===== */
 .dest-hero {
   height: 55vh;
-  min-height: 380px;
+  min-height: 520px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-end;
-  padding: 80px var(--col-pad) 60px;
+  padding: 140px var(--col-pad) 60px;
   background: var(--bg);
   position: relative;
   overflow: hidden;
@@ -1941,51 +1890,111 @@ footer {
   max-width: 480px;
   position: relative;
 }
-.dest-regions {
+.dest-cards {
   padding: var(--section-pad) var(--col-pad);
   max-width: var(--content-max);
   margin: 0 auto;
-}
-.dest-region {
   display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 60px;
-  padding: 52px 0;
-  border-top: 1px solid var(--gold-15);
-  align-items: start;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
 }
-.dest-region:last-child {
-  border-bottom: 1px solid var(--gold-15);
-}
-.dest-region-name {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: 22px;
-  color: var(--gold);
-  letter-spacing: 0.03em;
-  padding-top: 4px;
-}
-.dest-region-cities {
+.dest-card {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px 20px;
+  flex-direction: column;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--gold-08);
+  padding: 0;
+  cursor: none;
+  transition: background 0.4s;
 }
-.dest-city {
+.dest-card:hover { background: rgba(201,169,110,0.04); }
+.dest-card-visual {
+  height: 260px;
+  border-bottom: 1px solid var(--gold-08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.dest-card-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(201,169,110,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.dest-card-visual-rule {
+  width: 100%;
+  height: 1px;
+  background: var(--gold-15);
+}
+.dest-card-visual-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: var(--white-40);
+  text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.dest-card-body {
+  padding: 32px 28px 36px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.dest-card-tag {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.dest-card-name {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(36px, 4vw, 56px);
+  color: var(--white);
+  letter-spacing: 0.01em;
+  line-height: 1;
+  margin-bottom: 18px;
+}
+.dest-card-desc {
   font-family: var(--sans);
   font-weight: 300;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--white-65);
-  letter-spacing: 0.12em;
+  line-height: 1.65;
+  letter-spacing: 0.04em;
+  flex: 1;
+  margin-bottom: 28px;
+}
+.dest-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  color: var(--gold);
   text-transform: uppercase;
-  padding: 10px 0;
-  border-bottom: 1px solid transparent;
-  transition: color 0.25s, border-color 0.25s;
-  cursor: default;
+  text-decoration: none;
+  transition: opacity 0.3s;
 }
-.dest-city:hover {
-  color: var(--white);
-  border-bottom-color: var(--gold-40);
+.dest-card-link::after {
+  content: '↗';
+  font-size: 14px;
+  transition: transform 0.3s;
 }
+.dest-card:hover .dest-card-link::after { transform: translate(3px, -3px); }
+.dest-card-link:hover { opacity: 0.7; }
 .dest-note {
   padding: 0 var(--col-pad) var(--section-pad);
   max-width: var(--content-max);
@@ -2259,6 +2268,7 @@ footer {
   .service-content { padding: 48px 24px; }
   /* Service / destination subpage heroes — less top padding on mobile */
   .svc-page-hero { padding-top: 100px; padding-bottom: 48px; }
+  .dest-hero { padding-top: 100px; min-height: 440px; }
   /* Globe destination buttons — stack vertically */
   .globe-destinations { flex-direction: column; }
   .globe-dest-btn {
@@ -2272,10 +2282,6 @@ footer {
   }
   .globe-dest-btn:first-child { border-top: none; }
   .globe-dest-dot { margin-bottom: 0; }
-}
-
-/* Additional mobile refinements */
-@media (max-width: 767px) {
   /* Faster animation tokens — snappier feel on touch */
   :root { --dur-slow: 0.5s; --dur-med: 0.35s; }
   /* Tighter card padding */
@@ -2287,12 +2293,123 @@ footer {
   .globe-dest-dot::before, .globe-dest-dot::after { animation: none; }
 }
 
+/* ============================================================
+   COMPREHENSIVE MOBILE OVERHAUL
+   ============================================================ */
+@media (max-width: 767px) {
+  /* Tighten global spacing tokens */
+  :root {
+    --section-pad: 56px;
+    --t-display:   clamp(40px, 12vw, 72px);
+  }
+
+  /* Fix navbar overlap on center-aligned hero pages */
+  .page-hero  { padding-top: 100px; min-height: 380px; }
+  .about-hero { padding-top: 100px; min-height: 380px; }
+
+  /* Fix concierge hero navbar overlap (same pattern as dest-hero) */
+  .conc-hero { padding-top: 100px; min-height: 440px; }
+
+  /* iOS: prevent auto-zoom when input receives focus (needs ≥16px) */
+  .form-input,
+  .form-textarea { font-size: 16px; }
+
+  /* Hard-coded paddings that don't respond to --section-pad */
+  .brand-strip    { padding-top: 48px; padding-bottom: 48px; }
+  .final-cta      { padding-top: 64px; padding-bottom: 64px; }
+  .contact-page   { padding-top: 100px; }
+  .conc-statement { padding-top: 48px; padding-bottom: 48px; }
+  .dest-editorial { padding-top: 48px; padding-bottom: 48px; }
+  footer          { padding-top: 48px; }
+
+  /* Destination card visual — 260px too tall in single-column layout */
+  .dest-card-visual { height: 180px; }
+
+  /* Concierge category cards */
+  .conc-cat { padding: 32px 24px; }
+
+  /* Section header bottom gap */
+  .section-header { margin-bottom: 40px; }
+
+  /* Cinematic block — allow natural height on mobile */
+  .cinematic { height: auto; min-height: 360px; padding: 72px var(--col-pad); }
+
+  /* Process — large counter number */
+  .step-big-num { font-size: 60px; }
+
+  /* About — remove orphaned right border when grid stacks to 1 col */
+  .about-content { border-right: none; }
+  .about-panel   { padding: 40px 24px; }
+
+  /* Destination note quote */
+  .dest-note-text { padding-left: 20px; font-size: clamp(16px, 4vw, 24px); }
+
+  /* Services page content padding */
+  .service-content { padding: 40px 20px; }
+
+  /* Hero — 700px is too tall on small phones */
+  .hero { min-height: 560px; }
+
+  /* Globe section — tighten vertical space */
+  .globe-section { padding-top: 40px; }
+  .globe-section .ornament { display: none; }
+  .globe-section .section-header { margin-bottom: 28px; }
+  .globe-headline { font-size: clamp(26px, 7vw, 40px); margin-bottom: 10px; }
+  .globe-sub { font-size: 13px; }
+  .globe-dest-btn { padding: 12px 20px; }
+
+  /* Service subpages — tall portrait image too large on mobile */
+  .svc-page-hero .svc-img-ph { display: none; }
+  .svc-body-img-col { min-height: 200px; }
+  .svc-depth-img { aspect-ratio: 16 / 9; }
+}
+
+/* ============================================================
+   VERY SMALL SCREENS  (≤480px)
+   ============================================================ */
+@media (max-width: 480px) {
+  :root {
+    --t-display: clamp(34px, 11vw, 56px);
+  }
+  .dest-card-visual  { height: 150px; }
+  .service-card      { padding: 28px 16px; }
+  .conc-cat          { padding: 24px 20px; }
+  .svc-page-headline { font-size: clamp(36px, 11vw, 64px); }
+  .brand-strip       { padding-top: 40px; padding-bottom: 40px; }
+  .final-cta         { padding-top: 48px; padding-bottom: 48px; }
+  footer             { padding-top: 40px; }
+  .dest-editorial    { padding-top: 40px; padding-bottom: 40px; }
+  .conc-statement    { padding-top: 40px; padding-bottom: 40px; }
+
+  /* Hero further reduction on very small phones */
+  .hero { min-height: 500px; }
+
+  /* Globe section */
+  .globe-section { padding-top: 32px; }
+  .globe-headline { font-size: clamp(22px, 6.5vw, 34px); }
+}
+
 /* Touch / pointer-coarse devices — hide custom cursor, restore native */
 @media (hover: none), (pointer: coarse) {
   body, button, a { cursor: auto !important; }
   .cursor-dot, .cursor-ring { display: none !important; }
   /* Keep service learn links visible without hover */
   .service-learn { opacity: 0.7; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .animate-in, .animate-left, .animate-right, .animate-scale, .animate-fade {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .ornament-line.animate-in { width: 60px; }
+  .marquee-track { animation: none; }
 }
 </style>
 </head>
@@ -2308,7 +2425,7 @@ footer {
 <header class="nav-bar" id="navBar" role="banner">
 
   <!-- Logo -->
-  <a class="nav-logo" href="#" onclick="showPage('home')" aria-label="ARYON PRIVATE, return to homepage">
+  <a class="nav-logo" href="javascript:void(0)" onclick="showPage('home')" aria-label="ARYON PRIVATE, return to homepage">
     <img class="nav-chevron" src="Logo.jpeg" alt="" aria-hidden="true" width="46" height="46">
     <div class="nav-wordmark">
       <span class="nav-name">ARYON<span class="nav-reg">®</span></span>
@@ -2361,28 +2478,28 @@ footer {
     <nav class="overlay-left" aria-label="Primary">
       <ol class="overlay-nav-list">
         <li class="overlay-nav-item" data-nav-i="0">
-          <a class="overlay-nav-link" href="#" onclick="navGoTo('home')" data-cursor-expand>
+          <a class="overlay-nav-link" href="javascript:void(0)" onclick="navGoTo('home')" data-cursor-expand>
             <span class="nav-item-num">01</span>
             <span class="nav-item-text">Home</span>
             <span class="nav-item-arrow" aria-hidden="true">↗</span>
           </a>
         </li>
         <li class="overlay-nav-item" data-nav-i="1">
-          <a class="overlay-nav-link" href="#" onclick="navGoTo('services')" data-cursor-expand>
+          <a class="overlay-nav-link" href="javascript:void(0)" onclick="navGoTo('services')" data-cursor-expand>
             <span class="nav-item-num">02</span>
             <span class="nav-item-text">Services</span>
             <span class="nav-item-arrow" aria-hidden="true">↗</span>
           </a>
         </li>
         <li class="overlay-nav-item" data-nav-i="2">
-          <a class="overlay-nav-link" href="#" onclick="navGoTo('destinations')" data-cursor-expand>
+          <a class="overlay-nav-link" href="javascript:void(0)" onclick="navGoTo('destinations')" data-cursor-expand>
             <span class="nav-item-num">03</span>
             <span class="nav-item-text">Destinations</span>
             <span class="nav-item-arrow" aria-hidden="true">↗</span>
           </a>
         </li>
         <li class="overlay-nav-item" data-nav-i="3">
-          <a class="overlay-nav-link" href="#" onclick="navGoTo('contact')" data-cursor-expand>
+          <a class="overlay-nav-link" href="javascript:void(0)" onclick="navGoTo('contact')" data-cursor-expand>
             <span class="nav-item-num">04</span>
             <span class="nav-item-text">Contact</span>
             <span class="nav-item-arrow" aria-hidden="true">↗</span>
@@ -2405,19 +2522,22 @@ footer {
       <div class="overlay-right-block">
         <div class="overlay-right-label">SERVICES</div>
         <ul class="overlay-sub-list">
-          <li><a class="overlay-sub-link" href="#" onclick="navGoTo('residences')" data-cursor-expand>Private Residences</a></li>
-          <li><a class="overlay-sub-link" href="#" onclick="navGoTo('mobility')" data-cursor-expand>Private Mobility</a></li>
-          <li><a class="overlay-sub-link" href="#" onclick="navGoTo('yachting')" data-cursor-expand>Yachting</a></li>
-          <li><a class="overlay-sub-link" href="#" onclick="navGoTo('protection')" data-cursor-expand>Protection</a></li>
+          <li><a class="overlay-sub-link" href="javascript:void(0)" onclick="navGoTo('residences')" data-cursor-expand>Private Residences</a></li>
+          <li><a class="overlay-sub-link" href="javascript:void(0)" onclick="navGoTo('mobility')" data-cursor-expand>Private Mobility</a></li>
+          <li><a class="overlay-sub-link" href="javascript:void(0)" onclick="navGoTo('yachting')" data-cursor-expand>Yachting</a></li>
+          <li><a class="overlay-sub-link" href="javascript:void(0)" onclick="navGoTo('protection')" data-cursor-expand>Protection</a></li>
+          <li><a class="overlay-sub-link" href="javascript:void(0)" onclick="navGoTo('concierge')" data-cursor-expand>Lifestyle Concierge</a></li>
         </ul>
       </div>
+
+
 
       <div class="overlay-right-block">
         <div class="overlay-right-label">PRIVATE INQUIRY</div>
         <a class="overlay-email" href="mailto:private@aryonprivate.com" data-cursor-expand>
           private@aryonprivate.com
         </a>
-        <a class="overlay-cta" href="#" onclick="navGoTo('contact')" data-cursor-expand aria-label="Request access">
+        <a class="overlay-cta" href="javascript:void(0)" onclick="navGoTo('contact')" data-cursor-expand aria-label="Request access">
           REQUEST ACCESS
         </a>
       </div>
@@ -2461,13 +2581,9 @@ footer {
       </div>
       <p class="hero-tagline">Discreet. Refined. Relentless.</p>
       <div class="hero-ctas">
-        <a href="#" class="btn-primary" onclick="showPage('contact')" aria-label="Request access">REQUEST ACCESS</a>
-        <a href="#" class="btn-secondary" onclick="scrollToServices()" aria-label="Explore services">EXPLORE SERVICES</a>
+        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')" aria-label="Request access">REQUEST ACCESS</a>
+        <a href="javascript:void(0)" class="btn-secondary" onclick="scrollToServices()" aria-label="Explore services">EXPLORE SERVICES</a>
       </div>
-    </div>
-    <div class="scroll-indicator" aria-hidden="true">
-      <span class="scroll-text">SCROLL</span>
-      <div class="scroll-line"></div>
     </div>
   </section>
 
@@ -2520,7 +2636,7 @@ footer {
         <h3 class="service-name">Private Residences</h3>
         <div class="service-divider"></div>
         <p class="service-desc">Exclusive villa stays, private estates, and personally managed residence access worldwide.</p>
-        <a href="#" class="service-learn" onclick="showPage('residences')">Explore</a>
+        <a href="javascript:void(0)" class="service-learn" onclick="showPage('residences')">Explore</a>
       </article>
 
       <!-- Card 02 -->
@@ -2543,7 +2659,7 @@ footer {
         <h3 class="service-name">Private Mobility</h3>
         <div class="service-divider"></div>
         <p class="service-desc">Chauffeur-driven prestige vehicles, private transfers, and seamless ground coordination.</p>
-        <a href="#" class="service-learn" onclick="showPage('mobility')">Explore</a>
+        <a href="javascript:void(0)" class="service-learn" onclick="showPage('mobility')">Explore</a>
       </article>
 
       <!-- Card 03 -->
@@ -2566,7 +2682,7 @@ footer {
         <h3 class="service-name">Yachting</h3>
         <div class="service-divider"></div>
         <p class="service-desc">Tailored access to private yachts and beautifully managed sea experiences.</p>
-        <a href="#" class="service-learn" onclick="showPage('yachting')">Explore</a>
+        <a href="javascript:void(0)" class="service-learn" onclick="showPage('yachting')">Explore</a>
       </article>
 
       <!-- Card 04 -->
@@ -2588,7 +2704,7 @@ footer {
         <h3 class="service-name">Lifestyle Concierge</h3>
         <div class="service-divider"></div>
         <p class="service-desc">Personal coordination for dining, reservations, events, and every request between.</p>
-        <a href="#" class="service-learn" onclick="showPage('concierge')">Explore</a>
+        <a href="javascript:void(0)" class="service-learn" onclick="showPage('concierge')">Explore</a>
       </article>
 
       <!-- Card 05 -->
@@ -2613,7 +2729,7 @@ footer {
         <h3 class="service-name">Protection</h3>
         <div class="service-divider"></div>
         <p class="service-desc">Discreet security coordination and protection support for elevated travel and presence.</p>
-        <a href="#" class="service-learn" onclick="showPage('protection')">Explore</a>
+        <a href="javascript:void(0)" class="service-learn" onclick="showPage('protection')">Explore</a>
       </article>
     </div>
 
@@ -2632,9 +2748,8 @@ footer {
       <h2 class="globe-headline animate-in" data-delay="2">Three destinations.<br>One standard.</h2>
       <p class="globe-sub animate-in" data-delay="3">Select a destination to discover what we handle there.</p>
     </div>
-    <div class="globe-wrap" id="globeWrap">
+    <div id="globeCanvas">
       <canvas id="globeStars" aria-hidden="true"></canvas>
-      <div id="globeEl"></div>
     </div>
     <div class="globe-destinations">
       <button class="globe-dest-btn animate-in" data-delay="4" onclick="globeFlyTo('dubai')" data-dest="dubai">
@@ -2678,7 +2793,7 @@ footer {
       <div class="contact-separator" aria-hidden="true"></div>
       <div class="contact-option">
         <div class="contact-label">SECURE INQUIRY</div>
-        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
       </div>
     </div>
     <p class="final-note animate-fade">All communications are handled with absolute confidentiality.</p>
@@ -2711,7 +2826,7 @@ footer {
         <li>Property sourcing and advisory</li>
         <li>Long-stay management support</li>
       </ul>
-      <a href="#" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
+      <a href="javascript:void(0)" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
     </div>
     <div class="service-visual" aria-hidden="true">
       <svg class="service-visual-watermark" width="120" height="120" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="0.8" stroke-linecap="round">
@@ -2744,7 +2859,7 @@ footer {
         <li>Helicopter and charter coordination</li>
         <li>Cross-border journey management</li>
       </ul>
-      <a href="#" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
+      <a href="javascript:void(0)" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
     </div>
     <div class="service-visual" aria-hidden="true">
       <svg class="service-visual-watermark" width="120" height="120" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="0.8" stroke-linecap="round">
@@ -2772,7 +2887,7 @@ footer {
         <li>Provisioning and onboard preferences</li>
         <li>Extended voyage coordination</li>
       </ul>
-      <a href="#" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
+      <a href="javascript:void(0)" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
     </div>
     <div class="service-visual" aria-hidden="true">
       <svg class="service-visual-watermark" width="120" height="120" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="0.8" stroke-linecap="round">
@@ -2800,7 +2915,7 @@ footer {
         <li>Local intelligence and introductions</li>
         <li>Ongoing daily lifestyle management</li>
       </ul>
-      <a href="#" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
+      <a href="javascript:void(0)" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
     </div>
     <div class="service-visual" aria-hidden="true">
       <svg class="service-visual-watermark" width="120" height="120" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="0.8" stroke-linecap="round">
@@ -2828,7 +2943,7 @@ footer {
         <li>Digital and communication privacy advisory</li>
         <li>Threat and risk briefing support</li>
       </ul>
-      <a href="#" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
+      <a href="javascript:void(0)" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
     </div>
     <div class="service-visual" aria-hidden="true">
       <svg class="service-visual-watermark" width="120" height="120" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="0.8" stroke-linecap="round">
@@ -2906,8 +3021,8 @@ footer {
       </div>
 
       <div class="form-spacer">
-        <label class="form-label">ENQUIRY TYPE</label>
-        <div class="pill-group" role="group" aria-label="Select enquiry type">
+        <p id="label-enquiry" class="form-label">ENQUIRY TYPE</p>
+        <div class="pill-group" role="group" aria-labelledby="label-enquiry">
           <button class="pill active" onclick="selectPill(this)" type="button">RESIDENCES</button>
           <button class="pill" onclick="selectPill(this)" type="button">MOBILITY</button>
           <button class="pill" onclick="selectPill(this)" type="button">YACHTING</button>
@@ -2932,8 +3047,8 @@ footer {
       </div>
 
       <div class="form-spacer">
-        <label class="form-label">PREFERRED CONTACT METHOD</label>
-        <div class="pill-group" role="group" aria-label="Select contact method">
+        <p id="label-contact-method" class="form-label">PREFERRED CONTACT METHOD</p>
+        <div class="pill-group" role="group" aria-labelledby="label-contact-method">
           <button class="pill active" onclick="selectContactMethod(this,'email')" type="button">EMAIL</button>
           <button class="pill" onclick="selectContactMethod(this,'phone')" type="button">TELEPHONE</button>
         </div>
@@ -2967,6 +3082,7 @@ footer {
         <div class="svc-page-tag animate-in">PRIVATE RESIDENCES</div>
         <h1 class="svc-page-headline animate-in" data-delay="1">The right<br>property,<br>prepared.</h1>
         <p class="svc-page-sub animate-in" data-delay="2">Estates, villas, and private residences arranged with precision. Not just booked. Managed from the moment you confirm to the day you leave.</p>
+        <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
       </div>
       <div class="svc-img-ph animate-fade" data-delay="2">
         <div class="svc-img-ph-rule"></div>
@@ -3048,12 +3164,12 @@ footer {
         <div class="svc-section-rule"></div>
         <p class="svc-section-body">Our relationships with estate owners, family offices, and property managers have been built over years. When a property that matters is unavailable publicly, our first call is to these relationships.</p>
         <p class="svc-section-body">Exclusive access is not marketing language here. It is an honest description of how we work. The properties we recommend are ones we know personally, not one we have forwarded from a listing platform.</p>
-        <a href="#" class="service-inquire" onclick="showPage('contact')" style="margin-top:28px;">ARRANGE A PRIVATE INQUIRY</a>
+        <a href="javascript:void(0)" class="service-inquire" onclick="showPage('contact')" style="margin-top:28px;">ARRANGE A PRIVATE INQUIRY</a>
       </div>
     </div>
   </div>
 
-  <section class="final-cta">
+  <section class="final-cta" aria-label="Contact">
     <h2 class="final-cta-headline animate-in">Ready to discuss a property arrangement?</h2>
     <p class="final-cta-body animate-in" data-delay="1">Tell us where you are going, when you need to arrive, and what matters to you. We handle the rest.</p>
     <div class="contact-options animate-in" data-delay="2">
@@ -3064,7 +3180,7 @@ footer {
       <div class="contact-separator" aria-hidden="true"></div>
       <div class="contact-option">
         <div class="contact-label">PRIVATE INQUIRY</div>
-        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
       </div>
     </div>
   </section>
@@ -3080,6 +3196,7 @@ footer {
         <div class="svc-page-tag animate-in">PRIVATE MOBILITY</div>
         <h1 class="svc-page-headline animate-in" data-delay="1">Every<br>transfer,<br>handled.</h1>
         <p class="svc-page-sub animate-in" data-delay="2">Ground, air, and water. From the moment you land, your movement is managed without your involvement.</p>
+        <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
       </div>
       <div class="svc-img-ph animate-fade" data-delay="2">
         <div class="svc-img-ph-rule"></div>
@@ -3156,7 +3273,7 @@ footer {
         <div class="svc-section-rule"></div>
         <p class="svc-section-body">We do not aggregate. We vet personally. Every driver in our network has been assessed for professionalism, route knowledge, discretion, and composure under pressure.</p>
         <p class="svc-section-body">Vehicles are confirmed before each engagement. When something does not meet standard, it is replaced before you know there was a problem. The standard is not negotiated down to fit availability.</p>
-        <a href="#" class="service-inquire" onclick="showPage('contact')" style="margin-top:28px;">DISCUSS YOUR ITINERARY</a>
+        <a href="javascript:void(0)" class="service-inquire" onclick="showPage('contact')" style="margin-top:28px;">DISCUSS YOUR ITINERARY</a>
       </div>
       <div class="svc-depth-img animate-scale">
         <div class="svc-img-ph-rule" style="position:relative;z-index:1;"></div>
@@ -3166,7 +3283,7 @@ footer {
     </div>
   </div>
 
-  <section class="final-cta">
+  <section class="final-cta" aria-label="Contact">
     <h2 class="final-cta-headline animate-in">Planning a journey?</h2>
     <p class="final-cta-body animate-in" data-delay="1">Share the itinerary. We will arrange every transfer before you need to think about it.</p>
     <div class="contact-options animate-in" data-delay="2">
@@ -3177,7 +3294,7 @@ footer {
       <div class="contact-separator" aria-hidden="true"></div>
       <div class="contact-option">
         <div class="contact-label">PRIVATE INQUIRY</div>
-        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
       </div>
     </div>
   </section>
@@ -3193,6 +3310,7 @@ footer {
         <div class="svc-page-tag animate-in">YACHTING</div>
         <h1 class="svc-page-headline animate-in" data-delay="1">The sea,<br>arranged.</h1>
         <p class="svc-page-sub animate-in" data-delay="2">Private yacht access across the Mediterranean, Indian Ocean, and Caribbean. We handle what happens before you step aboard.</p>
+        <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
       </div>
       <div class="svc-img-ph animate-fade" data-delay="2">
         <div class="svc-img-ph-rule"></div>
@@ -3274,12 +3392,12 @@ footer {
         <div class="svc-section-rule"></div>
         <p class="svc-section-body">We do not forward you a catalogue and ask you to choose. We ask what matters: space, speed, privacy, style of travel. Then we present two or three options we can stand behind.</p>
         <p class="svc-section-body">The fleet changes seasonally. Our knowledge of it does not. When a vessel is not performing at the right standard, we remove it from our recommendations before a client encounters the problem.</p>
-        <a href="#" class="service-inquire" onclick="showPage('contact')" style="margin-top:28px;">ARRANGE A YACHT INQUIRY</a>
+        <a href="javascript:void(0)" class="service-inquire" onclick="showPage('contact')" style="margin-top:28px;">ARRANGE A YACHT INQUIRY</a>
       </div>
     </div>
   </div>
 
-  <section class="final-cta">
+  <section class="final-cta" aria-label="Contact">
     <h2 class="final-cta-headline animate-in">Where would you like to be on the water?</h2>
     <p class="final-cta-body animate-in" data-delay="1">Tell us the dates, the party size, and the general idea. We will handle the vessel and everything around it.</p>
     <div class="contact-options animate-in" data-delay="2">
@@ -3290,7 +3408,7 @@ footer {
       <div class="contact-separator" aria-hidden="true"></div>
       <div class="contact-option">
         <div class="contact-label">PRIVATE INQUIRY</div>
-        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
       </div>
     </div>
   </section>
@@ -3306,6 +3424,7 @@ footer {
         <div class="svc-page-tag animate-in">PROTECTION COORDINATION</div>
         <h1 class="svc-page-headline animate-in" data-delay="1">Presence<br>without<br>announcement.</h1>
         <p class="svc-page-sub animate-in" data-delay="2">Security handled with the same elegance as every other aspect of your life. Close protection that does not change how you move.</p>
+        <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
       </div>
       <div class="svc-img-ph animate-fade" data-delay="2">
         <div class="svc-img-ph-rule"></div>
@@ -3382,7 +3501,7 @@ footer {
         <div class="svc-section-rule"></div>
         <p class="svc-section-body">Our protection officers are drawn from military, intelligence, and law enforcement backgrounds. They are selected for competence and for judgment. We do not place individuals who attract attention. We place professionals who remove risk quietly.</p>
         <p class="svc-section-body">Every officer in our network has been personally assessed. References are verified. Conduct under pressure is discussed directly. We do not work with agencies we cannot account for.</p>
-        <a href="#" class="service-inquire" onclick="showPage('contact')" style="margin-top:28px;">DISCUSS PROTECTION REQUIREMENTS</a>
+        <a href="javascript:void(0)" class="service-inquire" onclick="showPage('contact')" style="margin-top:28px;">DISCUSS PROTECTION REQUIREMENTS</a>
       </div>
       <div class="svc-depth-img animate-scale">
         <div class="svc-img-ph-rule" style="position:relative;z-index:1;"></div>
@@ -3392,7 +3511,7 @@ footer {
     </div>
   </div>
 
-  <section class="final-cta">
+  <section class="final-cta" aria-label="Contact">
     <h2 class="final-cta-headline animate-in">Security should not feel like a burden.</h2>
     <p class="final-cta-body animate-in" data-delay="1">Tell us the context and the itinerary. We will propose the appropriate level of support, without overcomplicating what does not need to be complicated.</p>
     <div class="contact-options animate-in" data-delay="2">
@@ -3403,7 +3522,7 @@ footer {
       <div class="contact-separator" aria-hidden="true"></div>
       <div class="contact-option">
         <div class="contact-label">PRIVATE INQUIRY</div>
-        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
       </div>
     </div>
   </section>
@@ -3419,98 +3538,52 @@ footer {
     <p class="dest-hero-sub animate-in" data-delay="2">We work across five continents. Our reach is not a list. It is a permanent arrangement of relationships, access, and local intelligence built over time.</p>
   </div>
 
-  <div class="dest-regions">
+  <div class="dest-cards">
 
-    <div class="dest-region animate-fade">
-      <div class="dest-region-name">Mediterranean</div>
-      <div class="dest-region-cities">
-        <span class="dest-city">Côte d'Azur</span>
-        <span class="dest-city">Monte Carlo</span>
-        <span class="dest-city">Saint-Tropez</span>
-        <span class="dest-city">Capri</span>
-        <span class="dest-city">Amalfi Coast</span>
-        <span class="dest-city">Portofino</span>
-        <span class="dest-city">Positano</span>
-        <span class="dest-city">Taormina</span>
+    <!-- Dubai -->
+    <article class="dest-card animate-fade" data-delay="0" onclick="showPage('dubai')" style="cursor:none;" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showPage('dubai')" aria-label="Explore Dubai">
+      <div class="dest-card-visual">
+        <div class="dest-card-visual-rule"></div>
+        <div class="dest-card-visual-label">Dubai skyline from private terrace</div>
+        <div class="dest-card-visual-rule"></div>
       </div>
-    </div>
+      <div class="dest-card-body">
+        <div class="dest-card-tag">Middle East</div>
+        <div class="dest-card-name">Dubai.</div>
+        <p class="dest-card-desc">Where ambition meets excess — and discretion becomes rare. We provide both, without compromise.</p>
+        <a href="javascript:void(0)" class="dest-card-link" onclick="event.stopPropagation();showPage('dubai')">Explore</a>
+      </div>
+    </article>
 
-    <div class="dest-region animate-fade" data-delay="1">
-      <div class="dest-region-name">Greek Islands</div>
-      <div class="dest-region-cities">
-        <a href="#" class="dest-city dest-city-link" onclick="showPage('mykonos')">Mykonos</a>
-        <span class="dest-city">Santorini</span>
-        <span class="dest-city">Corfu</span>
-        <span class="dest-city">Rhodes</span>
-        <span class="dest-city">Paros</span>
+    <!-- Mykonos -->
+    <article class="dest-card animate-fade" data-delay="1" onclick="showPage('mykonos')" style="cursor:none;" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showPage('mykonos')" aria-label="Explore Mykonos">
+      <div class="dest-card-visual">
+        <div class="dest-card-visual-rule"></div>
+        <div class="dest-card-visual-label">Private villa overlooking the Aegean</div>
+        <div class="dest-card-visual-rule"></div>
       </div>
-    </div>
+      <div class="dest-card-body">
+        <div class="dest-card-tag">Greek Islands</div>
+        <div class="dest-card-name">Mykonos.</div>
+        <p class="dest-card-desc">The island moves fast in season. We move faster — so you never have to.</p>
+        <a href="javascript:void(0)" class="dest-card-link" onclick="event.stopPropagation();showPage('mykonos')">Explore</a>
+      </div>
+    </article>
 
-    <div class="dest-region animate-fade" data-delay="1">
-      <div class="dest-region-name">Balearics</div>
-      <div class="dest-region-cities">
-        <a href="#" class="dest-city dest-city-link" onclick="showPage('ibiza')">Ibiza</a>
-        <span class="dest-city">Formentera</span>
-        <span class="dest-city">Mallorca</span>
+    <!-- Ibiza -->
+    <article class="dest-card animate-fade" data-delay="2" onclick="showPage('ibiza')" style="cursor:none;" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showPage('ibiza')" aria-label="Explore Ibiza">
+      <div class="dest-card-visual">
+        <div class="dest-card-visual-rule"></div>
+        <div class="dest-card-visual-label">Private finca, Northern Ibiza</div>
+        <div class="dest-card-visual-rule"></div>
       </div>
-    </div>
-
-    <div class="dest-region animate-fade" data-delay="2">
-      <div class="dest-region-name">Middle East</div>
-      <div class="dest-region-cities">
-        <a href="#" class="dest-city dest-city-link" onclick="showPage('dubai')">Dubai</a>
-        <span class="dest-city">Abu Dhabi</span>
-        <span class="dest-city">Doha</span>
-        <span class="dest-city">Riyadh</span>
+      <div class="dest-card-body">
+        <div class="dest-card-tag">Balearics</div>
+        <div class="dest-card-name">Ibiza.</div>
+        <p class="dest-card-desc">Not just a season — a circuit. For those who want it done properly, quietly, and entirely on their terms.</p>
+        <a href="javascript:void(0)" class="dest-card-link" onclick="event.stopPropagation();showPage('ibiza')">Explore</a>
       </div>
-    </div>
-
-    <div class="dest-region animate-fade" data-delay="2">
-      <div class="dest-region-name">Indian Ocean</div>
-      <div class="dest-region-cities">
-        <span class="dest-city">Maldives</span>
-        <span class="dest-city">Seychelles</span>
-        <span class="dest-city">Mauritius</span>
-      </div>
-    </div>
-
-    <div class="dest-region animate-fade" data-delay="3">
-      <div class="dest-region-name">Asia Pacific</div>
-      <div class="dest-region-cities">
-        <span class="dest-city">Bali</span>
-        <span class="dest-city">Tokyo</span>
-        <span class="dest-city">Singapore</span>
-        <span class="dest-city">Bangkok</span>
-        <span class="dest-city">Phuket</span>
-        <span class="dest-city">Hong Kong</span>
-      </div>
-    </div>
-
-    <div class="dest-region animate-fade" data-delay="3">
-      <div class="dest-region-name">Alpine</div>
-      <div class="dest-region-cities">
-        <span class="dest-city">Courchevel</span>
-        <span class="dest-city">Megève</span>
-        <span class="dest-city">St. Moritz</span>
-        <span class="dest-city">Verbier</span>
-        <span class="dest-city">Aspen</span>
-        <span class="dest-city">Geneva</span>
-        <span class="dest-city">Zermatt</span>
-      </div>
-    </div>
-
-    <div class="dest-region animate-fade" data-delay="4">
-      <div class="dest-region-name">Capitals</div>
-      <div class="dest-region-cities">
-        <span class="dest-city">London</span>
-        <span class="dest-city">Paris</span>
-        <span class="dest-city">Milan</span>
-        <span class="dest-city">New York</span>
-        <span class="dest-city">Miami</span>
-        <span class="dest-city">Zurich</span>
-        <span class="dest-city">Vienna</span>
-      </div>
-    </div>
+    </article>
 
   </div>
 
@@ -3531,7 +3604,7 @@ footer {
       <div class="contact-separator" aria-hidden="true"></div>
       <div class="contact-option">
         <div class="contact-label">PRIVATE INQUIRY</div>
-        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
       </div>
     </div>
   </section>
@@ -3545,6 +3618,7 @@ footer {
     <div class="conc-hero-eyebrow animate-in">LIFESTYLE CONCIERGE</div>
     <h1 class="conc-hero-headline animate-in" data-delay="1">The detail<br>work.</h1>
     <p class="conc-hero-sub animate-in" data-delay="2">Most of what we do will never be noticed. That is the point. We operate in the background so everything in front of you works without effort.</p>
+    <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
   </div>
 
   <div class="conc-statement">
@@ -3669,7 +3743,7 @@ footer {
       <div class="contact-separator" aria-hidden="true"></div>
       <div class="contact-option">
         <div class="contact-label">PRIVATE INQUIRY</div>
-        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
       </div>
     </div>
   </section>
@@ -3685,7 +3759,7 @@ footer {
         <div class="svc-page-tag animate-in">MIDDLE EAST</div>
         <h1 class="svc-page-headline animate-in" data-delay="1">Dubai.</h1>
         <p class="svc-page-sub animate-in" data-delay="2">Where ambition meets excess — and discretion becomes rare. We provide both, without compromise.</p>
-        <a href="#" class="dest-back-link animate-in" data-delay="3" onclick="showPage('destinations')">← All Destinations</a>
+        <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('destinations')">← All Destinations</a>
       </div>
       <div class="svc-img-ph animate-fade" data-delay="2">
         <div class="svc-img-ph-rule"></div>
@@ -3753,7 +3827,7 @@ footer {
       <div class="contact-separator" aria-hidden="true"></div>
       <div class="contact-option">
         <div class="contact-label">PRIVATE INQUIRY</div>
-        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
       </div>
     </div>
   </section>
@@ -3769,7 +3843,7 @@ footer {
         <div class="svc-page-tag animate-in">GREEK ISLANDS</div>
         <h1 class="svc-page-headline animate-in" data-delay="1">Mykonos.</h1>
         <p class="svc-page-sub animate-in" data-delay="2">The island moves fast in season. We move faster — so you never have to.</p>
-        <a href="#" class="dest-back-link animate-in" data-delay="3" onclick="showPage('destinations')">← All Destinations</a>
+        <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('destinations')">← All Destinations</a>
       </div>
       <div class="svc-img-ph animate-fade" data-delay="2">
         <div class="svc-img-ph-rule"></div>
@@ -3837,7 +3911,7 @@ footer {
       <div class="contact-separator" aria-hidden="true"></div>
       <div class="contact-option">
         <div class="contact-label">PRIVATE INQUIRY</div>
-        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
       </div>
     </div>
   </section>
@@ -3853,7 +3927,7 @@ footer {
         <div class="svc-page-tag animate-in">BALEARICS</div>
         <h1 class="svc-page-headline animate-in" data-delay="1">Ibiza.</h1>
         <p class="svc-page-sub animate-in" data-delay="2">Not just a season — a circuit. For those who want it done properly, quietly, and entirely on their terms.</p>
-        <a href="#" class="dest-back-link animate-in" data-delay="3" onclick="showPage('destinations')">← All Destinations</a>
+        <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('destinations')">← All Destinations</a>
       </div>
       <div class="svc-img-ph animate-fade" data-delay="2">
         <div class="svc-img-ph-rule"></div>
@@ -3921,7 +3995,7 @@ footer {
       <div class="contact-separator" aria-hidden="true"></div>
       <div class="contact-option">
         <div class="contact-label">PRIVATE INQUIRY</div>
-        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
       </div>
     </div>
   </section>
@@ -3944,29 +4018,29 @@ footer {
       </div>
       <p class="footer-brand-text">A Private Standard of Luxury.<br>Lifestyle managed personally.</p>
     </div>
-    <div>
+    <nav aria-label="Services">
       <div class="footer-col-label">SERVICES</div>
       <ul class="footer-links">
-        <li><a href="#" class="footer-link" onclick="showPage('residences')">Private Residences</a></li>
-        <li><a href="#" class="footer-link" onclick="showPage('mobility')">Private Mobility</a></li>
-        <li><a href="#" class="footer-link" onclick="showPage('yachting')">Yachting</a></li>
-        <li><a href="#" class="footer-link" onclick="showPage('concierge')">Lifestyle Concierge</a></li>
-        <li><a href="#" class="footer-link" onclick="showPage('protection')">Protection</a></li>
+        <li><a href="javascript:void(0)" class="footer-link" onclick="showPage('residences')">Private Residences</a></li>
+        <li><a href="javascript:void(0)" class="footer-link" onclick="showPage('mobility')">Private Mobility</a></li>
+        <li><a href="javascript:void(0)" class="footer-link" onclick="showPage('yachting')">Yachting</a></li>
+        <li><a href="javascript:void(0)" class="footer-link" onclick="showPage('concierge')">Lifestyle Concierge</a></li>
+        <li><a href="javascript:void(0)" class="footer-link" onclick="showPage('protection')">Protection</a></li>
       </ul>
-    </div>
-    <div>
+    </nav>
+    <nav aria-label="Company">
       <div class="footer-col-label">COMPANY</div>
       <ul class="footer-links">
-        <li><a href="#" class="footer-link" onclick="showPage('about')">About</a></li>
-        <li><a href="#" class="footer-link" onclick="showPage('destinations')">Destinations</a></li>
-        <li><a href="#" class="footer-link">Privacy</a></li>
-        <li><a href="#" class="footer-link">Terms</a></li>
+        <li><a href="javascript:void(0)" class="footer-link" onclick="showPage('about')">About</a></li>
+        <li><a href="javascript:void(0)" class="footer-link" onclick="showPage('destinations')">Destinations</a></li>
+        <li><a href="javascript:void(0)" class="footer-link">Privacy</a></li>
+        <li><a href="javascript:void(0)" class="footer-link">Terms</a></li>
       </ul>
-    </div>
+    </nav>
     <div>
       <div class="footer-col-label">PRIVATE INQUIRY</div>
       <p class="footer-email">private@aryonprivate.com</p>
-      <a href="#" class="btn-access-outline" onclick="showPage('contact')" style="display:inline-block;padding:10px 20px;font-size:10px;" data-cursor-expand>REQUEST ACCESS</a>
+      <a href="javascript:void(0)" class="btn-access-outline" onclick="showPage('contact')" data-cursor-expand>REQUEST ACCESS</a>
     </div>
   </div>
   <div class="footer-divider"></div>
@@ -3983,7 +4057,6 @@ const dot = document.getElementById('cursorDot');
 const ring = document.getElementById('cursorRing');
 let mouseX = 0, mouseY = 0;
 let ringX = 0, ringY = 0;
-let cursorTextEl = null;
 
 document.addEventListener('mousemove', (e) => {
   mouseX = e.clientX;
@@ -3992,14 +4065,18 @@ document.addEventListener('mousemove', (e) => {
   dot.style.top = mouseY + 'px';
 });
 
+let lerpRaf = null;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function lerpCursor() {
   ringX += (mouseX - ringX) * 0.12;
   ringY += (mouseY - ringY) * 0.12;
   ring.style.left = ringX + 'px';
   ring.style.top = ringY + 'px';
-  requestAnimationFrame(lerpCursor);
+  lerpRaf = requestAnimationFrame(lerpCursor);
 }
-lerpCursor();
+document.addEventListener('mouseleave', () => { if (lerpRaf) cancelAnimationFrame(lerpRaf); lerpRaf = null; });
+document.addEventListener('mouseenter', () => { if (!lerpRaf && !reducedMotion) lerpRaf = requestAnimationFrame(lerpCursor); });
+if (!reducedMotion) lerpRaf = requestAnimationFrame(lerpCursor);
 
 const hoverEls = document.querySelectorAll('a, button, [data-cursor-expand]');
 hoverEls.forEach(el => {
@@ -4022,15 +4099,62 @@ document.addEventListener('mousedown', () => document.body.classList.add('cursor
 document.addEventListener('mouseup', () => document.body.classList.remove('cursor-down'));
 
 /* ===== PAGE SYSTEM ===== */
+const PAGE_TITLES = {
+  home:        'Aryon Private',
+  services:    'Services — Aryon Private',
+  destinations:'Destinations — Aryon Private',
+  about:       'About — Aryon Private',
+  contact:     'Private Inquiry — Aryon Private',
+  residences:  'Private Residences — Aryon Private',
+  mobility:    'Private Mobility — Aryon Private',
+  yachting:    'Yachting — Aryon Private',
+  protection:  'Protection — Aryon Private',
+  concierge:   'Lifestyle Concierge — Aryon Private',
+  mykonos:     'Mykonos — Aryon Private',
+  ibiza:       'Ibiza — Aryon Private',
+  dubai:       'Dubai — Aryon Private'
+};
+
 function showPage(pageId) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const target = document.getElementById('page-' + pageId);
-  if (target) {
-    target.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setTimeout(initObserver, 100);
+  if (!target) return;
+  target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.title = PAGE_TITLES[pageId] || 'Aryon Private';
+  if (history.pushState) history.pushState({ page: pageId }, '', '#' + pageId);
+  if (pageId === 'contact') resetContactForm();
+  setTimeout(initObserver, 100);
+}
+
+function resetContactForm() {
+  const fields = ['fullname', 'email', 'message', 'phone'];
+  fields.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.value = ''; el.style.borderBottomColor = ''; }
+  });
+  document.querySelectorAll('.pill-group').forEach(function(group) {
+    const first = group.querySelector('.pill');
+    if (!first) return;
+    group.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    first.classList.add('active');
+  });
+  const phoneField = document.getElementById('phone-field');
+  if (phoneField) phoneField.classList.remove('visible');
+  const btn = document.querySelector('.btn-submit');
+  if (btn) {
+    btn.textContent = 'SUBMIT PRIVATE INQUIRY';
+    btn.style.background = '';
+    btn.style.color = '';
+    btn.style.border = '';
+    btn.disabled = false;
   }
 }
+
+window.addEventListener('popstate', function(e) {
+  const page = (e.state && e.state.page) ? e.state.page : 'home';
+  showPage(page);
+});
 
 
 function scrollToServices() {
@@ -4039,30 +4163,27 @@ function scrollToServices() {
 }
 
 /* ===== INTERSECTION OBSERVER ===== */
+let activeObserver = null;
 function initObserver() {
+  if (activeObserver) { activeObserver.disconnect(); activeObserver = null; }
   const animatables = document.querySelectorAll('.animate-in:not(.in-view), .animate-left:not(.in-view), .animate-right:not(.in-view), .animate-scale:not(.in-view), .animate-fade:not(.in-view), .ornament-line:not(.in-view)');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+  if (!animatables.length) return;
+  activeObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('in-view');
-        observer.unobserve(entry.target);
+        activeObserver.unobserve(entry.target);
       }
     });
   }, { threshold: 0.15 });
-
-  animatables.forEach(el => observer.observe(el));
+  animatables.forEach(function(el) { activeObserver.observe(el); });
 }
 
-// Also observe dynamic ornament lines
-function observeOrnamentLines() {
-  document.querySelectorAll('.ornament-line').forEach(line => {
-    line.classList.add('animate-in');
-  });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
   initObserver();
+  // Hash-based routing on initial load
+  var hash = window.location.hash.slice(1);
+  if (hash && document.getElementById('page-' + hash)) showPage(hash);
 });
 
 /* ===== CONTACT FORM ===== */
@@ -4077,6 +4198,7 @@ function selectContactMethod(el, method) {
   group.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
   el.classList.add('active');
   const phoneField = document.getElementById('phone-field');
+  if (!phoneField) return;
   if (method === 'phone') {
     phoneField.classList.add('visible');
   } else {
@@ -4085,25 +4207,50 @@ function selectContactMethod(el, method) {
 }
 
 function handleSubmit() {
-  const name = document.getElementById('fullname').value;
-  const email = document.getElementById('email').value;
-  const msg = document.getElementById('message').value;
-  if (!name || !email || !msg) {
-    // Subtle indication — highlight empty fields
-    [document.getElementById('fullname'), document.getElementById('email'), document.getElementById('message')].forEach(f => {
-      if (!f.value) {
-        f.style.borderBottomColor = 'rgba(201,169,110,0.8)';
-        f.focus();
-      }
-    });
+  const nameEl  = document.getElementById('fullname');
+  const emailEl = document.getElementById('email');
+  const msgEl   = document.getElementById('message');
+  const required = [nameEl, emailEl, msgEl];
+
+  // Clear previous error state
+  required.forEach(f => { if (f) f.style.borderBottomColor = ''; });
+
+  let firstEmpty = null;
+  required.forEach(function(f) {
+    if (f && !f.value.trim()) {
+      f.style.borderBottomColor = 'rgba(201,169,110,0.8)';
+      if (!firstEmpty) firstEmpty = f;
+    }
+  });
+  if (firstEmpty) { firstEmpty.focus(); return; }
+
+  // Basic email format check
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
+    emailEl.style.borderBottomColor = 'rgba(201,169,110,0.8)';
+    emailEl.focus();
     return;
   }
+
+  // Capture selected pill values (for any real submission)
+  const enquiryType = (function() {
+    const active = document.querySelector('.pill-group:first-of-type .pill.active');
+    return active ? active.textContent.trim() : '';
+  }());
+  const contactMethod = (function() {
+    const groups = document.querySelectorAll('.pill-group');
+    const last = groups[groups.length - 1];
+    const active = last ? last.querySelector('.pill.active') : null;
+    return active ? active.textContent.trim() : '';
+  }());
+
+  void enquiryType; void contactMethod; // captured for future backend integration
+
   // Success state
   const submitBtn = document.querySelector('.btn-submit');
   submitBtn.textContent = 'INQUIRY RECEIVED. WE WILL BE IN TOUCH';
   submitBtn.style.background = 'rgba(201,169,110,0.2)';
-  submitBtn.style.color = 'var(--gold)';
-  submitBtn.style.border = '1px solid var(--gold-40)';
+  submitBtn.style.color = '#c9a96e';
+  submitBtn.style.border = '1px solid rgba(201,169,110,0.40)';
   submitBtn.disabled = true;
 }
 
@@ -4135,29 +4282,38 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
   ];
 
   var globe;
+  var flyToTimer = null;
 
   function initGlobe() {
-    var el = document.getElementById('globeEl');
+    var el = document.getElementById('globeCanvas');
     if (!el || !window.Globe) return;
 
-    var _oc = document.createElement('canvas');
-    _oc.width = 2; _oc.height = 2;
-    _oc.getContext('2d').fillStyle = '#070503';
-    _oc.getContext('2d').fillRect(0, 0, 2, 2);
+    /* Pin the element size with inline styles BEFORE Globe.gl reads offsetWidth */
+    var isMob = window.innerWidth < 768;
+    var size = isMob
+      ? Math.max(240, Math.round(window.innerWidth * 0.78))
+      : Math.min(620, window.innerWidth);
+    el.style.width  = size + 'px';
+    el.style.height = size + 'px';
+
+    /* Solid dark 2×2 canvas as the ocean texture */
+    var bg = document.createElement('canvas');
+    bg.width = 2; bg.height = 2;
+    bg.getContext('2d').fillStyle = '#070503';
+    bg.getContext('2d').fillRect(0, 0, 2, 2);
 
     globe = Globe()
-      /* Appearance — dark ocean base, land via polygons */
-      .globeImageUrl(_oc.toDataURL())
+      .width(size)
+      .height(size)
+      .globeImageUrl(bg.toDataURL())
       .backgroundColor('rgba(0,0,0,0)')
       .atmosphereColor('#c9a96e')
       .atmosphereAltitude(0.18)
-      /* Land polygons — dark interior, bright contour stroke */
       .polygonsData([])
-      .polygonCapColor(function() { return 'rgba(87, 75, 0, 0.76)'; })
-      .polygonSideColor(function() { return 'rgba(87, 75, 0, 0.28)'; })
+      .polygonCapColor(function() { return 'rgba(87,75,0,0.76)'; })
+      .polygonSideColor(function() { return 'rgba(87,75,0,0.28)'; })
       .polygonAltitude(0.006)
       .polygonStrokeColor(function() { return '#b39b00'; })
-      /* Points */
       .pointsData(destinations)
       .pointLat('lat').pointLng('lng')
       .pointColor(function() { return '#c9a96e'; })
@@ -4166,7 +4322,6 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
       .pointLabel(function(d) {
         return '<div class="globe-tip">' + d.label + '<em>' + d.region + '</em></div>';
       })
-      /* Pulsing rings */
       .ringsData(destinations)
       .ringLat('lat').ringLng('lng')
       .ringColor(function() {
@@ -4175,7 +4330,6 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
       .ringMaxRadius(4)
       .ringPropagationSpeed(1.1)
       .ringRepeatPeriod(1800)
-      /* Animated arcs */
       .arcsData(arcs)
       .arcStartLat('sLat').arcStartLng('sLng')
       .arcEndLat('eLat').arcEndLng('eLng')
@@ -4185,7 +4339,6 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
       .arcDashLength(0.22)
       .arcDashGap(0.85)
       .arcDashAnimateTime(3600)
-      /* Labels */
       .labelsData(destinations)
       .labelLat('lat').labelLng('lng')
       .labelText('label')
@@ -4194,41 +4347,40 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
       .labelAltitude(0.02)
       .labelDotRadius(0)
       .labelResolution(3)
-      /* Click */
       .onPointClick(function(d) { showPage(d.page); })
       (el);
 
-    /* Fetch land polygons and paint them gold */
+    /* Land polygons */
     fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
       .then(function(r) { return r.json(); })
       .then(function(world) {
-        if (window.topojson && globe) {
+        if (window.topojson && globe)
           globe.polygonsData(topojson.feature(world, world.objects.countries).features);
-        }
-      });
+      })
+      .catch(function() {});
 
-    /* Graticule — meridians, parallels, equator, tropics */
-    var _grat = [], _step = 5;
-    for (var _lo = -180; _lo < 180; _lo += 30) {
-      var _mc = [];
-      for (var _la = -85; _la <= 85; _la += _step) _mc.push([_la, _lo]);
-      _grat.push({ c: _mc, t: 'grid' });
+    /* Graticule */
+    var grat = [], step = 5;
+    for (var lo = -180; lo < 180; lo += 30) {
+      var mc = [];
+      for (var la = -85; la <= 85; la += step) mc.push([la, lo]);
+      grat.push({ c: mc, t: 'grid' });
     }
     [-60, -30, 30, 60].forEach(function(lat) {
-      var _pc = [];
-      for (var lo2 = -180; lo2 <= 180; lo2 += _step) _pc.push([lat, lo2]);
-      _grat.push({ c: _pc, t: 'grid' });
+      var pc = [];
+      for (var lo2 = -180; lo2 <= 180; lo2 += step) pc.push([lat, lo2]);
+      grat.push({ c: pc, t: 'grid' });
     });
-    var _eq = [];
-    for (var lo3 = -180; lo3 <= 180; lo3 += _step) _eq.push([0, lo3]);
-    _grat.push({ c: _eq, t: 'equator' });
+    var eq = [];
+    for (var lo3 = -180; lo3 <= 180; lo3 += step) eq.push([0, lo3]);
+    grat.push({ c: eq, t: 'equator' });
     [23.5, -23.5].forEach(function(lat) {
-      var _tc = [];
-      for (var lo4 = -180; lo4 <= 180; lo4 += _step) _tc.push([lat, lo4]);
-      _grat.push({ c: _tc, t: 'tropic' });
+      var tc = [];
+      for (var lo4 = -180; lo4 <= 180; lo4 += step) tc.push([lat, lo4]);
+      grat.push({ c: tc, t: 'tropic' });
     });
     globe
-      .pathsData(_grat)
+      .pathsData(grat)
       .pathPoints('c')
       .pathPointLat(function(p) { return p[0]; })
       .pathPointLng(function(p) { return p[1]; })
@@ -4242,29 +4394,17 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
       })
       .pathAltitude(0.001);
 
-    /* Sizing — guard against zero-dimension (hidden parent) */
-    function resize() {
-      var wrap = document.getElementById('globeWrap');
-      if (!wrap || !globe) return;
-      var w = wrap.offsetWidth;
-      if (w === 0) return;
-      globe.width(w).height(w);
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    /* Starfield — scattered dots around globe edges */
+    /* Starfield — dots only outside the sphere */
     (function() {
       var sc = document.getElementById('globeStars');
       if (!sc) return;
-      var w = sc.offsetWidth || 780, h = sc.offsetHeight || 780;
-      sc.width = w; sc.height = h;
+      sc.width = size; sc.height = size;
       var ctx = sc.getContext('2d');
-      var cx = w / 2, cy = h / 2, r = w / 2 * 0.94;
+      var cx = size / 2, cy = size / 2, r = size / 2 * 0.94;
       for (var i = 0; i < 260; i++) {
-        var x = Math.random() * w, y = Math.random() * h;
+        var x = Math.random() * size, y = Math.random() * size;
         var dx = x - cx, dy = y - cy;
-        if (dx * dx + dy * dy < r * r) continue; /* skip inside globe */
+        if (dx * dx + dy * dy < r * r) continue;
         var s = Math.random() > 0.86 ? 1.3 : 0.7;
         var a = Math.random() * 0.5 + 0.12;
         ctx.beginPath();
@@ -4275,51 +4415,52 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     })();
 
     /* Camera */
-    globe.pointOfView({ lat: 33, lng: 28, altitude: 2.0 }, 0);
-    globe.controls().autoRotate      = true;
-    globe.controls().autoRotateSpeed = 0.38;
-    globe.controls().enableZoom      = false;
-    globe.controls().enablePan       = false;
-    globe.controls().minPolarAngle   = Math.PI * 0.25;
-    globe.controls().maxPolarAngle   = Math.PI * 0.75;
+    globe.pointOfView({ lat: 33, lng: 28, altitude: 2.5 }, 0);
 
-    var wrap = document.getElementById('globeWrap');
+    var ctrl = globe.controls();
+    ctrl.autoRotate      = true;
+    ctrl.autoRotateSpeed = 0.38;
+    ctrl.enableZoom      = true;
+    ctrl.zoomSpeed       = 0.5;
+    ctrl.enablePan       = false;
+    ctrl.minPolarAngle   = Math.PI * 0.25;
+    ctrl.maxPolarAngle   = Math.PI * 0.75;
 
-    /* Zoom via wheel — capture phase on wrapper, only applies when cursor is
-       directly over the globe canvas (el.contains check filters out buttons etc.) */
-    wrap.addEventListener('wheel', function(e) {
-      if (!el.contains(e.target)) return;
-      e.preventDefault();
-      e.stopPropagation();
-      var pov = globe.pointOfView();
-      var delta = e.deltaY > 0 ? 0.15 : -0.15;
-      var newAlt = Math.max(1.5, Math.min(2.5, pov.altitude + delta));
-      globe.pointOfView({ lat: pov.lat, lng: pov.lng, altitude: newAlt }, 80);
-    }, { passive: false, capture: true });
-
-    /* Pause on drag, resume after */
-    wrap.addEventListener('pointerdown', function() {
+    /* Drag: pause rotation, resume after release */
+    el.addEventListener('pointerdown', function() {
       globe.controls().autoRotate = false;
     }, true);
-    wrap.addEventListener('pointerup', function() {
+    el.addEventListener('pointerup', function() {
       setTimeout(function() { globe.controls().autoRotate = true; }, 2800);
     }, true);
+
+    /* Resize */
+    function resize() {
+      var mob = window.innerWidth < 768;
+      var w = mob
+        ? Math.max(240, Math.round(window.innerWidth * 0.78))
+        : Math.min(620, window.innerWidth);
+      el.style.width  = w + 'px';
+      el.style.height = w + 'px';
+      globe.width(w).height(w);
+    }
+    window.addEventListener('resize', resize);
   }
 
-  /* Fly-to called by destination buttons */
   window.globeFlyTo = function(dest) {
     var d = destinations.filter(function(x) { return x.page === dest; })[0];
     if (!d) return;
     if (globe) {
       globe.controls().autoRotate = false;
-      globe.pointOfView({ lat: d.lat, lng: d.lng, altitude: 1.65 }, 900);
+      globe.pointOfView({ lat: d.lat, lng: d.lng, altitude: 2.5 }, 900);
     }
     document.querySelectorAll('.globe-dest-btn').forEach(function(b) {
       b.classList.remove('active');
     });
     var btn = document.querySelector('.globe-dest-btn[data-dest="' + dest + '"]');
     if (btn) btn.classList.add('active');
-    setTimeout(function() {
+    clearTimeout(flyToTimer);
+    flyToTimer = setTimeout(function() {
       showPage(dest);
       if (globe) globe.controls().autoRotate = true;
     }, 1200);
@@ -4335,3 +4476,6 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
 <script src="nav.js"></script>
 </body>
 </html>
+
+
+

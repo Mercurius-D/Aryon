@@ -95,7 +95,7 @@
   /* ── Focus trap ── */
   function trapFocus() {
     const focusable = navOverlay.querySelectorAll(
-      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
     );
     if (!focusable.length) return;
 
@@ -124,6 +124,7 @@
   /* ── Public API ── */
   window.navGoTo = function (pageId) {
     closeMenu();
+    /* +60 ms buffer lets the closing CSS animation fully settle before page swap */
     setTimeout(() => {
       if (typeof window.showPage === 'function') window.showPage(pageId);
     }, CLOSE_DURATION + 60);
