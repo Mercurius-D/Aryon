@@ -4437,39 +4437,12 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
 
     var ctrl = globe.controls();
     ctrl.autoRotate      = true;
-    ctrl.autoRotateSpeed = 0.3;
+    ctrl.autoRotateSpeed = 0.7;
     ctrl.enableZoom      = false;
     ctrl.enablePan       = false;
     ctrl.minPolarAngle   = Math.PI * 0.25;
     ctrl.maxPolarAngle   = Math.PI * 0.75;
 
-    /* Patch renderer.render() — runs inside Globe.gl's own animation tick,
-       just before Three.js draws the frame. Snapping camera position here
-       guarantees the rendered frame always uses the locked distance,
-       regardless of what Globe.gl or OrbitControls did earlier in the tick. */
-    var _lockDist = null;
-    var _renderer = globe.renderer();
-    var _camera   = globe.camera();
-    var _origRender = _renderer.render.bind(_renderer);
-    _renderer.render = function(scene, cam) {
-      /* Only snap once _lockDist is confirmed valid (> 0) */
-      if (_lockDist > 0) {
-        cam.position.setLength(_lockDist);
-      }
-      return _origRender(scene, cam);
-    };
-    /* Poll until the camera has actually been placed at altitude 2.5.
-       A zero or near-zero length means Globe.gl hasn't positioned it yet. */
-    (function pollDist() {
-      var d = _camera.position.length();
-      if (d > 50) {
-        _lockDist = d;
-        ctrl.minDistance = d;
-        ctrl.maxDistance = d;
-      } else {
-        setTimeout(pollDist, 100);
-      }
-    })();
 
     /* Drag: pause rotation, resume after release */
     el.addEventListener('pointerdown', function() {
