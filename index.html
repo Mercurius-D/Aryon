@@ -4425,27 +4425,29 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     ctrl.minPolarAngle   = Math.PI * 0.25;
     ctrl.maxPolarAngle   = Math.PI * 0.75;
 
-    /* Block zoom on the exact element OrbitControls listens to */
-    function stopZoom(e) { e.preventDefault(); e.stopImmediatePropagation(); }
-    var zoomEvents = ['wheel', 'mousewheel', 'DOMMouseScroll'];
-    zoomEvents.forEach(function(t) {
-      el.addEventListener(t, stopZoom, { passive: false, capture: true });
-      if (ctrl.domElement) {
-        ctrl.domElement.addEventListener(t, stopZoom, { passive: false, capture: true });
-      }
-    });
-    /* Bind to inner canvas too, after Globe.gl creates it */
+    /* Lock camera distance at the initial altitude so OrbitControls
+       cannot zoom even if enableZoom is bypassed internally */
     setTimeout(function() {
-      el.querySelectorAll('canvas').forEach(function(c) {
-        zoomEvents.forEach(function(t) {
-          c.addEventListener(t, stopZoom, { passive: false, capture: true });
-        });
-      });
-    }, 0);
-    /* Block pinch-to-zoom on mobile */
-    el.addEventListener('touchmove', function(e) {
-      if (e.touches.length > 1) e.preventDefault();
-    }, { passive: false });
+      if (ctrl.object) {
+        var d = ctrl.object.position.length();
+        ctrl.minDistance = d;
+        ctrl.maxDistance = d;
+      }
+    }, 300);
+
+    /* Intercept at window capture phase — fires before Globe.gl's own
+       listeners regardless of where they are attached in the DOM tree */
+    window.addEventListener('wheel', function(e) {
+      if (el.contains(e.target)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    }, { passive: false, capture: true });
+    window.addEventListener('touchmove', function(e) {
+      if (el.contains(e.target) && e.touches.length > 1) {
+        e.preventDefault();
+      }
+    }, { passive: false, capture: true });
 
     /* Drag: pause rotation, resume after release */
     el.addEventListener('pointerdown', function() {
