@@ -4451,20 +4451,22 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     _rotating = true;
     (function rotateTick() {
       requestAnimationFrame(rotateTick);
-      if (!_rotating) return;
-      var cos = Math.cos(_rad), sin = Math.sin(_rad);
-      var x = _cam.position.x, z = _cam.position.z;
-      _cam.position.x = x * cos - z * sin;
-      _cam.position.z = x * sin + z * cos;
-      _cam.lookAt(0, 0, 0);
-      _renderer.render(_scene, _cam);
+      if (_rotating) {
+        var cos = Math.cos(_rad), sin = Math.sin(_rad);
+        var x = _cam.position.x, z = _cam.position.z;
+        _cam.position.x = x * cos - z * sin;
+        _cam.position.z = x * sin + z * cos;
+        _cam.lookAt(0, 0, 0);
+      }
+      _renderer.render(_scene, _cam); /* always render — keeps drag visible too */
     })();
 
-    /* Drag: pause rotation, resume after release */
+    /* Drag: pause rotation on press, resume after release (window catches
+       releases outside the globe element too) */
     el.addEventListener('pointerdown', function() { _rotating = false; }, true);
-    el.addEventListener('pointerup', function() {
+    window.addEventListener('pointerup', function() {
       setTimeout(function() { _rotating = true; }, 2800);
-    }, true);
+    });
 
     /* Resize */
     function resize() {
