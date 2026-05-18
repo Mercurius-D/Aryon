@@ -1,0 +1,13 @@
+# index.html — always revalidate so updates are picked up immediately
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Static assets — cache for 1 year (immutable)
+/nav.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/nav.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/Logo.jpeg
+  Cache-Control: public, max-age=31536000, immutable
