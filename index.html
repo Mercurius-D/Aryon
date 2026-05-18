@@ -4438,8 +4438,7 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
       })
       .pathStroke(function(d) {
         return d.t === 'equator' ? 1.0 : d.t === 'tropic' ? 0.55 : 0.28;
-      })
-      .pathPointAlt(function() { return 0.001; });
+      });
 
     /* Starfield — dots only outside the sphere */
     (function() {
