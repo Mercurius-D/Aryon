@@ -2,17 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta name="description" content="ARYON PRIVATE. A discreet lifestyle management firm. Private residences, yachting, mobility, and personal concierge services.">
 <title>ARYON PRIVATE: A Private Standard</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap"></noscript>
 <link rel="stylesheet" href="nav.css?v=2">
 
 <style>
-/* ===== GOOGLE FONTS ===== */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap');
 
 /* ===== CSS RESET ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1767,7 +1769,7 @@ footer {
   font-family: var(--sans);
   font-weight: 300;
   font-size: 13px;
-  color: var(--white-40);
+  color: rgba(255,255,255,0.62);
   line-height: 1.8;
   margin-top: 16px;
 }
@@ -1787,7 +1789,7 @@ footer {
   font-family: var(--sans);
   font-weight: 300;
   font-size: 13px;
-  color: var(--white-40);
+  color: rgba(255,255,255,0.62);
   line-height: 2.2;
   transition: color 0.25s;
   cursor: none;
@@ -1837,14 +1839,14 @@ footer {
   font-family: var(--sans);
   font-weight: 300;
   font-size: 11px;
-  color: rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.55);
   letter-spacing: 0.08em;
 }
 .footer-tagline {
   font-family: var(--sans);
   font-weight: 400;
   font-size: 11px;
-  color: var(--gold-40);
+  color: var(--gold);
   letter-spacing: var(--ls-wide);
   text-transform: uppercase;
 }
@@ -2444,7 +2446,7 @@ footer {
 <header class="nav-bar" id="navBar" role="banner">
 
   <!-- Logo -->
-  <a class="nav-logo" href="javascript:void(0)" onclick="showPage('home')" aria-label="ARYON PRIVATE, return to homepage">
+  <a class="nav-logo" href="#" onclick="showPage('home')" aria-label="ARYON PRIVATE, return to homepage">
     <img class="nav-chevron" src="Logo.jpeg" alt="" aria-hidden="true" width="46" height="46">
     <div class="nav-wordmark">
       <span class="nav-name">ARYON<span class="nav-reg">®</span></span>
@@ -2497,28 +2499,28 @@ footer {
     <nav class="overlay-left" aria-label="Primary">
       <ol class="overlay-nav-list">
         <li class="overlay-nav-item" data-nav-i="0">
-          <a class="overlay-nav-link" href="javascript:void(0)" onclick="navGoTo('home')" data-cursor-expand>
+          <a class="overlay-nav-link" href="#" onclick="navGoTo('home')" data-cursor-expand>
             <span class="nav-item-num">01</span>
             <span class="nav-item-text">Home</span>
             <span class="nav-item-arrow" aria-hidden="true">↗</span>
           </a>
         </li>
         <li class="overlay-nav-item" data-nav-i="1">
-          <a class="overlay-nav-link" href="javascript:void(0)" onclick="navGoTo('services')" data-cursor-expand>
+          <a class="overlay-nav-link" href="#" onclick="navGoTo('services')" data-cursor-expand>
             <span class="nav-item-num">02</span>
             <span class="nav-item-text">Services</span>
             <span class="nav-item-arrow" aria-hidden="true">↗</span>
           </a>
         </li>
         <li class="overlay-nav-item" data-nav-i="2">
-          <a class="overlay-nav-link" href="javascript:void(0)" onclick="navGoTo('destinations')" data-cursor-expand>
+          <a class="overlay-nav-link" href="#" onclick="navGoTo('destinations')" data-cursor-expand>
             <span class="nav-item-num">03</span>
             <span class="nav-item-text">Destinations</span>
             <span class="nav-item-arrow" aria-hidden="true">↗</span>
           </a>
         </li>
         <li class="overlay-nav-item" data-nav-i="3">
-          <a class="overlay-nav-link" href="javascript:void(0)" onclick="navGoTo('contact')" data-cursor-expand>
+          <a class="overlay-nav-link" href="#" onclick="navGoTo('contact')" data-cursor-expand>
             <span class="nav-item-num">04</span>
             <span class="nav-item-text">Contact</span>
             <span class="nav-item-arrow" aria-hidden="true">↗</span>
@@ -2541,11 +2543,11 @@ footer {
       <div class="overlay-right-block">
         <div class="overlay-right-label">SERVICES</div>
         <ul class="overlay-sub-list">
-          <li><a class="overlay-sub-link" href="javascript:void(0)" onclick="navGoTo('residences')" data-cursor-expand>Private Residences</a></li>
-          <li><a class="overlay-sub-link" href="javascript:void(0)" onclick="navGoTo('mobility')" data-cursor-expand>Private Mobility</a></li>
-          <li><a class="overlay-sub-link" href="javascript:void(0)" onclick="navGoTo('yachting')" data-cursor-expand>Yachting</a></li>
-          <li><a class="overlay-sub-link" href="javascript:void(0)" onclick="navGoTo('protection')" data-cursor-expand>Protection</a></li>
-          <li><a class="overlay-sub-link" href="javascript:void(0)" onclick="navGoTo('concierge')" data-cursor-expand>Lifestyle Concierge</a></li>
+          <li><a class="overlay-sub-link" href="#" onclick="navGoTo('residences')" data-cursor-expand>Private Residences</a></li>
+          <li><a class="overlay-sub-link" href="#" onclick="navGoTo('mobility')" data-cursor-expand>Private Mobility</a></li>
+          <li><a class="overlay-sub-link" href="#" onclick="navGoTo('yachting')" data-cursor-expand>Yachting</a></li>
+          <li><a class="overlay-sub-link" href="#" onclick="navGoTo('protection')" data-cursor-expand>Protection</a></li>
+          <li><a class="overlay-sub-link" href="#" onclick="navGoTo('concierge')" data-cursor-expand>Lifestyle Concierge</a></li>
         </ul>
       </div>
 
@@ -2556,7 +2558,7 @@ footer {
         <a class="overlay-email" href="mailto:private@aryonprivate.com" data-cursor-expand>
           private@aryonprivate.com
         </a>
-        <a class="overlay-cta" href="javascript:void(0)" onclick="navGoTo('contact')" data-cursor-expand aria-label="Request access">
+        <a class="overlay-cta" href="#" onclick="navGoTo('contact')" data-cursor-expand aria-label="Request access">
           REQUEST ACCESS
         </a>
       </div>
@@ -2600,8 +2602,8 @@ footer {
       </div>
       <p class="hero-tagline">Discreet. Refined. Relentless.</p>
       <div class="hero-ctas">
-        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')" aria-label="Request access">REQUEST ACCESS</a>
-        <a href="javascript:void(0)" class="btn-secondary" onclick="scrollToServices()" aria-label="Explore services">EXPLORE SERVICES</a>
+        <a href="#" class="btn-primary" onclick="showPage('contact')" aria-label="Request access">REQUEST ACCESS</a>
+        <a href="#" class="btn-secondary" onclick="scrollToServices()" aria-label="Explore services">EXPLORE SERVICES</a>
       </div>
     </div>
   </section>
@@ -2655,7 +2657,7 @@ footer {
         <h3 class="service-name">Private Residences</h3>
         <div class="service-divider"></div>
         <p class="service-desc">Exclusive villa stays, private estates, and personally managed residence access worldwide.</p>
-        <a href="javascript:void(0)" class="service-learn" onclick="showPage('residences')">Explore</a>
+        <a href="#" class="service-learn" onclick="showPage('residences')">Explore</a>
       </article>
 
       <!-- Card 02 -->
@@ -2678,7 +2680,7 @@ footer {
         <h3 class="service-name">Private Mobility</h3>
         <div class="service-divider"></div>
         <p class="service-desc">Chauffeur-driven prestige vehicles, private transfers, and seamless ground coordination.</p>
-        <a href="javascript:void(0)" class="service-learn" onclick="showPage('mobility')">Explore</a>
+        <a href="#" class="service-learn" onclick="showPage('mobility')">Explore</a>
       </article>
 
       <!-- Card 03 -->
@@ -2701,7 +2703,7 @@ footer {
         <h3 class="service-name">Yachting</h3>
         <div class="service-divider"></div>
         <p class="service-desc">Tailored access to private yachts and beautifully managed sea experiences.</p>
-        <a href="javascript:void(0)" class="service-learn" onclick="showPage('yachting')">Explore</a>
+        <a href="#" class="service-learn" onclick="showPage('yachting')">Explore</a>
       </article>
 
       <!-- Card 04 -->
@@ -2723,7 +2725,7 @@ footer {
         <h3 class="service-name">Lifestyle Concierge</h3>
         <div class="service-divider"></div>
         <p class="service-desc">Personal coordination for dining, reservations, events, and every request between.</p>
-        <a href="javascript:void(0)" class="service-learn" onclick="showPage('concierge')">Explore</a>
+        <a href="#" class="service-learn" onclick="showPage('concierge')">Explore</a>
       </article>
 
       <!-- Card 05 -->
@@ -2748,7 +2750,7 @@ footer {
         <h3 class="service-name">Protection</h3>
         <div class="service-divider"></div>
         <p class="service-desc">Discreet security coordination and protection support for elevated travel and presence.</p>
-        <a href="javascript:void(0)" class="service-learn" onclick="showPage('protection')">Explore</a>
+        <a href="#" class="service-learn" onclick="showPage('protection')">Explore</a>
       </article>
     </div>
 
@@ -2812,7 +2814,7 @@ footer {
       <div class="contact-separator" aria-hidden="true"></div>
       <div class="contact-option">
         <div class="contact-label">SECURE INQUIRY</div>
-        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
       </div>
     </div>
     <p class="final-note animate-fade">All communications are handled with absolute confidentiality.</p>
@@ -2845,7 +2847,7 @@ footer {
         <li>Property sourcing and advisory</li>
         <li>Long-stay management support</li>
       </ul>
-      <a href="javascript:void(0)" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
+      <a href="#" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
     </div>
     <div class="service-visual" aria-hidden="true">
       <svg class="service-visual-watermark" width="120" height="120" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="0.8" stroke-linecap="round">
@@ -2878,7 +2880,7 @@ footer {
         <li>Helicopter and charter coordination</li>
         <li>Cross-border journey management</li>
       </ul>
-      <a href="javascript:void(0)" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
+      <a href="#" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
     </div>
     <div class="service-visual" aria-hidden="true">
       <svg class="service-visual-watermark" width="120" height="120" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="0.8" stroke-linecap="round">
@@ -2906,7 +2908,7 @@ footer {
         <li>Provisioning and onboard preferences</li>
         <li>Extended voyage coordination</li>
       </ul>
-      <a href="javascript:void(0)" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
+      <a href="#" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
     </div>
     <div class="service-visual" aria-hidden="true">
       <svg class="service-visual-watermark" width="120" height="120" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="0.8" stroke-linecap="round">
@@ -2934,7 +2936,7 @@ footer {
         <li>Local intelligence and introductions</li>
         <li>Ongoing daily lifestyle management</li>
       </ul>
-      <a href="javascript:void(0)" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
+      <a href="#" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
     </div>
     <div class="service-visual" aria-hidden="true">
       <svg class="service-visual-watermark" width="120" height="120" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="0.8" stroke-linecap="round">
@@ -2962,7 +2964,7 @@ footer {
         <li>Digital and communication privacy advisory</li>
         <li>Threat and risk briefing support</li>
       </ul>
-      <a href="javascript:void(0)" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
+      <a href="#" class="service-inquire" onclick="showPage('contact')">INQUIRE ABOUT THIS →</a>
     </div>
     <div class="service-visual" aria-hidden="true">
       <svg class="service-visual-watermark" width="120" height="120" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="0.8" stroke-linecap="round">
@@ -3101,7 +3103,7 @@ footer {
         <div class="svc-page-tag animate-in">PRIVATE RESIDENCES</div>
         <h1 class="svc-page-headline animate-in" data-delay="1">The right<br>property,<br>prepared.</h1>
         <p class="svc-page-sub animate-in" data-delay="2">Estates, villas, and private residences arranged with precision. Not just booked. Managed from the moment you confirm to the day you leave.</p>
-        <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
+        <a href="#" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
       </div>
       <div class="svc-img-ph animate-fade" data-delay="2">
         <div class="svc-img-ph-rule"></div>
@@ -3183,7 +3185,7 @@ footer {
         <div class="svc-section-rule"></div>
         <p class="svc-section-body">Our relationships with estate owners, family offices, and property managers have been built over years. When a property that matters is unavailable publicly, our first call is to these relationships.</p>
         <p class="svc-section-body">Exclusive access is not marketing language here. It is an honest description of how we work. The properties we recommend are ones we know personally, not one we have forwarded from a listing platform.</p>
-        <a href="javascript:void(0)" class="service-inquire" onclick="showPage('contact')" style="margin-top:28px;">ARRANGE A PRIVATE INQUIRY</a>
+        <a href="#" class="service-inquire" onclick="showPage('contact')" style="margin-top:28px;">ARRANGE A PRIVATE INQUIRY</a>
       </div>
     </div>
   </div>
@@ -3199,7 +3201,7 @@ footer {
       <div class="contact-separator" aria-hidden="true"></div>
       <div class="contact-option">
         <div class="contact-label">PRIVATE INQUIRY</div>
-        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
       </div>
     </div>
   </section>
@@ -3215,7 +3217,7 @@ footer {
         <div class="svc-page-tag animate-in">PRIVATE MOBILITY</div>
         <h1 class="svc-page-headline animate-in" data-delay="1">Every<br>transfer,<br>handled.</h1>
         <p class="svc-page-sub animate-in" data-delay="2">Ground, air, and water. From the moment you land, your movement is managed without your involvement.</p>
-        <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
+        <a href="#" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
       </div>
       <div class="svc-img-ph animate-fade" data-delay="2">
         <div class="svc-img-ph-rule"></div>
@@ -3292,7 +3294,7 @@ footer {
         <div class="svc-section-rule"></div>
         <p class="svc-section-body">We do not aggregate. We vet personally. Every driver in our network has been assessed for professionalism, route knowledge, discretion, and composure under pressure.</p>
         <p class="svc-section-body">Vehicles are confirmed before each engagement. When something does not meet standard, it is replaced before you know there was a problem. The standard is not negotiated down to fit availability.</p>
-        <a href="javascript:void(0)" class="service-inquire" onclick="showPage('contact')" style="margin-top:28px;">DISCUSS YOUR ITINERARY</a>
+        <a href="#" class="service-inquire" onclick="showPage('contact')" style="margin-top:28px;">DISCUSS YOUR ITINERARY</a>
       </div>
       <div class="svc-depth-img animate-scale">
         <div class="svc-img-ph-rule" style="position:relative;z-index:1;"></div>
@@ -3313,7 +3315,7 @@ footer {
       <div class="contact-separator" aria-hidden="true"></div>
       <div class="contact-option">
         <div class="contact-label">PRIVATE INQUIRY</div>
-        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
       </div>
     </div>
   </section>
@@ -3329,7 +3331,7 @@ footer {
         <div class="svc-page-tag animate-in">YACHTING</div>
         <h1 class="svc-page-headline animate-in" data-delay="1">The sea,<br>arranged.</h1>
         <p class="svc-page-sub animate-in" data-delay="2">Private yacht access across the Mediterranean, Indian Ocean, and Caribbean. We handle what happens before you step aboard.</p>
-        <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
+        <a href="#" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
       </div>
       <div class="svc-img-ph animate-fade" data-delay="2">
         <div class="svc-img-ph-rule"></div>
@@ -3411,7 +3413,7 @@ footer {
         <div class="svc-section-rule"></div>
         <p class="svc-section-body">We do not forward you a catalogue and ask you to choose. We ask what matters: space, speed, privacy, style of travel. Then we present two or three options we can stand behind.</p>
         <p class="svc-section-body">The fleet changes seasonally. Our knowledge of it does not. When a vessel is not performing at the right standard, we remove it from our recommendations before a client encounters the problem.</p>
-        <a href="javascript:void(0)" class="service-inquire" onclick="showPage('contact')" style="margin-top:28px;">ARRANGE A YACHT INQUIRY</a>
+        <a href="#" class="service-inquire" onclick="showPage('contact')" style="margin-top:28px;">ARRANGE A YACHT INQUIRY</a>
       </div>
     </div>
   </div>
@@ -3427,7 +3429,7 @@ footer {
       <div class="contact-separator" aria-hidden="true"></div>
       <div class="contact-option">
         <div class="contact-label">PRIVATE INQUIRY</div>
-        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
       </div>
     </div>
   </section>
@@ -3443,7 +3445,7 @@ footer {
         <div class="svc-page-tag animate-in">PROTECTION COORDINATION</div>
         <h1 class="svc-page-headline animate-in" data-delay="1">Presence<br>without<br>announcement.</h1>
         <p class="svc-page-sub animate-in" data-delay="2">Security handled with the same elegance as every other aspect of your life. Close protection that does not change how you move.</p>
-        <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
+        <a href="#" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
       </div>
       <div class="svc-img-ph animate-fade" data-delay="2">
         <div class="svc-img-ph-rule"></div>
@@ -3520,7 +3522,7 @@ footer {
         <div class="svc-section-rule"></div>
         <p class="svc-section-body">Our protection officers are drawn from military, intelligence, and law enforcement backgrounds. They are selected for competence and for judgment. We do not place individuals who attract attention. We place professionals who remove risk quietly.</p>
         <p class="svc-section-body">Every officer in our network has been personally assessed. References are verified. Conduct under pressure is discussed directly. We do not work with agencies we cannot account for.</p>
-        <a href="javascript:void(0)" class="service-inquire" onclick="showPage('contact')" style="margin-top:28px;">DISCUSS PROTECTION REQUIREMENTS</a>
+        <a href="#" class="service-inquire" onclick="showPage('contact')" style="margin-top:28px;">DISCUSS PROTECTION REQUIREMENTS</a>
       </div>
       <div class="svc-depth-img animate-scale">
         <div class="svc-img-ph-rule" style="position:relative;z-index:1;"></div>
@@ -3541,7 +3543,7 @@ footer {
       <div class="contact-separator" aria-hidden="true"></div>
       <div class="contact-option">
         <div class="contact-label">PRIVATE INQUIRY</div>
-        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
       </div>
     </div>
   </section>
@@ -3560,7 +3562,7 @@ footer {
   <div class="dest-cards">
 
     <!-- Mykonos -->
-    <article class="dest-card animate-fade" data-delay="0" onclick="showPage('mykonos')" style="cursor:none;" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showPage('mykonos')" aria-label="Explore Mykonos">
+    <div class="dest-card animate-fade" data-delay="0" onclick="showPage('mykonos')" style="cursor:none;" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showPage('mykonos')" aria-label="Explore Mykonos">
       <div class="dest-card-visual">
         <div class="dest-card-visual-rule"></div>
         <div class="dest-card-visual-label">Private villa overlooking the Aegean</div>
@@ -3570,12 +3572,12 @@ footer {
         <div class="dest-card-tag">Greek Islands</div>
         <div class="dest-card-name">Mykonos.</div>
         <p class="dest-card-desc">The island moves fast in season. We move faster — so you never have to.</p>
-        <a href="javascript:void(0)" class="dest-card-link" onclick="event.stopPropagation();showPage('mykonos')">Explore</a>
+        <a href="#" class="dest-card-link" onclick="event.stopPropagation();showPage('mykonos')">Explore</a>
       </div>
-    </article>
+    </div>
 
     <!-- Dubai -->
-    <article class="dest-card animate-fade" data-delay="1" onclick="showPage('dubai')" style="cursor:none;" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showPage('dubai')" aria-label="Explore Dubai">
+    <div class="dest-card animate-fade" data-delay="1" onclick="showPage('dubai')" style="cursor:none;" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showPage('dubai')" aria-label="Explore Dubai">
       <div class="dest-card-visual">
         <div class="dest-card-visual-rule"></div>
         <div class="dest-card-visual-label">Dubai skyline from private terrace</div>
@@ -3585,12 +3587,12 @@ footer {
         <div class="dest-card-tag">Middle East</div>
         <div class="dest-card-name">Dubai.</div>
         <p class="dest-card-desc">Where ambition meets excess — and discretion becomes rare. We provide both, without compromise.</p>
-        <a href="javascript:void(0)" class="dest-card-link" onclick="event.stopPropagation();showPage('dubai')">Explore</a>
+        <a href="#" class="dest-card-link" onclick="event.stopPropagation();showPage('dubai')">Explore</a>
       </div>
-    </article>
+    </div>
 
     <!-- Ibiza -->
-    <article class="dest-card animate-fade" data-delay="2" onclick="showPage('ibiza')" style="cursor:none;" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showPage('ibiza')" aria-label="Explore Ibiza">
+    <div class="dest-card animate-fade" data-delay="2" onclick="showPage('ibiza')" style="cursor:none;" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showPage('ibiza')" aria-label="Explore Ibiza">
       <div class="dest-card-visual">
         <div class="dest-card-visual-rule"></div>
         <div class="dest-card-visual-label">Private finca, Northern Ibiza</div>
@@ -3600,9 +3602,9 @@ footer {
         <div class="dest-card-tag">Balearics</div>
         <div class="dest-card-name">Ibiza.</div>
         <p class="dest-card-desc">Not just a season — a circuit. For those who want it done properly, quietly, and entirely on their terms.</p>
-        <a href="javascript:void(0)" class="dest-card-link" onclick="event.stopPropagation();showPage('ibiza')">Explore</a>
+        <a href="#" class="dest-card-link" onclick="event.stopPropagation();showPage('ibiza')">Explore</a>
       </div>
-    </article>
+    </div>
 
   </div>
 
@@ -3623,7 +3625,7 @@ footer {
       <div class="contact-separator" aria-hidden="true"></div>
       <div class="contact-option">
         <div class="contact-label">PRIVATE INQUIRY</div>
-        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
       </div>
     </div>
   </section>
@@ -3637,7 +3639,7 @@ footer {
     <div class="conc-hero-eyebrow animate-in">LIFESTYLE CONCIERGE</div>
     <h1 class="conc-hero-headline animate-in" data-delay="1">The detail<br>work.</h1>
     <p class="conc-hero-sub animate-in" data-delay="2">Most of what we do will never be noticed. That is the point. We operate in the background so everything in front of you works without effort.</p>
-    <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
+    <a href="#" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
   </div>
 
   <div class="conc-statement">
@@ -3762,7 +3764,7 @@ footer {
       <div class="contact-separator" aria-hidden="true"></div>
       <div class="contact-option">
         <div class="contact-label">PRIVATE INQUIRY</div>
-        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
       </div>
     </div>
   </section>
@@ -3778,7 +3780,7 @@ footer {
         <div class="svc-page-tag animate-in">MIDDLE EAST</div>
         <h1 class="svc-page-headline animate-in" data-delay="1">Dubai.</h1>
         <p class="svc-page-sub animate-in" data-delay="2">Where ambition meets excess — and discretion becomes rare. We provide both, without compromise.</p>
-        <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('destinations')">← All Destinations</a>
+        <a href="#" class="dest-back-link animate-in" data-delay="3" onclick="showPage('destinations')">← All Destinations</a>
       </div>
       <div class="svc-img-ph animate-fade" data-delay="2">
         <div class="svc-img-ph-rule"></div>
@@ -3846,7 +3848,7 @@ footer {
       <div class="contact-separator" aria-hidden="true"></div>
       <div class="contact-option">
         <div class="contact-label">PRIVATE INQUIRY</div>
-        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
       </div>
     </div>
   </section>
@@ -3862,7 +3864,7 @@ footer {
         <div class="svc-page-tag animate-in">GREEK ISLANDS</div>
         <h1 class="svc-page-headline animate-in" data-delay="1">Mykonos.</h1>
         <p class="svc-page-sub animate-in" data-delay="2">The island moves fast in season. We move faster — so you never have to.</p>
-        <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('destinations')">← All Destinations</a>
+        <a href="#" class="dest-back-link animate-in" data-delay="3" onclick="showPage('destinations')">← All Destinations</a>
       </div>
       <div class="svc-img-ph animate-fade" data-delay="2">
         <div class="svc-img-ph-rule"></div>
@@ -3930,7 +3932,7 @@ footer {
       <div class="contact-separator" aria-hidden="true"></div>
       <div class="contact-option">
         <div class="contact-label">PRIVATE INQUIRY</div>
-        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
       </div>
     </div>
   </section>
@@ -3946,7 +3948,7 @@ footer {
         <div class="svc-page-tag animate-in">BALEARICS</div>
         <h1 class="svc-page-headline animate-in" data-delay="1">Ibiza.</h1>
         <p class="svc-page-sub animate-in" data-delay="2">Not just a season — a circuit. For those who want it done properly, quietly, and entirely on their terms.</p>
-        <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('destinations')">← All Destinations</a>
+        <a href="#" class="dest-back-link animate-in" data-delay="3" onclick="showPage('destinations')">← All Destinations</a>
       </div>
       <div class="svc-img-ph animate-fade" data-delay="2">
         <div class="svc-img-ph-rule"></div>
@@ -4014,7 +4016,7 @@ footer {
       <div class="contact-separator" aria-hidden="true"></div>
       <div class="contact-option">
         <div class="contact-label">PRIVATE INQUIRY</div>
-        <a href="javascript:void(0)" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
+        <a href="#" class="btn-primary" onclick="showPage('contact')">REQUEST ACCESS</a>
       </div>
     </div>
   </section>
@@ -4040,26 +4042,26 @@ footer {
     <nav aria-label="Services">
       <div class="footer-col-label">SERVICES</div>
       <ul class="footer-links">
-        <li><a href="javascript:void(0)" class="footer-link" onclick="showPage('residences')">Private Residences</a></li>
-        <li><a href="javascript:void(0)" class="footer-link" onclick="showPage('mobility')">Private Mobility</a></li>
-        <li><a href="javascript:void(0)" class="footer-link" onclick="showPage('yachting')">Yachting</a></li>
-        <li><a href="javascript:void(0)" class="footer-link" onclick="showPage('concierge')">Lifestyle Concierge</a></li>
-        <li><a href="javascript:void(0)" class="footer-link" onclick="showPage('protection')">Protection</a></li>
+        <li><a href="#" class="footer-link" onclick="showPage('residences')">Private Residences</a></li>
+        <li><a href="#" class="footer-link" onclick="showPage('mobility')">Private Mobility</a></li>
+        <li><a href="#" class="footer-link" onclick="showPage('yachting')">Yachting</a></li>
+        <li><a href="#" class="footer-link" onclick="showPage('concierge')">Lifestyle Concierge</a></li>
+        <li><a href="#" class="footer-link" onclick="showPage('protection')">Protection</a></li>
       </ul>
     </nav>
     <nav aria-label="Company">
       <div class="footer-col-label">COMPANY</div>
       <ul class="footer-links">
-        <li><a href="javascript:void(0)" class="footer-link" onclick="showPage('about')">About</a></li>
-        <li><a href="javascript:void(0)" class="footer-link" onclick="showPage('destinations')">Destinations</a></li>
-        <li><a href="javascript:void(0)" class="footer-link">Privacy</a></li>
-        <li><a href="javascript:void(0)" class="footer-link">Terms</a></li>
+        <li><a href="#" class="footer-link" onclick="showPage('about')">About</a></li>
+        <li><a href="#" class="footer-link" onclick="showPage('destinations')">Destinations</a></li>
+        <li><a href="#" class="footer-link">Privacy</a></li>
+        <li><a href="#" class="footer-link">Terms</a></li>
       </ul>
     </nav>
     <div>
       <div class="footer-col-label">PRIVATE INQUIRY</div>
       <p class="footer-email">private@aryonprivate.com</p>
-      <a href="javascript:void(0)" class="btn-access-outline" onclick="showPage('contact')" data-cursor-expand>REQUEST ACCESS</a>
+      <a href="#" class="btn-access-outline" onclick="showPage('contact')" data-cursor-expand>REQUEST ACCESS</a>
     </div>
   </div>
   <div class="footer-divider"></div>
@@ -4437,7 +4439,7 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
       .pathStroke(function(d) {
         return d.t === 'equator' ? 1.0 : d.t === 'tropic' ? 0.55 : 0.28;
       })
-      .pathAltitude(0.001);
+      .pathPointAlt(function() { return 0.001; });
 
     /* Starfield — dots only outside the sphere */
     (function() {
