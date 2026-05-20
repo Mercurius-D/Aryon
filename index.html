@@ -2108,22 +2108,19 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
     document.head.appendChild(ts);
   }
 
-  /* Skip globe on mobile — 471KB WebGL library causes >10s TBT on throttled mobile CPU */
-  if (window.innerWidth >= 768) {
-    var _globeEl = document.getElementById('globeCanvas');
-    if (_globeEl && 'IntersectionObserver' in window) {
-      var _obs = new IntersectionObserver(function(entries) {
-        if (entries[0].isIntersecting) {
-          _obs.disconnect();
-          _launchGlobe();
-        }
-      }, { rootMargin: '300px' });
-      _obs.observe(_globeEl);
-    } else if (document.readyState === 'complete') {
-      setTimeout(_launchGlobe, 0);
-    } else {
-      window.addEventListener('load', function() { setTimeout(_launchGlobe, 0); });
-    }
+  var _globeEl = document.getElementById('globeCanvas');
+  if (_globeEl && 'IntersectionObserver' in window) {
+    var _obs = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) {
+        _obs.disconnect();
+        _launchGlobe();
+      }
+    }, { rootMargin: '300px' });
+    _obs.observe(_globeEl);
+  } else if (document.readyState === 'complete') {
+    setTimeout(_launchGlobe, 0);
+  } else {
+    window.addEventListener('load', function() { setTimeout(_launchGlobe, 0); });
   }
 })();
 </script>
