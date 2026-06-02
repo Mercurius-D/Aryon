@@ -99,11 +99,21 @@ html,body{overscroll-behavior:none;}
 .service-visual{overflow:hidden;padding:0;}
 .dest-card-visual img{width:100%;height:100%;object-fit:cover;display:block;}
 /* ===== VIDEOS ===== */
+/* Poster img — shown immediately; video fades in over it via .v-ready */
+.video-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:0;}
 .svc-img-ph video,.service-visual video{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;z-index:1;opacity:0;transition:opacity 1.4s ease;}
 .svc-depth-img video{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;z-index:1;opacity:0;transition:opacity 1.4s ease;}
 .svc-img-ph video.v-ready,.svc-depth-img video.v-ready{opacity:1;}
 .svc-img-ph:has(video)::before{display:none;}
 .svc-depth-img:has(video)::before{display:none;}
+/* ===== YACHTING CINEMATIC HERO ===== */
+.yacht-cin-hero{position:relative;height:65vh;min-height:520px;overflow:hidden;display:flex;align-items:flex-end;border-bottom:1px solid var(--gold-15);}
+.yacht-cin-hero .video-poster{object-position:center 20%;}
+.yacht-cin-hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;z-index:1;opacity:0;transition:opacity 1.4s ease;}
+.yacht-cin-hero video.v-ready{opacity:1;}
+.yacht-cin-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom,rgba(10,10,10,0.25) 0%,rgba(10,10,10,0.0) 28%,rgba(10,10,10,0.5) 62%,rgba(13,13,13,0.97) 100%);pointer-events:none;}
+.yacht-cin-content{position:relative;z-index:3;padding:0 var(--col-pad) 60px;width:100%;}
+@media(max-width:767px){.yacht-cin-hero{height:60vh;min-height:420px;}.yacht-cin-content{padding-bottom:44px;}}
 
 /* ===== DEST CARD IMAGE EFFECTS ===== */
 @keyframes kenBurns{0%{transform:scale(1);}100%{transform:scale(1.08);}}
@@ -882,7 +892,8 @@ html,body{overscroll-behavior:none;}
         <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
       </div>
       <div class="svc-img-ph animate-fade" data-delay="2">
-        <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" poster="img/mobility-1.webp" aria-hidden="true"><source src="video/mobility-hero.mp4" type="video/mp4"></video>
+        <img class="video-poster" src="img/mobility-1.webp" alt="" aria-hidden="true">
+        <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-hidden="true"><source src="video/mobility-hero.mp4" type="video/mp4"></video>
       </div>
     </div>
   </div>
@@ -981,17 +992,15 @@ html,body{overscroll-behavior:none;}
 <!-- ===== YACHTING PAGE ===== -->
 <div id="page-yachting" class="page">
 
-  <div class="svc-page-hero">
-    <div class="svc-page-hero-inner">
-      <div>
-        <div class="svc-page-tag animate-in">YACHTING</div>
-        <h1 class="svc-page-headline animate-in" data-delay="1">The sea,<br>arranged.</h1>
-        <p class="svc-page-sub animate-in" data-delay="2">Private yacht access across the Mediterranean, Indian Ocean, and Caribbean. We handle what happens before you step aboard.</p>
-        <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
-      </div>
-      <div class="svc-img-ph animate-fade" data-delay="2">
-        <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" poster="img/yachting-1.webp" aria-hidden="true"><source src="video/yachting-hero.mp4" type="video/mp4"></video>
-      </div>
+  <div class="yacht-cin-hero">
+    <img class="video-poster" src="img/yachting-1.webp" alt="" aria-hidden="true">
+    <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-hidden="true"><source src="video/yachting-hero.mp4" type="video/mp4"></video>
+    <div class="yacht-cin-overlay" aria-hidden="true"></div>
+    <div class="yacht-cin-content">
+      <div class="svc-page-tag animate-in">YACHTING</div>
+      <h1 class="svc-page-headline animate-in" data-delay="1">The sea,<br>arranged.</h1>
+      <p class="svc-page-sub animate-in" data-delay="2">Private yacht access across the Mediterranean, Indian Ocean, and Caribbean. We handle what happens before you step aboard.</p>
+      <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
     </div>
   </div>
 
@@ -1055,7 +1064,8 @@ html,body{overscroll-behavior:none;}
   <div class="svc-depth-section">
     <div class="svc-depth-inner">
       <div class="svc-depth-img animate-scale">
-        <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" poster="img/yachting-3.webp" aria-hidden="true"><source src="video/yachting-wake.mp4" type="video/mp4"></video>
+        <img class="video-poster" src="img/yachting-3.webp" alt="" aria-hidden="true">
+        <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-hidden="true"><source src="video/yachting-wake.mp4" type="video/mp4"></video>
       </div>
       <div class="animate-right">
         <div class="svc-section-tag">THE FLEET WE RECOMMEND</div>
