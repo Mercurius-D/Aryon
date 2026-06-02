@@ -107,13 +107,19 @@ html,body{overscroll-behavior:none;}
 .svc-img-ph:has(video)::before{display:none;}
 .svc-depth-img:has(video)::before{display:none;}
 /* ===== YACHTING CINEMATIC HERO ===== */
-.yacht-cin-hero{position:relative;height:65vh;min-height:520px;overflow:hidden;display:flex;align-items:flex-end;border-bottom:1px solid var(--gold-15);}
-.yacht-cin-hero .video-poster{object-position:center 20%;}
-.yacht-cin-hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;z-index:1;opacity:0;transition:opacity 1.4s ease;}
+/* Video is 704×304 (2.3:1 landscape) — object-fit:cover with center center
+   shows the yacht centered; minimal cropping at most resolutions */
+.yacht-cin-hero{position:relative;height:65vh;min-height:500px;overflow:hidden;display:flex;align-items:flex-end;border-bottom:1px solid var(--gold-15);}
+.yacht-cin-hero .video-poster{object-position:center center;}
+.yacht-cin-hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;z-index:1;opacity:0;transition:opacity 1.8s ease;}
 .yacht-cin-hero video.v-ready{opacity:1;}
-.yacht-cin-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom,rgba(10,10,10,0.25) 0%,rgba(10,10,10,0.0) 28%,rgba(10,10,10,0.5) 62%,rgba(13,13,13,0.97) 100%);pointer-events:none;}
-.yacht-cin-content{position:relative;z-index:3;padding:0 var(--col-pad) 60px;width:100%;}
-@media(max-width:767px){.yacht-cin-hero{height:60vh;min-height:420px;}.yacht-cin-content{padding-bottom:44px;}}
+/* Gradient: strong at top (nav legibility) → clears in middle (video breathes)
+   → darkens at bottom matching --bg:#0d0d0d exactly — seamless page blend */
+.yacht-cin-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom,rgba(13,13,13,0.62) 0%,rgba(13,13,13,0.08) 18%,rgba(13,13,13,0.0) 36%,rgba(13,13,13,0.0) 52%,rgba(13,13,13,0.48) 70%,rgba(13,13,13,0.90) 86%,rgba(13,13,13,0.99) 100%);pointer-events:none;}
+.yacht-cin-content{position:relative;z-index:3;padding:0 var(--col-pad) 64px;width:100%;}
+/* Text-only approach section — no portrait image competing with the video hero */
+.svc-body-text-only{grid-template-columns:1fr !important;min-height:auto !important;max-width:700px;}
+@media(max-width:767px){.yacht-cin-hero{height:52vh;min-height:340px;}.yacht-cin-content{padding-bottom:44px;}}
 
 /* ===== DEST CARD IMAGE EFFECTS ===== */
 @keyframes kenBurns{0%{transform:scale(1);}100%{transform:scale(1.08);}}
@@ -993,7 +999,7 @@ html,body{overscroll-behavior:none;}
 <div id="page-yachting" class="page">
 
   <div class="yacht-cin-hero">
-    <img class="video-poster" src="img/yachting-1.webp" alt="" aria-hidden="true">
+    <img class="video-poster" src="img/yachting-poster.jpg" alt="" aria-hidden="true">
     <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-hidden="true"><source src="video/yachting-hero.mp4" type="video/mp4"></video>
     <div class="yacht-cin-overlay" aria-hidden="true"></div>
     <div class="yacht-cin-content">
@@ -1005,18 +1011,13 @@ html,body{overscroll-behavior:none;}
   </div>
 
   <div class="svc-body-section">
-    <div class="svc-body-grid">
-      <div class="svc-body-text-col animate-left">
+    <div class="svc-body-grid svc-body-text-only">
+      <div class="svc-body-text-col animate-in">
         <div class="svc-section-tag">THE APPROACH</div>
         <h2 class="svc-section-h">We know the vessels worth boarding.</h2>
         <div class="svc-section-rule"></div>
         <p class="svc-section-body">The charter market is large and largely undifferentiated. We know the vessels worth boarding and the ones that look better in photographs. Our recommendations are based on direct knowledge and client experience, not marketing materials.</p>
         <p class="svc-section-body">Every charter we arrange is fully provisioned to your preferences. The captain is briefed before departure. The route is confirmed. Nothing on board is a surprise, unless you requested one.</p>
-      </div>
-      <div class="svc-body-img-col animate-fade" data-delay="1">
-        <div class="svc-img-ph">
-          <img src="img/yachting-2.webp" alt="Sundeck, crewed superyacht" loading="lazy">
-        </div>
       </div>
     </div>
   </div>
@@ -1064,8 +1065,7 @@ html,body{overscroll-behavior:none;}
   <div class="svc-depth-section">
     <div class="svc-depth-inner">
       <div class="svc-depth-img animate-scale">
-        <img class="video-poster" src="img/yachting-3.webp" alt="" aria-hidden="true">
-        <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-hidden="true"><source src="video/yachting-wake.mp4" type="video/mp4"></video>
+        <img src="img/yachting-3.webp" alt="Superyacht at sea" loading="lazy">
       </div>
       <div class="animate-right">
         <div class="svc-section-tag">THE FLEET WE RECOMMEND</div>
