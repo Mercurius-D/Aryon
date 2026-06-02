@@ -99,8 +99,9 @@ html,body{overscroll-behavior:none;}
 .service-visual{overflow:hidden;padding:0;}
 .dest-card-visual img{width:100%;height:100%;object-fit:cover;display:block;}
 /* ===== VIDEOS ===== */
-.svc-img-ph video,.service-visual video{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;z-index:1;}
-.svc-depth-img video{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;z-index:1;}
+.svc-img-ph video,.service-visual video{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;z-index:1;opacity:0;transition:opacity 1.4s ease;}
+.svc-depth-img video{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;z-index:1;opacity:0;transition:opacity 1.4s ease;}
+.svc-img-ph video.v-ready,.svc-depth-img video.v-ready{opacity:1;}
 .svc-img-ph:has(video)::before{display:none;}
 .svc-depth-img:has(video)::before{display:none;}
 
@@ -881,7 +882,7 @@ html,body{overscroll-behavior:none;}
         <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
       </div>
       <div class="svc-img-ph animate-fade" data-delay="2">
-        <video autoplay muted loop playsinline disablepictureinpicture preload="none" aria-hidden="true"><source src="video/mobility-hero.mp4" type="video/mp4"></video>
+        <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" poster="img/mobility-1.webp" aria-hidden="true"><source src="video/mobility-hero.mp4" type="video/mp4"></video>
       </div>
     </div>
   </div>
@@ -989,7 +990,7 @@ html,body{overscroll-behavior:none;}
         <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
       </div>
       <div class="svc-img-ph animate-fade" data-delay="2">
-        <video autoplay muted loop playsinline disablepictureinpicture preload="none" aria-hidden="true"><source src="video/yachting-hero.mp4" type="video/mp4"></video>
+        <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" poster="img/yachting-1.webp" aria-hidden="true"><source src="video/yachting-hero.mp4" type="video/mp4"></video>
       </div>
     </div>
   </div>
@@ -1054,7 +1055,7 @@ html,body{overscroll-behavior:none;}
   <div class="svc-depth-section">
     <div class="svc-depth-inner">
       <div class="svc-depth-img animate-scale">
-        <video autoplay muted loop playsinline disablepictureinpicture preload="none" aria-hidden="true"><source src="video/yachting-wake.mp4" type="video/mp4"></video>
+        <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" poster="img/yachting-3.webp" aria-hidden="true"><source src="video/yachting-wake.mp4" type="video/mp4"></video>
       </div>
       <div class="animate-right">
         <div class="svc-section-tag">THE FLEET WE RECOMMEND</div>
@@ -1886,6 +1887,13 @@ function showPage(pageId) {
   var _nb = document.getElementById('navBar');
   if (_nb) _nb.classList.remove('scrolled');
 
+  // Pause all videos in currently active pages — stops background bandwidth use
+  document.querySelectorAll('.page.active video').forEach(function(v) {
+    v.pause();
+    v.currentTime = 0;
+    v.classList.remove('v-ready');
+  });
+
   // Preload the hero image for the incoming page (desktop only)
   if (window.innerWidth > 767) {
     const heroSrc = PAGE_HERO_IMGS[pageId];
@@ -1907,6 +1915,20 @@ function showPage(pageId) {
   if (history.pushState) history.pushState({ page: pageId }, '', '#' + pageId);
   if (pageId === 'contact') resetContactForm();
   setTimeout(initObserver, 100);
+
+  // Start all videos in the incoming page — explicitly trigger load + play
+  // so autoplay fires reliably regardless of browser preload policy.
+  // canplay fires once enough data is buffered; we use it to fade in.
+  target.querySelectorAll('video').forEach(function(v) {
+    v.classList.remove('v-ready');
+    var onReady = function() {
+      v.classList.add('v-ready');
+      v.removeEventListener('canplay', onReady);
+    };
+    v.addEventListener('canplay', onReady);
+    v.load();
+    v.play().catch(function() {});
+  });
 }
 
 function resetContactForm() {
