@@ -98,6 +98,11 @@ html,body{overscroll-behavior:none;}
 .svc-depth-img img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;}
 .service-visual{overflow:hidden;padding:0;}
 .dest-card-visual img{width:100%;height:100%;object-fit:cover;display:block;}
+/* ===== VIDEOS ===== */
+.svc-img-ph video,.service-visual video{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;z-index:1;}
+.svc-depth-img video{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;z-index:1;}
+.svc-img-ph:has(video)::before{display:none;}
+.svc-depth-img:has(video)::before{display:none;}
 
 /* ===== DEST CARD IMAGE EFFECTS ===== */
 @keyframes kenBurns{0%{transform:scale(1);}100%{transform:scale(1.08);}}
@@ -876,7 +881,7 @@ html,body{overscroll-behavior:none;}
         <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
       </div>
       <div class="svc-img-ph animate-fade" data-delay="2">
-        <img src="img/mobility-1.webp" alt="Chauffeur and prestige vehicle, Monaco" loading="lazy">
+        <video autoplay muted loop playsinline disablepictureinpicture preload="none" aria-hidden="true"><source src="video/mobility-hero.mp4" type="video/mp4"></video>
       </div>
     </div>
   </div>
@@ -984,7 +989,7 @@ html,body{overscroll-behavior:none;}
         <a href="javascript:void(0)" class="dest-back-link animate-in" data-delay="3" onclick="showPage('services')">← Back to Services</a>
       </div>
       <div class="svc-img-ph animate-fade" data-delay="2">
-        <img src="img/yachting-1.webp" alt="Motor yacht at anchor, Greek Islands" loading="lazy">
+        <video autoplay muted loop playsinline disablepictureinpicture preload="none" aria-hidden="true"><source src="video/yachting-hero.mp4" type="video/mp4"></video>
       </div>
     </div>
   </div>
@@ -1049,7 +1054,7 @@ html,body{overscroll-behavior:none;}
   <div class="svc-depth-section">
     <div class="svc-depth-inner">
       <div class="svc-depth-img animate-scale">
-        <img src="img/yachting-3.webp" alt="Interior salon, private motor yacht" loading="lazy">
+        <video autoplay muted loop playsinline disablepictureinpicture preload="none" aria-hidden="true"><source src="video/yachting-wake.mp4" type="video/mp4"></video>
       </div>
       <div class="animate-right">
         <div class="svc-section-tag">THE FLEET WE RECOMMEND</div>
@@ -1848,8 +1853,6 @@ document.addEventListener('mouseup', () => document.body.classList.remove('curso
 // Hero images to preload when navigating to a page (desktop only, >767px)
 const PAGE_HERO_IMGS = {
   residences: 'img/residences-1.webp',
-  mobility:   'img/mobility-1.webp',
-  yachting:   'img/yachting-1.webp',
   protection: 'img/protection-1.webp',
   dubai:      'img/dest-dubai.webp',
   mykonos:    'img/dest-mykonos.webp',
