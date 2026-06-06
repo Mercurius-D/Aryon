@@ -1913,8 +1913,10 @@ const PAGE_TITLES = {
 
 function showPage(pageId) {
   // Scroll to top instantly BEFORE switching pages — prevents flash of
-  // wrong scroll position (and GPU layer bleed) during the transition
-  window.scrollTo(0, 0);
+  // wrong scroll position (and GPU layer bleed) during the transition.
+  // Use behavior:'instant' to bypass css scroll-behavior:smooth, which
+  // would animate the scroll and let the page switch mid-animation.
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   // Force nav back to base state immediately — don't wait for scroll event,
   // which can lag behind the page swap and leave a solid scrolled-nav visible
   var _nb = document.getElementById('navBar');
@@ -1944,6 +1946,9 @@ function showPage(pageId) {
   const target = document.getElementById('page-' + pageId);
   if (!target) return;
   target.classList.add('active');
+  // Second instant scroll AFTER the DOM switch — catches any position drift
+  // that occurs when the document height changes as pages hide/show.
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   document.title = PAGE_TITLES[pageId] || 'Aryon Private';
   if (history.pushState) history.pushState({ page: pageId }, '', '#' + pageId);
   if (pageId === 'contact') resetContactForm();
