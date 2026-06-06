@@ -2,6 +2,7 @@
 
 # Raw source videos (already processed into video/)
 WhatsApp Video*.mp4
+mob.mp4
 
 # wrangler files
 .wrangler

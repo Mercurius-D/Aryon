@@ -314,7 +314,7 @@ html,body{overscroll-behavior:none;}
   <!-- Hero -->
   <section class="hero" aria-label="Hero">
     <img class="hero-poster" src="img/yachting-poster.jpg" alt="" aria-hidden="true">
-    <video class="hero-video" autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-hidden="true"><source src="video/yachting-hero.mp4" type="video/mp4"></video>
+    <video class="hero-video" autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-hidden="true"></video>
     <div class="hero-content">
       <h1 class="hero-headline">
         <span class="hero-line">A PRIVATE</span>
@@ -2041,9 +2041,13 @@ function initObserver() {
 }());
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Start home hero video — page-home is active on load so showPage() never fires for it
+  // Start home hero video — page-home is active on load so showPage() never fires for it.
+  // Pick mobile (portrait) or desktop (landscape) source based on viewport width so only
+  // one file is fetched per device.
   var homeVid = document.querySelector('#page-home .hero-video');
   if (homeVid) {
+    var isMobile = window.matchMedia('(max-width:767px)').matches;
+    homeVid.src = isMobile ? 'video/yachting-hero-mob.mp4' : 'video/yachting-hero.mp4';
     var onHomeReady = function() {
       homeVid.classList.add('v-ready');
       homeVid.removeEventListener('canplay', onHomeReady);
