@@ -30,6 +30,29 @@
 <meta name="twitter:description" content="A discreet lifestyle management firm. Private residences, yachting, mobility, and concierge services.">
 <meta name="twitter:image" content="https://aryonprivate.com/img/og-image.webp">
 
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "Aryon Private",
+      "url": "https://aryonprivate.com",
+      "logo": "https://aryonprivate.com/img/logo-transparent.png",
+      "email": "private@aryonprivate.com",
+      "description": "A discreet lifestyle management firm offering private residences, yachting, mobility, and concierge services.",
+      "areaServed": ["Mykonos", "Dubai", "Ibiza", "Mediterranean", "Middle East"]
+    },
+    {
+      "@type": "WebSite",
+      "name": "Aryon Private",
+      "url": "https://aryonprivate.com"
+    }
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://formspree.io">
@@ -190,8 +213,18 @@ html,body{overscroll-behavior:none;}
   z-index:1;
 }
 </style>
+<link rel="preload" as="image" href="img/yachting-poster.jpg" fetchpriority="high">
 </head>
 <body>
+
+<noscript>
+  <div style="position:fixed;inset:0;background:#0d0d0d;display:flex;align-items:center;justify-content:center;z-index:99999;font-family:Georgia,serif;text-align:center;padding:40px;">
+    <div>
+      <p style="font-size:clamp(18px,4vw,28px);color:#c9a96e;letter-spacing:0.08em;margin-bottom:20px;">ARYON PRIVATE</p>
+      <p style="font-size:15px;color:rgba(255,255,255,0.6);line-height:1.8;max-width:380px;">This site requires JavaScript. Please enable it in your browser settings or contact us at <a href="mailto:private@aryonprivate.com" style="color:#c9a96e;">private@aryonprivate.com</a></p>
+    </div>
+  </div>
+</noscript>
 
 <!-- ===== CUSTOM CURSOR ===== -->
 <div class="cursor-dot" id="cursorDot"></div>
@@ -771,13 +804,13 @@ html,body{overscroll-behavior:none;}
 
       <div class="form-spacer">
         <p id="label-enquiry" class="form-label">ENQUIRY TYPE</p>
-        <div class="pill-group" role="group" aria-labelledby="label-enquiry">
-          <button class="pill active" onclick="selectPill(this)" type="button" aria-pressed="true">RESIDENCES</button>
-          <button class="pill" onclick="selectPill(this)" type="button" aria-pressed="false">MOBILITY</button>
-          <button class="pill" onclick="selectPill(this)" type="button" aria-pressed="false">YACHTING</button>
-          <button class="pill" onclick="selectPill(this)" type="button" aria-pressed="false">CONCIERGE</button>
-          <button class="pill" onclick="selectPill(this)" type="button" aria-pressed="false">PROTECTION</button>
-          <button class="pill" onclick="selectPill(this)" type="button" aria-pressed="false">OTHER</button>
+        <div class="pill-group" role="radiogroup" aria-labelledby="label-enquiry">
+          <button class="pill active" onclick="selectPill(this)" type="button" role="radio" aria-checked="true">RESIDENCES</button>
+          <button class="pill" onclick="selectPill(this)" type="button" role="radio" aria-checked="false">MOBILITY</button>
+          <button class="pill" onclick="selectPill(this)" type="button" role="radio" aria-checked="false">YACHTING</button>
+          <button class="pill" onclick="selectPill(this)" type="button" role="radio" aria-checked="false">CONCIERGE</button>
+          <button class="pill" onclick="selectPill(this)" type="button" role="radio" aria-checked="false">PROTECTION</button>
+          <button class="pill" onclick="selectPill(this)" type="button" role="radio" aria-checked="false">OTHER</button>
         </div>
       </div>
 
@@ -1268,7 +1301,7 @@ html,body{overscroll-behavior:none;}
   <div class="dest-cards">
 
     <!-- Mykonos -->
-    <div class="dest-card animate-fade" data-delay="0" onclick="showPage('mykonos')" style="cursor:none;" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showPage('mykonos')" aria-label="Explore Mykonos">
+    <div class="dest-card animate-fade" data-delay="0" onclick="showPage('mykonos')" style="cursor:none;" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('mykonos');}" aria-label="Explore Mykonos">
       <div class="dest-card-visual">
         <img src="img/dest-mykonos.webp" alt="Mykonos" loading="lazy">
       </div>
@@ -1281,7 +1314,7 @@ html,body{overscroll-behavior:none;}
     </div>
 
     <!-- Dubai -->
-    <div class="dest-card animate-fade" data-delay="1" onclick="showPage('dubai')" style="cursor:none;" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showPage('dubai')" aria-label="Explore Dubai">
+    <div class="dest-card animate-fade" data-delay="1" onclick="showPage('dubai')" style="cursor:none;" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('dubai');}" aria-label="Explore Dubai">
       <div class="dest-card-visual">
         <img src="img/dest-dubai.webp" alt="Dubai" loading="lazy">
       </div>
@@ -1294,7 +1327,7 @@ html,body{overscroll-behavior:none;}
     </div>
 
     <!-- Ibiza -->
-    <div class="dest-card animate-fade" data-delay="2" onclick="showPage('ibiza')" style="cursor:none;" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showPage('ibiza')" aria-label="Explore Ibiza">
+    <div class="dest-card animate-fade" data-delay="2" onclick="showPage('ibiza')" style="cursor:none;" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showPage('ibiza');}" aria-label="Explore Ibiza">
       <div class="dest-card-visual">
         <img src="img/dest-ibiza.webp" alt="Ibiza" loading="lazy">
       </div>
@@ -1866,50 +1899,54 @@ html,body{overscroll-behavior:none;}
 <!-- ===== JAVASCRIPT ===== -->
 <script>
 /* ===== CUSTOM CURSOR ===== */
-const dot = document.getElementById('cursorDot');
-const ring = document.getElementById('cursorRing');
-let mouseX = 0, mouseY = 0;
-let ringX = 0, ringY = 0;
+// Skip entirely on touch/pointer-coarse devices — cursor is display:none via CSS
+// anyway, but this prevents the mousemove listener and RAF loop from running.
+if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
 
-document.addEventListener('mousemove', (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-  dot.style.left = mouseX + 'px';
-  dot.style.top = mouseY + 'px';
-});
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    dot.style.left = mouseX + 'px';
+    dot.style.top = mouseY + 'px';
+  });
 
-let lerpRaf = null;
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-function lerpCursor() {
-  ringX += (mouseX - ringX) * 0.12;
-  ringY += (mouseY - ringY) * 0.12;
-  ring.style.left = ringX + 'px';
-  ring.style.top = ringY + 'px';
-  lerpRaf = requestAnimationFrame(lerpCursor);
+  let lerpRaf = null;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function lerpCursor() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    ring.style.left = ringX + 'px';
+    ring.style.top = ringY + 'px';
+    lerpRaf = requestAnimationFrame(lerpCursor);
+  }
+  document.addEventListener('mouseleave', () => { if (lerpRaf) cancelAnimationFrame(lerpRaf); lerpRaf = null; });
+  document.addEventListener('mouseenter', () => { if (!lerpRaf && !reducedMotion) lerpRaf = requestAnimationFrame(lerpCursor); });
+  if (!reducedMotion) lerpRaf = requestAnimationFrame(lerpCursor);
+
+  const hoverEls = document.querySelectorAll('a, button, [data-cursor-expand]');
+  hoverEls.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      document.body.classList.add('cursor-hover');
+      const label = el.getAttribute('data-cursor-text');
+      if (label) {
+        ring.classList.add('cursor-label');
+        ring.textContent = label;
+      }
+    });
+    el.addEventListener('mouseleave', () => {
+      document.body.classList.remove('cursor-hover');
+      ring.classList.remove('cursor-label');
+      ring.textContent = '';
+    });
+  });
+
+  document.addEventListener('mousedown', () => document.body.classList.add('cursor-down'));
+  document.addEventListener('mouseup', () => document.body.classList.remove('cursor-down'));
 }
-document.addEventListener('mouseleave', () => { if (lerpRaf) cancelAnimationFrame(lerpRaf); lerpRaf = null; });
-document.addEventListener('mouseenter', () => { if (!lerpRaf && !reducedMotion) lerpRaf = requestAnimationFrame(lerpCursor); });
-if (!reducedMotion) lerpRaf = requestAnimationFrame(lerpCursor);
-
-const hoverEls = document.querySelectorAll('a, button, [data-cursor-expand]');
-hoverEls.forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    document.body.classList.add('cursor-hover');
-    const label = el.getAttribute('data-cursor-text');
-    if (label) {
-      ring.classList.add('cursor-label');
-      ring.textContent = label;
-    }
-  });
-  el.addEventListener('mouseleave', () => {
-    document.body.classList.remove('cursor-hover');
-    ring.classList.remove('cursor-label');
-    ring.textContent = '';
-  });
-});
-
-document.addEventListener('mousedown', () => document.body.classList.add('cursor-down'));
-document.addEventListener('mouseup', () => document.body.classList.remove('cursor-down'));
 
 /* ===== PAGE SYSTEM ===== */
 
@@ -1938,6 +1975,23 @@ const PAGE_TITLES = {
   dubai:       'Dubai — Aryon Private',
   privacy:     'Privacy Policy — Aryon Private',
   terms:       'Terms of Engagement — Aryon Private'
+};
+
+const PAGE_DESCRIPTIONS = {
+  home:        'Aryon Private — a discreet lifestyle management firm. Private residences, yachting, mobility and concierge services. Handled with absolute discretion.',
+  services:    'Explore Aryon Private\'s full range of services: private residences, mobility, yachting, concierge and protection. Arranged without compromise.',
+  destinations:'Aryon Private serves clients in Mykonos, Dubai and Ibiza. Discreet, fully managed experiences in the world\'s most demanding destinations.',
+  contact:     'Request access to Aryon Private. Submit a confidential inquiry for private residences, yachting, mobility, and lifestyle concierge services.',
+  residences:  'Private estates, villas and residences arranged with precision — not just booked, but managed from confirmation to departure.',
+  mobility:    'Private ground, air and water transfers managed end-to-end. Every movement handled from the moment you land.',
+  yachting:    'Private yacht access across the Mediterranean, Indian Ocean and Caribbean. Charter, crew and logistics handled completely.',
+  protection:  'Discreet close protection that does not change how you move. Security managed with the same elegance as every other service.',
+  concierge:   'The detail work handled invisibly. Aryon Private\'s lifestyle concierge operates in the background so everything in front of you works.',
+  dubai:       'Aryon Private in Dubai — where ambition meets excess. Discreet services and full lifestyle management in the UAE.',
+  mykonos:     'Aryon Private in Mykonos — the island moves fast in season. We move faster. Full concierge across the Greek Islands.',
+  ibiza:       'Aryon Private in Ibiza — not just a season, a circuit. Private residences, yacht access and concierge across the Balearics.',
+  privacy:     'Aryon Private privacy policy — how we handle your personal data with discretion.',
+  terms:       'Aryon Private terms of engagement.'
 };
 
 function showPage(pageId) {
@@ -1979,6 +2033,8 @@ function showPage(pageId) {
   // that occurs when the document height changes as pages hide/show.
   window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   document.title = PAGE_TITLES[pageId] || 'Aryon Private';
+  const _descEl = document.querySelector('meta[name="description"]');
+  if (_descEl && PAGE_DESCRIPTIONS[pageId]) _descEl.content = PAGE_DESCRIPTIONS[pageId];
   if (history.pushState) history.pushState({ page: pageId }, '', '#' + pageId);
   if (pageId === 'contact') resetContactForm();
   setTimeout(initObserver, 100);
@@ -2097,9 +2153,11 @@ function selectPill(el) {
   group.querySelectorAll('.pill').forEach(p => {
     p.classList.remove('active');
     p.setAttribute('aria-pressed', 'false');
+    p.setAttribute('aria-checked', 'false');
   });
   el.classList.add('active');
   el.setAttribute('aria-pressed', 'true');
+  el.setAttribute('aria-checked', 'true');
 }
 
 function selectContactMethod(el, method) {
@@ -2499,11 +2557,20 @@ document.addEventListener('DOMContentLoaded', refreshCursorListeners);
   /* Load globe libraries after window.load so they don't affect FCP/LCP/TBT.
      topojson must resolve before globe.gl; globe.gl must resolve before initGlobe. */
   function _launchGlobe() {
+    var _globeCanvasEl = document.getElementById('globeCanvas');
     var ts = document.createElement('script');
     ts.src = 'https://cdn.jsdelivr.net/npm/topojson@3/dist/topojson.min.js';
+    ts.onerror = function() {
+      console.warn('Aryon: topojson CDN unavailable — globe section hidden');
+      if (_globeCanvasEl) _globeCanvasEl.style.display = 'none';
+    };
     ts.onload = function() {
       var gs = document.createElement('script');
       gs.src = 'https://cdn.jsdelivr.net/npm/globe.gl@2.45.3/dist/globe.gl.min.js';
+      gs.onerror = function() {
+        console.warn('Aryon: globe.gl CDN unavailable — globe section hidden');
+        if (_globeCanvasEl) _globeCanvasEl.style.display = 'none';
+      };
       gs.onload = initGlobe;
       document.head.appendChild(gs);
     };
